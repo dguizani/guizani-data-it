@@ -37,6 +37,11 @@ Na ordem de execução. A especificação de cada entrega está em `docs/brief.m
 - [ ] Conferir que o site no ar não mudou (mesmo conteúdo, HTTPS, `http://` redirecionando para `https://`).
 
 **Commits:**
+- `e5cd4df` chore: `.gitignore` (dependências, build, `.astro/`, `logs/`, `references/`, `.env`).
+- `3698732` docs: `docs/control_files.md` e `docs/git_rules.md`, copiados do prompt.
+- `ab8937a` docs: `docs/brief.md` e `docs/approved_content.md`, copiados do prompt.
+- `312f659` docs: `CLAUDE.md`.
+- `7c8710d` docs: pastas de controle e `docs/session.md`.
 
 **Resultado:**
 
