@@ -2,49 +2,6 @@
 
 Na ordem de execução. A especificação de cada entrega está em `docs/brief.md` (seção indicada em **Contexto**) e os textos em `docs/approved_content.md`.
 
-### M-001 · Linha de base do repositório
-
-**Objetivo:** arrumar as branches e o repositório no GitHub para a construção do site novo, sem mudar o site no ar. Origem: prompt de construção, 2026-10-28.
-
-**Depende de:** nada.
-
-**Como é hoje** (conferido em 2026-10-28):
-- `origin/release/guizani-data-it` em `38a8a39` (publicada pelo Pages, build `legacy`, raiz); `origin/main` em `c9fc9b5` (currículo antigo, branch padrão); `origin/release/landing_page` em `544918c`, já contida na `origin/main` (PR #4).
-- A `main` antiga e a `release/guizani-data-it` compartilham só o commit raiz `af964a6` (`.gitattributes`); fora ele, os históricos são independentes.
-- Localmente (primeira sessão, sem push): a `main` antiga virou `legacy/curriculo-2024` (no `c9fc9b5`, rastreando a `origin/main`), e uma `main` nova foi criada a partir da `origin/release/guizani-data-it`, sem rastrear nenhuma branch remota. Os arquivos de controle e o `CLAUDE.md` estão nela.
-- Pages: certificado HTTPS aprovado (expira em 2026-12-26 e o GitHub renova sozinho), `https_enforced: false`, domínio não verificado (`protected_domain_state: null`).
-- Repositório `dguizani/curriculo_html`, descrição "Meu currículo"; o remote do clone aponta para `EmployingDGC/curriculo_html` (redirecionado).
-
-**Ideias para o debate:**
-1. **Como renomear a `main` remota:** pelo `gh` (`gh api -X POST repos/dguizani/curriculo_html/branches/main/rename -f new_name=legacy/curriculo-2024`), que fica registrado na conversa (recomendado), ou pela tela (Settings → Branches → lápis ao lado da `main`). Nos dois casos a branch renomeada continua padrão até o passo seguinte.
-2. **Ordem dos passos no GitHub:** renomear a `main` → push da `main` nova (`git push -u origin main`, sem `--force`, porque a `main` remota deixou de existir) → trocar a branch padrão para a `main` → apagar a `release/landing_page` → renomear o repositório. O site não muda em nenhum deles, porque o Pages publica a `release/guizani-data-it`.
-3. **Nome e descrição do repositório:** `guizani-data-it`, com a descrição nos dois idiomas. Proposta: "Site da Guizani Data IT, engenharia de dados (Astro) · Guizani Data IT website, data engineering (Astro)".
-4. **Referência do Lighthouse do site atual (celular):** pela API pública do PageSpeed Insights (`strategy=mobile`), que roda o Lighthouse nos servidores do Google sem instalar nada (recomendado), com o JSON cru em `logs/` e o resumo das notas em `docs/reports/`; ou pelo Lighthouse num contêiner com Chrome, que só fica pronto no M-002.
-5. **Verificação do domínio (C-004):** o prompt deixa para o lançamento (M-009), mas ela protege o `datait` contra um site de outra conta do GitHub desde já e não muda nada no ar. Sugestão: trazer para este M-001.
-
-**Decisões:**
-
-**Passos:**
-- [x] Conferir o clone, criar localmente a `legacy/curriculo-2024` e a `main` nova (primeira sessão, 2026-10-28).
-- [x] Criar os arquivos de controle, o `CLAUDE.md`, o `.gitignore` e os documentos do briefing na `main` nova (primeira sessão, 2026-10-28).
-- [ ] Renomear a `main` remota para `legacy/curriculo-2024` (com autorização) e apontar a `legacy/curriculo-2024` local para a `origin/legacy/curriculo-2024`.
-- [ ] Push da `main` nova, sem `--force` (com autorização).
-- [ ] Trocar a branch padrão para a `main` (com autorização).
-- [ ] Apagar a `release/landing_page` no GitHub e localmente (com autorização).
-- [ ] Renomear o repositório para `guizani-data-it` com a descrição nova (com autorização) e rodar `git remote set-url origin https://github.com/dguizani/guizani-data-it.git`.
-- [ ] Ligar o "Enforce HTTPS" (com autorização).
-- [ ] Registrar o Lighthouse do site atual (celular) como referência.
-- [ ] Conferir que o site no ar não mudou (mesmo conteúdo, HTTPS, `http://` redirecionando para `https://`).
-
-**Commits:**
-- `e5cd4df` chore: `.gitignore` (dependências, build, `.astro/`, `logs/`, `references/`, `.env`).
-- `3698732` docs: `docs/control_files.md` e `docs/git_rules.md`, copiados do prompt.
-- `ab8937a` docs: `docs/brief.md` e `docs/approved_content.md`, copiados do prompt.
-- `312f659` docs: `CLAUDE.md`.
-- `7c8710d` docs: pastas de controle e `docs/session.md`.
-
-**Resultado:**
-
 ### M-002 · Estrutura inicial do projeto
 
 **Objetivo:** criar o projeto Astro e todo o ferramental (Docker, lint, formatação, CI, Dependabot), sem conteúdo ainda. Origem: prompt de construção, 2026-10-28.
@@ -193,13 +150,13 @@ Na ordem de execução. A especificação de cada entrega está em `docs/brief.m
 
 **Objetivo:** publicar o site novo pelo GitHub Actions e fechar a configuração do domínio e do e-mail. Origem: prompt de construção, 2026-10-28.
 
-**Depende de:** M-007, M-008, C-004 (verificação do domínio), C-005 (ImprovMX) e C-006 (CNAME no DNS).
+**Depende de:** M-007, M-008, C-005 (ImprovMX) e C-006 (CNAME no DNS).
 
 **Contexto:** `docs/brief.md`, seção **Como subir**, e os critérios de sucesso em **Objetivo**.
 
 **Passos:**
 - [ ] Trocar a origem do Pages de "branch" para "GitHub Actions" e o workflow de deploy para rodar a cada push na `main` (com autorização).
-- [ ] Domínio verificado (C-004), se ainda não tiver sido feito no M-001.
+- [ ] Conferir que o domínio continua verificado (C-004, feito no M-001).
 - [ ] Trocar os quatro registros A pelo CNAME `dguizani.github.io` (C-006) e conferir o certificado e o "Enforce HTTPS".
 - [ ] E-mail do ImprovMX funcionando (C-005): mensagem de teste chegando ao Gmail.
 - [ ] Apagar a `release/guizani-data-it` (com autorização).

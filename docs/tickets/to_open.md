@@ -63,7 +63,7 @@
 
 ### C-004 · Verificar o domínio no GitHub
 
-**Roadmap:** M-009 (ou M-001, se o debate trouxer para antes).
+**Roadmap:** M-001 (decisão 5, de 2026-10-28) e conferido de novo no M-009.
 
 **Para:** o usuário, no GitHub e no Registro.br.
 
