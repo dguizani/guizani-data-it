@@ -77,7 +77,7 @@ Na ordem de execução. A especificação de cada entrega está em `docs/brief.m
 
 **Objetivo:** montar a página com as seções na ordem aprovada: hero, sobre, serviços, projetos principais, participação pontual, linha do tempo, skills, laboratório, contato e rodapé. Origem: prompt de construção, 2026-10-28.
 
-**Depende de:** M-003 e M-004; C-001 (foto), C-002 (currículos) e P-001 (e-mail) para o Sobre e o Contato.
+**Depende de:** M-003 e M-004; C-001 (foto) e C-002 (currículos) para o Sobre e o Contato. O e-mail é `contato@guizani.com.br` (P-001, respondida em 2026-10-28) e só recebe mensagens depois do C-005.
 
 **Contexto:** `docs/brief.md`, seção **Funcionalidades do MVP** (seções, hero, cards, contato, rodapé), e `docs/approved_content.md`.
 
@@ -85,7 +85,7 @@ Na ordem de execução. A especificação de cada entrega está em `docs/brief.m
 - [ ] Propor ao usuário opções da frase de posicionamento do hero.
 - [ ] Propor a versão nova do Sobre, a partir do texto da landing page atual.
 - [ ] Componentes `Header`, `Hero`, `About` (foto otimizada pelo `astro:assets`, AVIF e WebP), `Services`, `ProjectCard`, `Projects`, `OccasionalWork`, `Timeline`, `Skills`, `Lab`, `Contact` e `Footer`, todos lendo o `site.yaml`.
-- [ ] Contato: e-mail (depois da P-001), WhatsApp com a mensagem pronta do idioma, LinkedIn e o currículo em PDF do idioma.
+- [ ] Contato: e-mail `contato@guizani.com.br` (P-001), WhatsApp com a mensagem pronta do idioma, LinkedIn e o currículo em PDF do idioma.
 - [ ] Conferir no celular o critério dos 30 segundos (o que faz, principais tecnologias, como contatar).
 
 **Commits:**
