@@ -57,6 +57,7 @@ Na ordem de execução. A especificação de cada entrega está em `docs/brief.m
 1. **Versão do Node:** conferir o aviso de segurança mais recente (<https://nodejs.org/en/blog/vulnerability>) e escolher a versão 26 LTS com o piso 26.12.1, mostrando ao usuário antes de fixar.
 2. **Docker:** só `docker run` (comandos longos, documentados no `tests/README.md`) ou um `compose.yaml` com o serviço do Node (comandos curtos, como `docker compose run --rm node npm run build`, e é o que o Dependabot consegue atualizar no ecossistema `docker`). Com o `compose.yaml`, a versão fica em dois lugares (`.nvmrc` e a imagem), e o CI precisa conferir que são iguais.
 3. **Lighthouse local:** a imagem `node` não tem Chrome. Opções: uma imagem própria (`Dockerfile` com Chromium) só para o Lighthouse, ou rodar o Lighthouse CI só no GitHub Actions e, localmente, usar o PageSpeed Insights depois do deploy.
+4. **Fim de linha:** o `.gitattributes` atual (`* text=auto`) faz o git gravar os arquivos com CRLF no checkout do Windows (aviso "LF will be replaced by CRLF", visto em 2026-10-28), e o Prettier espera LF: o `format:check` local falharia num clone novo. Sugestão: `* text=auto eol=lf` no `.gitattributes`.
 
 **Decisões:**
 
