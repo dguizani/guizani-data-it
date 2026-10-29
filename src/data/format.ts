@@ -179,3 +179,19 @@ export function withClients<T extends Project>(
     return client === undefined ? [] : [{ project, client }];
   });
 }
+
+/** Endereço do início da página em cada idioma. */
+export const homePath: Readonly<Record<Lang, string>> = {
+  pt: "/",
+  en: "/en/",
+};
+
+/**
+ * O outro idioma do site.
+ *
+ * @param lang - Idioma da página.
+ * @returns `en` para `pt` e `pt` para `en`.
+ */
+export function otherLang(lang: Lang): Lang {
+  return lang === "pt" ? "en" : "pt";
+}

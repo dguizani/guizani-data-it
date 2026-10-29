@@ -613,6 +613,13 @@ ui:
     analyticsNotice:
       pt: Este site conta visitas de forma anônima, sem cookies.
       en: This site counts visits anonymously, without cookies.
+  language:
+    switchLabel:
+      pt: EN
+      en: PT
+    switchName:
+      pt: Read this site in English
+      en: Ler este site em português
   a11y:
     home:
       pt: Guizani Data IT, início

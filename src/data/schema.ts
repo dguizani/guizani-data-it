@@ -361,6 +361,16 @@ export const ui = z
         ),
       })
       .describe("Textos do rodapé."),
+    language: z
+      .strictObject({
+        switchLabel: localizedText.describe(
+          "Texto do seletor, com o nome do outro idioma (ex.: EN na página em português).",
+        ),
+        switchName: localizedText.describe(
+          "Nome do seletor para os leitores de tela, escrito no outro idioma.",
+        ),
+      })
+      .describe("Textos do seletor de idioma."),
     a11y: z
       .strictObject({
         home: localizedText.describe(
