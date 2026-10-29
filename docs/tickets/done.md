@@ -1,5 +1,28 @@
 # Chamados · concluídos
 
+### C-001 · Entregar a foto de perfil e o banner do LinkedIn
+
+**Roadmap:** M-004 e M-005.
+
+**Para:** o usuário.
+
+**Histórico:** 2026-10-28, a primeira entrega trazia outras imagens (não eram a foto de perfil nem o banner); o usuário trocou pelos arquivos certos no mesmo dia.
+
+**Referência:** `references/image_3_1x1.png` (foto, 768 × 768) e `references/capa.fw.png` (banner, 4423 × 1152), entregues em 2026-10-28.
+
+**Título:** Foto de perfil e banner do LinkedIn (referências da identidade visual).
+
+**Descrição:** a foto entra na seção Sobre (otimizada no build). O banner é só inspiração para o fundo de circuito do hero e não entra no site. A foto antiga do currículo (`images/perfil-1.fw.png`, 9,7 MB) não é reaproveitada.
+
+**Sugestão de solução** (só uma sugestão):
+1. Salvar a foto e o banner, no maior tamanho que tiver, na pasta `references/` da raiz do projeto. Ela está no `.gitignore` e nunca vai para o git.
+2. Avisar no chat. O agente copia uma versão da foto para `src/assets/` (essa vai para o git e é otimizada no build) e usa o banner só como referência.
+
+**Casos de teste:**
+1. Os dois arquivos estão em `references/`, e `git status` não os mostra.
+
+**Resultado:** 2026-10-28, concluído. Os dois arquivos estão em `references/`, e `git status --ignored` mostra a pasta como ignorada (caso 1). A foto entra no `src/assets/` no M-005; o banner fica só como referência do `CircuitBackground` (M-004), sem os logos do Python.
+
 ### C-004 · Verificar o domínio no GitHub
 
 **Roadmap:** M-001 (decisão 5, de 2026-10-28) e conferido de novo no M-009.

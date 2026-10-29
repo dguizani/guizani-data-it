@@ -77,22 +77,3 @@
 **Casos de teste:**
 1. Os dois arquivos estão em `public/` e abrem no navegador.
 2. Na página em português, o link abre o PDF em português; em `/en/`, o PDF em inglês.
-
-### C-001 · Entregar a foto de perfil e o banner do LinkedIn
-
-**Roadmap:** M-004 e M-005.
-
-**Para:** o usuário.
-
-**Referência:**
-
-**Título:** Foto de perfil e banner do LinkedIn (referências da identidade visual).
-
-**Descrição:** a foto entra na seção Sobre (otimizada no build). O banner é só inspiração para o fundo de circuito do hero e não entra no site. A foto antiga do currículo (`images/perfil-1.fw.png`, 9,7 MB) não é reaproveitada.
-
-**Sugestão de solução** (só uma sugestão):
-1. Salvar a foto e o banner, no maior tamanho que tiver, na pasta `references/` da raiz do projeto. Ela está no `.gitignore` e nunca vai para o git.
-2. Avisar no chat. O agente copia uma versão da foto para `src/assets/` (essa vai para o git e é otimizada no build) e usa o banner só como referência.
-
-**Casos de teste:**
-1. Os dois arquivos estão em `references/`, e `git status` não os mostra.
