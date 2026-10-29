@@ -2,6 +2,23 @@
 
 Na ordem de execução. A especificação de cada entrega está em `docs/brief.md` (seção indicada em **Contexto**) e os textos em `docs/approved_content.md`.
 
+### M-013 · Projetos principais em uma coluna
+
+**Objetivo:** mostrar os cards dos projetos principais um abaixo do outro, sem as duas colunas no desktop. Origem: pedido do usuário, 2026-10-29.
+
+**Depende de:** —
+
+**Como é hoje:** `Projects.astro` usa `columns: 2` a partir de `64rem` (desktop), com `break-inside: avoid` em cada card; no celular os cards já ficam um abaixo do outro.
+
+**Passos:**
+- [ ] Tirar o `@media` com as duas colunas e o `break-inside`, que perde a função, do `Projects.astro`.
+- [ ] Conferir se a largura do card no desktop precisa de um limite para a leitura.
+- [ ] `T-NNN` com os projetos no desktop e no celular, nos dois idiomas.
+
+**Commits:**
+
+**Resultado:**
+
 ### M-012 · Formação e certificações
 
 **Objetivo:** mostrar no site a escolaridade, os cursos, os diplomas e as certificações, tendo o LinkedIn do usuário como base. Origem: pedido do usuário, 2026-10-29.
