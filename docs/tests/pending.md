@@ -25,6 +25,7 @@
 **Resultado:**
 - 2026-10-28 22:30, pelo agente, no contêiner: `npm ci` com 0 vulnerabilidades; lint, Prettier, `astro check` (0/0/0) e build passaram; Lighthouse na página provisória com performance 100, acessibilidade 100, boas práticas 100 e SEO 100. Com o mínimo de performance trocado para 101 numa cópia fora do git, a verificação deu `FAIL` e saída 1. `docker compose up dev` respondeu 200 em <http://localhost:4321> com o título "Guizani Data IT". A conferência do `.nvmrc` contra o `Dockerfile` deu `26.13.0` nos dois. Falta: a recarga ao salvar (confirmação do usuário) e o CI no GitHub (depois do push).
 - 2026-10-28, pelo usuário: com o `docker compose up dev`, a página recarregou sozinha ao salvar uma mudança no `src/pages/index.astro` (mudança desfeita depois).
+- 2026-10-28 22:41, pelo agente, no GitHub: CI `40801729242` (push do `c816a7a`) verde em 1min9s, com todos os passos ok: versão do Node igual no `.nvmrc` e no `Dockerfile`, `npm ci`, lint, Prettier, `astro check`, build e Lighthouse (performance 100, acessibilidade 100, boas práticas 100, SEO 100), e o artefato `lighthouse-reports` (394 KB) anexado. As 6 execuções iniciais do Dependabot terminaram sem abrir pull request (dependências em dia). Aviso do GitHub: o `ubuntu-latest` passa a ser o Ubuntu 26 a partir de 2026-10-19.
 
 ### T-001 · Linha de base do repositório
 
