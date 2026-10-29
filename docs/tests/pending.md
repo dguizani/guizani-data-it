@@ -19,11 +19,12 @@
 **Passos:**
 - [ ] Rodada completa no contêiner: `npm ci` com `found 0 vulnerabilities`; lint sem erros; `All matched files use Prettier code style!`; `astro check` com `0 errors`, `0 warnings`, `0 hints`; build `Complete!`; Lighthouse com `ok` em todas as categorias.
 - [ ] A verificação do Lighthouse falha (`FAIL` e saída 1) quando uma nota fica abaixo do mínimo.
-- [ ] `docker compose up dev` e <http://localhost:4321> mostra a página provisória "Guizani Data IT"; ao mudar e salvar o `src/pages/index.astro`, a página recarrega sozinha.
+- [x] `docker compose up dev` e <http://localhost:4321> mostra a página provisória "Guizani Data IT"; ao mudar e salvar o `src/pages/index.astro`, a página recarrega sozinha.
 - [ ] CI no GitHub verde no push da `main`, com o relatório do Lighthouse anexado como artefato (`lighthouse-reports`).
 
 **Resultado:**
 - 2026-10-28 22:30, pelo agente, no contêiner: `npm ci` com 0 vulnerabilidades; lint, Prettier, `astro check` (0/0/0) e build passaram; Lighthouse na página provisória com performance 100, acessibilidade 100, boas práticas 100 e SEO 100. Com o mínimo de performance trocado para 101 numa cópia fora do git, a verificação deu `FAIL` e saída 1. `docker compose up dev` respondeu 200 em <http://localhost:4321> com o título "Guizani Data IT". A conferência do `.nvmrc` contra o `Dockerfile` deu `26.13.0` nos dois. Falta: a recarga ao salvar (confirmação do usuário) e o CI no GitHub (depois do push).
+- 2026-10-28, pelo usuário: com o `docker compose up dev`, a página recarregou sozinha ao salvar uma mudança no `src/pages/index.astro` (mudança desfeita depois).
 
 ### T-001 · Linha de base do repositório
 
