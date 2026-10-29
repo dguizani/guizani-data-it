@@ -12,20 +12,4 @@
 8. ~~Página provisória no computador e no celular, nos dois temas → T-004~~ (ok em 2026-10-29)
 9. ~~Página completa no celular e no computador (30 segundos, projetos, contato, textos novos) → T-005~~ (ok em 2026-10-29)
 10. ~~Seletor de idioma e página em inglês → T-006~~ (ok em 2026-10-29)
-11. Deploy pelo GitHub Actions e site novo no ar → T-007
-
-### T-007 · Publicação antecipada do site novo
-
-**Roadmap:** M-010.
-
-**Commits:** `b52b99f`.
-
-**O que mudou:** o <https://datait.guizani.com.br> passa a mostrar o site novo (em português em `/` e em inglês em `/en/`), publicado pelo workflow `Deploy` a cada push na `main`. A landing page antiga sai do ar, mas a `release/guizani-data-it` continua existindo para a volta.
-
-**Passos:**
-- [ ] Settings → Pages: origem "GitHub Actions", domínio `datait.guizani.com.br` e "Enforce HTTPS" marcado.
-- [ ] Actions: o workflow `Deploy` do push na `main` está verde (CI, build e deploy).
-- [ ] Abrir <https://datait.guizani.com.br> e <https://datait.guizani.com.br/en/> no celular: o site novo, com o cadeado; `http://datait.guizani.com.br` leva para o `https://`.
-
-**Resultado:**
-- 2026-10-29, pelo agente: origem do Pages trocada para "GitHub Actions" pela API (`build_type: workflow`, `cname: datait.guizani.com.br`, `https_enforced: true`, certificado `approved`). Push do `b52b99f`: CI `40814613768` e Deploy `40814613861` verdes (checks, build e deploy). Por `curl`: `/` e `/en/` respondem 200 com o site novo (`lang="pt-BR"` e `lang="en"`), e o `http://` responde 301 para o `https://`. Falta a confirmação do usuário.
+11. ~~Deploy pelo GitHub Actions e site novo no ar → T-007~~ (ok em 2026-10-29)
