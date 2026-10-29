@@ -19,9 +19,9 @@ Site da **Guizani Data IT**, a empresa de engenharia de dados de Davi Guizani, p
 
 ## O que já existe
 
-- **Repositório:** `dguizani/curriculo_html`, público (vai ser renomeado para `guizani-data-it` no M-001). Precisa continuar público, por causa do GitHub Pages gratuito.
-- **GitHub Pages:** publica a branch `release/guizani-data-it`, na raiz, com o build `legacy` (sem Actions), no domínio `datait.guizani.com.br`, com certificado HTTPS aprovado e "Enforce HTTPS" desligado. Essa branch tem a landing page antiga (HTML e CSS puros) e fica **congelada** até o lançamento.
-- **Branches locais:** `main` (nova, criada a partir da `release/guizani-data-it`, onde ficam todos os commits) e `legacy/curriculo-2024` (a `main` antiga, com o currículo em inglês). As duas compartilham só o commit raiz `af964a6`. A mudança no GitHub é feita no M-001.
+- **Repositório:** `dguizani/guizani-data-it` (antes `curriculo_html`; o GitHub redireciona o nome antigo), público. Precisa continuar público, por causa do GitHub Pages gratuito.
+- **GitHub Pages:** publica a branch `release/guizani-data-it`, na raiz, com o build `legacy` (sem Actions), no domínio `datait.guizani.com.br`, com certificado HTTPS e "Enforce HTTPS" ligado. Essa branch tem a landing page antiga (HTML e CSS puros) e fica **congelada** até o lançamento.
+- **Branches:** `main` (padrão, criada a partir da `release/guizani-data-it`, onde ficam todos os commits), `legacy/curriculo-2024` (a `main` antiga, com o currículo em inglês; só consulta) e `release/guizani-data-it` (o site no ar). A `main` e a `legacy/curriculo-2024` compartilham só o commit raiz `af964a6`.
 - **DNS:** Registro.br, sem registro MX; o `datait` aponta para o GitHub Pages por quatro registros A.
 
 ## Padrões de código
