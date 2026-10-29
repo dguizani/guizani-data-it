@@ -3,7 +3,7 @@
 ## Execução conjunta
 
 1. Conferência do repositório no GitHub e do site no ar → T-001
-2. Conferência da verificação do domínio, depois do C-004 → T-001
+2. Conferência da verificação do domínio e do CNAME, depois do C-004 e do C-006 → T-001
 
 ### T-001 · Linha de base do repositório
 
@@ -20,6 +20,7 @@
 - [ ] Settings → Pages: origem "Deploy from a branch", `release/guizani-data-it`, `/ (root)`; domínio `datait.guizani.com.br`; "Enforce HTTPS" marcado.
 - [ ] Abrir <https://datait.guizani.com.br> no celular: a landing page de sempre, com o cadeado; `http://datait.guizani.com.br` também leva para o `https://`.
 - [ ] Depois do C-004: na página Settings → Pages da conta, `guizani.com.br` aparece como verificado, e `gh api repos/dguizani/guizani-data-it/pages --jq .protected_domain_state` responde `verified`.
+- [ ] Depois do C-006: Settings → Pages do repositório mostra "DNS check successful", sem o aviso de registro A, e o site continua abrindo com o cadeado.
 
 **Resultado:**
 - 2026-10-28 21:15, pelo agente: pela API e por `curl`, nome, descrição, branch padrão, lista de branches (`legacy/curriculo-2024`, `main`, `release/guizani-data-it`), origem do Pages, `https_enforced: true` e site no ar idêntico à `release/guizani-data-it` conferem. Falta a confirmação do usuário e o C-004.

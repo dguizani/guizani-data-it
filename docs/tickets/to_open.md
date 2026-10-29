@@ -2,7 +2,7 @@
 
 ### C-006 · Trocar os registros A do `datait` por um CNAME
 
-**Roadmap:** M-009.
+**Roadmap:** M-001 (decisão 7, de 2026-10-28) e conferido de novo no M-009.
 
 **Para:** o usuário, no Registro.br.
 
@@ -10,7 +10,7 @@
 
 **Título:** Apontar o `datait.guizani.com.br` para o GitHub Pages por CNAME.
 
-**Descrição:** hoje o `datait` aponta para o GitHub Pages por quatro registros A (`185.199.108.153` a `185.199.111.153`, conferido em 2026-10-28). Para subdomínios, o GitHub recomenda um CNAME para `<usuário>.github.io`: se o GitHub trocar os IPs, o site continua no ar sem mexer no DNS. Fazer só no lançamento.
+**Descrição:** hoje o `datait` aponta para o GitHub Pages por quatro registros A (`185.199.108.153` a `185.199.111.153`, conferido em 2026-10-28). Para subdomínios, o GitHub recomenda um CNAME para `<usuário>.github.io`: se o GitHub trocar os IPs, o site continua no ar sem mexer no DNS. Feito no M-001, junto com o C-004 (o Pages mostra "DNS check unsuccessful", `InvalidARecordError`, desde 2026-10-28); a troca não muda o que o site serve.
 
 | Verificação | Encontrado (2026-10-28) | Esperado |
 |---|---|---|
