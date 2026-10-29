@@ -42,12 +42,17 @@
 - O ESLint aceita as chamadas `describe` e `it` do `node:test` sem `await` (`no-floating-promises`), como o próprio `node:test` espera.
 - A ordem de `projects` no YAML não importa: o site ordena pelas datas.
 
+**Correções:**
+- 2026-10-28: o lint falhou no CI (`40804842940`) com `Unsafe member access .data on a type that cannot be resolved`: os tipos do `astro:content` ficam em `.astro/`, gerada pelo `astro sync`, e no CI o lint roda antes do `check` e do build. Aqui a pasta já existia, por isso passou. Correção: o `lint` roda `astro sync && eslint .` (`63c3a10`), e a **Rodada completa** do `tests/README.md` começa apagando `.astro/` e `dist/` (`71d3e55`), o que reproduz o ambiente do CI.
+
 **Commits:**
 - `7dbe943` feat: `site.yaml`, schema Zod, loader e `getSite()`.
 - `1315828` test: 9 testes do schema com o `node:test`, `npm test` no CI.
 - `1fc754a` chore: JSON Schema do `site.yaml` no VS Code.
 - `d9a9f79` feat: Laboratório depois da P-002.
 - `6c68d4e` chore: telemetria do Astro desligada.
+- `63c3a10` fix: `astro sync` antes do ESLint.
+- `71d3e55` docs: rodada completa a partir de uma pasta limpa.
 
 **Resultado:**
 
