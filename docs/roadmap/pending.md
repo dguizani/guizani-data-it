@@ -2,25 +2,6 @@
 
 Na ordem de execução. A especificação de cada entrega está em `docs/brief.md` (seção indicada em **Contexto**) e os textos em `docs/approved_content.md`.
 
-### M-004 · Identidade visual
-
-**Objetivo:** paleta nas cores do Python sobre base escura, fontes, logo novo em SVG, tema claro e escuro com botão e o fundo de circuito do hero. Origem: prompt de construção, 2026-10-28.
-
-**Depende de:** M-002 e C-001 (foto e banner de referência).
-
-**Contexto:** `docs/brief.md`, seção **Funcionalidades do MVP** (identidade visual, logo e tema).
-
-**Passos:**
-- [ ] Tokens da paleta dos dois temas em `src/styles/tokens.css`, conferindo os tons e o contraste (WCAG AA); no tema claro, o amarelo nunca é cor de texto.
-- [ ] Inter e JetBrains Mono pelos pacotes `@fontsource`, servidas pelo site.
-- [ ] Debater as opções de logo (monograma ou nome em fonte própria) e fazer o SVG que troca de cor com o tema; nunca o logo do Python.
-- [ ] `ThemeToggle` e o script inline no `<head>` (tema do sistema por padrão, escolha salva no navegador, sem piscar).
-- [ ] `CircuitBackground`: linhas de circuito e texto binário em SVG leve, inspirados no banner.
-
-**Commits:**
-
-**Resultado:**
-
 ### M-005 · Seções do site
 
 **Objetivo:** montar a página com as seções na ordem aprovada: hero, sobre, serviços, projetos principais, participação pontual, linha do tempo, skills, laboratório, contato e rodapé. Origem: prompt de construção, 2026-10-28.

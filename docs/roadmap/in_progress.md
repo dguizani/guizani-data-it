@@ -1,5 +1,38 @@
 # Roadmap · em andamento
 
+### M-004 · Identidade visual
+
+**Objetivo:** paleta nas cores do Python sobre base escura, fontes, logo novo em SVG, tema claro e escuro com botão e o fundo de circuito do hero. Origem: prompt de construção, 2026-10-28.
+
+**Depende de:** M-002 e C-001 (foto e banner de referência, concluído).
+
+**Contexto:** `docs/brief.md`, seção **Funcionalidades do MVP** (identidade visual, logo e tema).
+
+**Achados** (2026-10-28):
+- Contraste WCAG da paleta do briefing: todas as combinações de texto passam no AA; a mais justa é o azul `#4B8BBE` sobre a superfície escura `#121C21` (4,73). O amarelo `#FFD43B` como texto sobre o branco reprova (1,43), como o briefing já previa; o texto escuro sobre o botão amarelo fica entre 11,50 e 13,25.
+- Banner (`references/capa.fw.png`): fundo quase preto com tom verde-azulado, linhas de circuito brilhantes em amarelo-claro com anéis nas pontas, uma coluna de texto binário (a palavra "empti" repetida), o texto "EMP TI" e dois logos do Python, que não entram no site.
+- Prévia dos três conceitos de logo (monograma GD, `guizani.data_it` e G de circuito) nos dois temas, com Inter e JetBrains Mono, em `logs/logo-concepts/preview.png` (fora do git).
+
+**Decisões** (2026-10-28, aprovadas pelo usuário):
+1. Paleta do briefing sem mudanças; no tema claro, o amarelo só como fundo de botão, com texto escuro.
+2. Inter em versão variável (`@fontsource-variable/inter`) e JetBrains Mono nos pesos 400 e 700 (`@fontsource/jetbrains-mono`), servidas pelo site, só os caracteres latinos baixados (`unicode-range`), com `font-display: swap`.
+3. Logo C, "G de circuito": um G desenhado como trilha de circuito em azul, terminando num ponto amarelo, ao lado do nome "GUIZANI" com "DATA IT" em JetBrains Mono embaixo. O símbolo é SVG; o nome é texto HTML com as fontes do site. O usuário pode pedir outro logo no futuro.
+4. Tema: segue o sistema na primeira visita; o botão alterna entre claro e escuro; a escolha fica salva no navegador; um script inline no `<head>` aplica o tema antes da página aparecer.
+5. `CircuitBackground`: SVG fixo, sem animação, com menos de 5 KB, linhas de circuito em amarelo-claro com anéis nas pontas e brilho feito por uma segunda linha larga e transparente (sem filtro de desfoque), uma coluna de texto binário com a palavra "data" (`01100100 01100001 01110100 01100001`), em baixa opacidade, escondido dos leitores de tela; sem os logos do Python.
+
+**Passos:**
+- [ ] Fontes pelos pacotes `@fontsource`.
+- [ ] Tokens dos dois temas em `src/styles/tokens.css` e o reset em `src/styles/reset.css`.
+- [ ] `Base.astro` com o script do tema no `<head>`.
+- [ ] `Logo`, `ThemeToggle` e `CircuitBackground`, com os textos no `site.yaml`.
+- [ ] Página provisória mostrando a identidade nos dois temas.
+- [ ] Conferir no celular e nos dois temas; Lighthouse 90 ou mais.
+- [ ] `T-004`.
+
+**Commits:**
+
+**Resultado:**
+
 ### M-003 · Arquivo de dados e schema
 
 **Objetivo:** guardar todo o conteúdo do site em `src/data/site.yaml`, nos dois idiomas lado a lado, validado no build por um schema Zod. Origem: prompt de construção, 2026-10-28.
