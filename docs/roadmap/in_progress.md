@@ -21,15 +21,27 @@
 5. `CircuitBackground`: SVG fixo, sem animação, com menos de 5 KB, linhas de circuito em amarelo-claro com anéis nas pontas e brilho feito por uma segunda linha larga e transparente (sem filtro de desfoque), uma coluna de texto binário com a palavra "data" (`01100100 01100001 01110100 01100001`), em baixa opacidade, escondido dos leitores de tela; sem os logos do Python.
 
 **Passos:**
-- [ ] Fontes pelos pacotes `@fontsource`.
-- [ ] Tokens dos dois temas em `src/styles/tokens.css` e o reset em `src/styles/reset.css`.
-- [ ] `Base.astro` com o script do tema no `<head>`.
-- [ ] `Logo`, `ThemeToggle` e `CircuitBackground`, com os textos no `site.yaml`.
-- [ ] Página provisória mostrando a identidade nos dois temas.
-- [ ] Conferir no celular e nos dois temas; Lighthouse 90 ou mais.
-- [ ] `T-004`.
+- [x] Fontes pelos pacotes `@fontsource` (`59f1d6d`).
+- [x] Tokens dos dois temas em `src/styles/tokens.css` e o reset em `src/styles/reset.css` (`59f1d6d`).
+- [x] `Base.astro` com o script do tema no `<head>` (`27973ea`).
+- [x] `Logo`, `ThemeToggle` e `CircuitBackground`, com os textos no `site.yaml` (`98e6776`, `3729bbb`).
+- [x] Página provisória mostrando a identidade nos dois temas (`abf7aee`).
+- [x] Conferir no celular e nos dois temas; Lighthouse 90 ou mais (pelo agente, com capturas em `logs/m004/`; a conferência do usuário fica no T-004).
+- [x] `T-004`.
+
+**Ajustes na implementação:**
+- O nome da empresa saiu de `contact.company` e foi para um bloco `brand` do `site.yaml`, com as duas linhas do logo (`wordmark.primary` e `wordmark.secondary`); os textos de acessibilidade ficam em `ui.a11y`.
+- O script do tema no `<head>` também trata o clique no botão (qualquer elemento com `data-theme-toggle`), para o site não ter um terceiro script.
+- O texto binário do `CircuitBackground` é um `<pattern>` do SVG com uma linha que se repete na vertical, em vez de um `.map()` com JSX: o parser do Astro no ESLint não resolve o tipo do JSX dentro de expressões (`no-unsafe-return`), e o `pattern` também deixa o SVG menor (2,2 KB no HTML).
+- Nas telas a partir de 48rem, uma máscara em gradiente esmaece o lado esquerdo do fundo, onde fica o texto do hero, como no banner, em que o desenho fica no centro e à direita.
+- As capturas da página nos dois temas, no celular (390 px) e no desktop (1280 px), ficam em `logs/m004/` (fora do git).
 
 **Commits:**
+- `98e6776` feat: `brand` e `ui.a11y` no `site.yaml` e no schema.
+- `59f1d6d` feat: fontes, tokens dos dois temas e reset.
+- `27973ea` feat: `Base.astro` com o script do tema.
+- `3729bbb` feat: `Logo`, `ThemeToggle` e `CircuitBackground`.
+- `abf7aee` feat: página provisória com a identidade.
 
 **Resultado:**
 
