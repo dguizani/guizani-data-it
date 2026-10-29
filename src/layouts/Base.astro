@@ -1,0 +1,86 @@
+---
+/**
+ * Estrutura comum a todas as páginas: o `<head>` (metadados, fontes e o script
+ * do tema) e o `<body>` com o conteúdo da página.
+ *
+ * O script do tema roda no `<head>`, antes da página aparecer, para ela não
+ * piscar no tema errado: usa a escolha salva no navegador ou, sem ela, o tema
+ * do sistema. Ele também trata o clique em qualquer elemento com
+ * `data-theme-toggle`, para o site não precisar de outro script.
+ */
+import "@fontsource-variable/inter/wght.css";
+import "@fontsource/jetbrains-mono/latin-400.css";
+import "@fontsource/jetbrains-mono/latin-700.css";
+import interLatin from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import "../styles/tokens.css";
+import "../styles/reset.css";
+
+/** Propriedades do layout base. */
+interface Props {
+  /** Idioma da página, no formato do atributo `lang` (ex.: `pt-BR`, `en`). */
+  lang: string;
+  /** Título da página, mostrado na aba do navegador e nos buscadores. */
+  title: string;
+  /** Descrição da página para os buscadores. */
+  description: string;
+}
+
+const { lang, title, description } = Astro.props;
+---
+
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="color-scheme" content="dark light" />
+    <title>{title}</title>
+    <link
+      rel="preload"
+      href={interLatin}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <script is:inline>
+      (() => {
+        const key = "theme";
+        const root = document.documentElement;
+        const readStored = () => {
+          try {
+            return localStorage.getItem(key);
+          } catch {
+            return null;
+          }
+        };
+        const apply = (theme) => {
+          root.dataset.theme = theme;
+        };
+        const stored = readStored();
+        const system = matchMedia("(prefers-color-scheme: light)").matches
+          ? "light"
+          : "dark";
+        apply(stored === "light" || stored === "dark" ? stored : system);
+        document.addEventListener("click", (event) => {
+          const target = event.target;
+          if (
+            !(target instanceof Element) ||
+            target.closest("[data-theme-toggle]") === null
+          ) {
+            return;
+          }
+          const next = root.dataset.theme === "dark" ? "light" : "dark";
+          apply(next);
+          try {
+            localStorage.setItem(key, next);
+          } catch {
+            return;
+          }
+        });
+      })();
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
