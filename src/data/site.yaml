@@ -477,8 +477,13 @@ lab:
         supermercados.
       en: Complete relational database model for a supermarket chain.
 
+brand:
+  name: Guizani Data IT
+  wordmark:
+    primary: Guizani
+    secondary: Data IT
+
 contact:
-  company: Guizani Data IT
   owner: Davi Guizani
   cnpj: 62.058.173/0001-18
   email: contato@guizani.com.br
@@ -568,3 +573,10 @@ ui:
     analyticsNotice:
       pt: Este site conta visitas de forma anônima, sem cookies.
       en: This site counts visits anonymously, without cookies.
+  a11y:
+    home:
+      pt: Guizani Data IT, início
+      en: Guizani Data IT, home
+    themeToggle:
+      pt: Alternar entre tema claro e escuro
+      en: Toggle light and dark theme

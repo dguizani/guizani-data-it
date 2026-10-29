@@ -196,10 +196,31 @@ export const labItem = z
 /** Projeto pessoal ou de estudo. */
 export type LabItem = z.infer<typeof labItem>;
 
+/** Nome da empresa e as duas partes do nome que aparecem no logo. */
+export const brand = z
+  .strictObject({
+    name: plainText.describe(
+      "Nome completo da empresa (ex.: Guizani Data IT).",
+    ),
+    wordmark: z
+      .strictObject({
+        primary: plainText.describe(
+          "Parte de cima do nome no logo (ex.: Guizani).",
+        ),
+        secondary: plainText.describe(
+          "Parte de baixo do nome no logo (ex.: Data IT).",
+        ),
+      })
+      .describe("Nome no logo, em duas linhas."),
+  })
+  .describe("Marca da empresa.");
+
+/** Marca da empresa. */
+export type Brand = z.infer<typeof brand>;
+
 /** Dados de contato e da empresa. */
 export const contact = z
   .strictObject({
-    company: plainText.describe("Nome da empresa."),
     owner: plainText.describe("Nome do engenheiro por trás da empresa."),
     cnpj: z
       .string()
@@ -287,6 +308,16 @@ export const ui = z
         ),
       })
       .describe("Textos do rodapé."),
+    a11y: z
+      .strictObject({
+        home: localizedText.describe(
+          "Nome do link do logo, que leva ao início da página.",
+        ),
+        themeToggle: localizedText.describe(
+          "Nome do botão que alterna entre o tema claro e o escuro.",
+        ),
+      })
+      .describe("Textos de acessibilidade, lidos pelos leitores de tela."),
   })
   .describe("Textos da interface, nos dois idiomas.");
 
@@ -336,6 +367,7 @@ export const siteSchema = z
     lab: z
       .array(labItem)
       .describe("Projetos pessoais e de estudo, na ordem em que aparecem."),
+    brand,
     contact,
     ui,
   })
