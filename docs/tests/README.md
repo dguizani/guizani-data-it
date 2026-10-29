@@ -21,7 +21,7 @@ O projeto não usa Node instalado no sistema: todos os comandos rodam em contêi
 **Ambiente:**
 
 - Docker Desktop instalado e rodando (`docker version` responde com o cliente e o servidor).
-- Serviço `dev`: o Node, para instalação, servidor de desenvolvimento, lint, formatação, `astro check` e build. Serviço `lighthouse`: o mesmo Node com o Chromium.
+- Serviço `dev`: o Node, para instalação, servidor de desenvolvimento, lint, formatação, `astro check`, testes e build. Serviço `lighthouse`: o mesmo Node com o Chromium.
 - As dependências ficam no volume `guizani-data-it_node_modules`, e não na pasta do projeto, porque no Windows o `node_modules` dentro de uma pasta montada é muito lento. Para reiniciar o ambiente do zero: `docker compose down -v` e rodar a instalação de novo. Depois de mudar o `Dockerfile` (por exemplo, a versão do Node): `docker compose build`.
 - O CI confere que a versão do `FROM` do `Dockerfile` é igual à do `.nvmrc`; quando o Dependabot sobe a imagem, o `.nvmrc` precisa subir no mesmo pull request.
 
@@ -34,13 +34,14 @@ O projeto não usa Node instalado no sistema: todos os comandos rodam em contêi
 | Lint | `docker compose run --rm dev npm run lint` | nenhuma mensagem de erro |
 | Formatação (conferir) | `docker compose run --rm dev npm run format:check` | `All matched files use Prettier code style!` |
 | Tipos e schema | `docker compose run --rm dev npm run check` | `0 errors`, `0 warnings`, `0 hints` |
+| Testes do schema | `docker compose run --rm dev npm test` | `fail 0` |
 | Build | `docker compose run --rm dev npm run build` | `Complete!` |
 | Lighthouse (build e verificação) | `docker compose run --rm lighthouse` | cada categoria com `ok` e a pasta dos relatórios |
 
 **Rodada completa** (a mesma sequência do CI), no Git Bash:
 
 ```bash
-docker compose run --rm dev sh -c "npm ci && npm run lint && npm run format:check && npm run check" && docker compose run --rm lighthouse
+docker compose run --rm dev sh -c "npm ci && npm run lint && npm run format:check && npm run check && npm test" && docker compose run --rm lighthouse
 ```
 
 **Lighthouse:** o `scripts/lighthouse-check.ts` serve o `dist/` com o `astro preview`, roda o Lighthouse 3 vezes por página no perfil de celular, usa a mediana e barra performance, acessibilidade ou SEO abaixo de 90 (boas práticas só é informada). Os relatórios JSON e HTML de cada execução ficam em `logs/lighthouse/check__<data e hora>/`; o HTML abre no navegador. As notas no contêiner podem diferir um pouco das do CI, porque o Lighthouse simula um celular a partir da velocidade da máquina.
