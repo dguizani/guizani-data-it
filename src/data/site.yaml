@@ -435,6 +435,9 @@ lab:
     technologies:
       - pandas
       - matplotlib
+      - NLTK
+      - scikit-learn
+      - Base dos Dados
     description:
       pt: >-
         Trabalhos da graduação em Ciência de Dados na UNINTER: análise do
@@ -460,6 +463,19 @@ lab:
         Side-by-side comparison of pandas and Polars: DataFrame creation,
         selection, filtering, chaining, and lazy vs. eager execution.
     repository: https://github.com/dguizani/polars-python-studying
+  - id: guizani-supermarket
+    name: guizani-supermarket
+    period:
+      start: "2022"
+      end: "2023"
+    technologies:
+      - PostgreSQL
+      - SQL
+    description:
+      pt: >-
+        Modelagem completa de um banco de dados relacional para uma rede de
+        supermercados.
+      en: Complete relational database model for a supermarket chain.
 
 contact:
   company: Guizani Data IT
