@@ -1,0 +1,82 @@
+---
+/**
+ * Seção de formação e certificações: uma linha por item, primeiro os cursos de
+ * formação (período, título e instituição) e depois as certificações (data,
+ * nome, emissor e o link de verificação, quando houver).
+ */
+import Section from "./Section.astro";
+import { formatPeriod, formatYearMonth, type Lang } from "../data/format.ts";
+import type { Site } from "../data/schema.ts";
+
+/** Propriedades da seção de formação e certificações. */
+interface Props {
+  /** Todo o conteúdo do site. */
+  site: Site;
+  /** Idioma da página. */
+  lang: Lang;
+}
+
+const { site, lang } = Astro.props;
+---
+
+<Section id="education" title={site.ui.sections.education[lang]}>
+  <ul class="items">
+    {site.education.map((item) => (
+      <li class="item">
+        <p class="date">
+          {formatPeriod(item.period, lang, site.ui.project.ongoing[lang])}
+        </p>
+        <p>
+          <strong>{item.degree[lang]}</strong> <span>· {item.institution}</span>
+        </p>
+      </li>
+    ))}
+    {site.certifications.map((item) => (
+      <li class="item">
+        <p class="date">{formatYearMonth(item.date, lang)}</p>
+        <p>
+          <strong>{item.name}</strong> <span>· {item.issuer}</span>
+        </p>
+        {item.verificationUrl !== undefined && (
+          <a
+            href={item.verificationUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {site.ui.education.verify[lang]}
+            <span class="visually-hidden">
+              {item.name} {site.ui.a11y.externalLink[lang]}
+            </span>
+          </a>
+        )}
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<style>
+  .items {
+    display: grid;
+    gap: var(--space-4);
+    padding: 0;
+    list-style: none;
+  }
+
+  .item {
+    display: grid;
+    gap: var(--space-1);
+    justify-items: start;
+    padding-left: var(--space-4);
+    border-left: 0.1875rem solid var(--color-primary);
+  }
+
+  .date {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+
+  span {
+    color: var(--color-text-muted);
+  }
+</style>

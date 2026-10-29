@@ -2,7 +2,8 @@
 /**
  * Página inicial completa num idioma: o cabeçalho, as seções na ordem aprovada
  * (hero, sobre, serviços, projetos principais, participação pontual, linha do
- * tempo, skills, laboratório e contato), o rodapé e o botão de voltar ao topo.
+ * tempo, skills, formação e certificações, laboratório e contato), o rodapé e o
+ * botão de voltar ao topo.
  *
  * As páginas de cada idioma só escolhem o idioma. Os links `hreflang` apontam
  * para as duas versões, com a em português como padrão (`x-default`).
@@ -10,6 +11,7 @@
 import About from "./About.astro";
 import BackToTop from "./BackToTop.astro";
 import Contact from "./Contact.astro";
+import Education from "./Education.astro";
 import Footer from "./Footer.astro";
 import Header from "./Header.astro";
 import Hero from "./Hero.astro";
@@ -57,6 +59,7 @@ const alternates = [
     <OccasionalWork site={site} lang={lang} />
     <Timeline site={site} lang={lang} />
     <Skills site={site} lang={lang} />
+    <Education site={site} lang={lang} />
     <Lab site={site} lang={lang} />
     <Contact site={site} lang={lang} />
   </main>

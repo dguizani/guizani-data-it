@@ -416,6 +416,21 @@ skills:
         en: Data testing
       - LGPD
 
+education:
+  - id: uninter-data-science
+    degree:
+      pt: Tecnólogo em Ciência de Dados
+      en: Technologist degree in Data Science
+    institution: UNINTER
+    period:
+      start: "2024"
+      end: "2026"
+certifications:
+  - id: pcep
+    name: PCEP – Certified Entry-Level Python Programmer
+    issuer: Python Institute
+    date: "2025-01"
+    verificationUrl: https://verify.openedg.org/?id=vi42.dv6B.cUXq
 lab:
   - id: intern-data-rpa-course
     name: intern-data-rpa-course
@@ -554,6 +569,9 @@ ui:
     skills:
       pt: Skills
       en: Skills
+    education:
+      pt: Formação e certificações
+      en: Education and certifications
     lab:
       pt: Laboratório
       en: Lab
@@ -590,6 +608,10 @@ ui:
     privateRepository:
       pt: Repositório privado
       en: Private repository
+  education:
+    verify:
+      pt: Verificar
+      en: Verify
   contact:
     email:
       pt: E-mail

@@ -196,6 +196,40 @@ export const labItem = z
 /** Projeto pessoal ou de estudo. */
 export type LabItem = z.infer<typeof labItem>;
 
+/** Curso de formação, com o título obtido, a instituição e o período. */
+export const educationItem = z
+  .strictObject({
+    id: id.describe("Identificador da formação, único no arquivo."),
+    degree: localizedText.describe(
+      "Título obtido, como aparece no diploma (ex.: Tecnólogo em Ciência de Dados).",
+    ),
+    institution: plainText.describe("Nome da instituição de ensino."),
+    period,
+  })
+  .describe("Curso de formação.");
+
+/** Curso de formação. */
+export type EducationItem = z.infer<typeof educationItem>;
+
+/** Certificação, com o emissor, a data e o link de verificação. */
+export const certification = z
+  .strictObject({
+    id: id.describe("Identificador da certificação, único no arquivo."),
+    name: plainText.describe("Nome oficial da certificação."),
+    issuer: plainText.describe("Instituição que emitiu a certificação."),
+    date: yearMonth.describe(
+      "Data da certificação: AAAA ou AAAA-MM, entre aspas.",
+    ),
+    verificationUrl: z
+      .url()
+      .optional()
+      .describe("Endereço da página oficial que confirma a certificação."),
+  })
+  .describe("Certificação.");
+
+/** Certificação. */
+export type Certification = z.infer<typeof certification>;
+
 /** Nome da empresa e as duas partes do nome que aparecem no logo. */
 export const brand = z
   .strictObject({
@@ -311,6 +345,7 @@ export const ui = z
         occasionalWork: localizedText,
         timeline: localizedText,
         skills: localizedText,
+        education: localizedText,
         lab: localizedText,
         contact: localizedText,
       })
@@ -342,6 +377,13 @@ export const ui = z
         ),
       })
       .describe("Rótulos do Laboratório."),
+    education: z
+      .strictObject({
+        verify: localizedText.describe(
+          "Link para a página oficial que confirma uma certificação.",
+        ),
+      })
+      .describe("Rótulos da seção de formação e certificações."),
     contact: z
       .strictObject({
         email: localizedText,
@@ -437,6 +479,12 @@ export const siteSchema = z
       .array(skillGroup)
       .min(1)
       .describe("Grupos de skills, na ordem em que aparecem."),
+    education: z
+      .array(educationItem)
+      .describe("Cursos de formação, na ordem em que aparecem."),
+    certifications: z
+      .array(certification)
+      .describe("Certificações, na ordem em que aparecem."),
     lab: z
       .array(labItem)
       .describe("Projetos pessoais e de estudo, na ordem em que aparecem."),
@@ -460,6 +508,8 @@ export const siteSchema = z
       projects: site.projects,
       services: site.services,
       skills: site.skills,
+      education: site.education,
+      certifications: site.certifications,
       lab: site.lab,
     };
     for (const [list, items] of Object.entries(lists)) {
