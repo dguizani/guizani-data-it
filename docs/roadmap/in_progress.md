@@ -22,6 +22,9 @@
 6. Testes do schema com o `node:test` (arquivo válido passa; campo faltando, `en` vazio e cliente inexistente são recusados), no `npm test` e no CI.
 7. JSON Schema do `site.yaml` para o VS Code, com a extensão YAML da Red Hat (autocomplete e a descrição de cada campo).
 8. Laboratório: descrições do `polars-python-studying` e do `uninter` aprovadas; o `intern-data-rpa-course` entra com a descrição proposta, a confirmar na P-002; o `python-financeiro-pessoal` e o `guizani-supermarket` ficam fora do `site.yaml` até a P-002.
+9. Depois da P-002: o `python-financeiro-pessoal` não entra no Laboratório; o `guizani-supermarket` entra sem link, com a descrição do usuário; a descrição do `intern-data-rpa-course` fica como proposta; o `uninter` ganha NLTK, scikit-learn e Base dos Dados (2026-10-28, aprovado pelo usuário).
+10. A versão em inglês de todo o conteúdo foi aprovada como está, inclusive "Featured projects", "Short engagements", "Skills" também no título em português, "REST APIs" e a explicação da LGPD (2026-10-28, aprovado pelo usuário).
+11. A telemetria do Astro fica desligada (`ASTRO_TELEMETRY_DISABLED=1` no `compose.yaml` e nos workflows) (2026-10-28, aprovado pelo usuário).
 
 **Passos:**
 - [x] Schema Zod com descrição em cada campo e o loader da coleção `site` (`7dbe943`).
@@ -29,8 +32,8 @@
 - [x] Testes do schema (`npm test`) e o passo no CI (`1315828`).
 - [x] JSON Schema para o VS Code (`1fc754a`), usando o que o Astro já gera em `.astro/collections/site.schema.json`.
 - [x] Guia de edição do conteúdo no `README.md`.
-- [ ] Revisão da versão em inglês pelo usuário.
-- [ ] Responder a P-002 e completar o Laboratório.
+- [x] Revisão da versão em inglês pelo usuário (2026-10-28, aprovada como está).
+- [x] Responder a P-002 e completar o Laboratório (2026-10-28).
 - [x] `T-003`.
 
 **Ajustes na implementação:**
@@ -43,6 +46,8 @@
 - `7dbe943` feat: `site.yaml`, schema Zod, loader e `getSite()`.
 - `1315828` test: 9 testes do schema com o `node:test`, `npm test` no CI.
 - `1fc754a` chore: JSON Schema do `site.yaml` no VS Code.
+- `d9a9f79` feat: Laboratório depois da P-002.
+- `6c68d4e` chore: telemetria do Astro desligada.
 
 **Resultado:**
 
