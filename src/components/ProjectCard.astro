@@ -2,7 +2,8 @@
 /**
  * Card de um projeto principal: o cliente (ou o setor, quando o nome não pode
  * aparecer) com a consultoria, o título, o período, o problema, o papel e a
- * stack em etiquetas.
+ * stack em etiquetas. Quando o card é largo, o topo e a stack ficam à esquerda,
+ * e o problema e o papel, à direita.
  */
 import {
   clientLabel,
@@ -29,28 +30,30 @@ const period = formatPeriod(project.period, lang, ui.project.ongoing[lang]);
 ---
 
 <article class="card">
-  <header class="top">
-    <p class="client">
-      {clientLabel(client, lang)}{" "}
-      {project.consultancy !== undefined && (
-        <span class="via">
-          {ui.project.via[lang]} {project.consultancy}
-        </span>
-      )}
-    </p>
-    <h3>{project.title[lang]}</h3>
-    <p class="period">{period}</p>
-  </header>
-  <dl class="details">
-    <div>
-      <dt>{ui.project.problem[lang]}</dt>
-      <dd>{project.problem[lang]}</dd>
-    </div>
-    <div>
-      <dt>{ui.project.role[lang]}</dt>
-      <dd>{project.role[lang]}</dd>
-    </div>
-    <div>
+  <div class="layout">
+    <header class="top">
+      <p class="client">
+        {clientLabel(client, lang)}{" "}
+        {project.consultancy !== undefined && (
+          <span class="via">
+            {ui.project.via[lang]} {project.consultancy}
+          </span>
+        )}
+      </p>
+      <h3>{project.title[lang]}</h3>
+      <p class="period">{period}</p>
+    </header>
+    <dl class="details">
+      <div>
+        <dt>{ui.project.problem[lang]}</dt>
+        <dd>{project.problem[lang]}</dd>
+      </div>
+      <div>
+        <dt>{ui.project.role[lang]}</dt>
+        <dd>{project.role[lang]}</dd>
+      </div>
+    </dl>
+    <dl class="tech">
       <dt>{ui.project.stack[lang]}</dt>
       <dd>
         <ul class="stack">
@@ -59,22 +62,46 @@ const period = formatPeriod(project.period, lang, ui.project.ongoing[lang]);
           ))}
         </ul>
       </dd>
-    </div>
-  </dl>
+    </dl>
+  </div>
 </article>
 
 <style>
   .card {
-    display: grid;
-    gap: var(--space-4);
+    container: project-card / inline-size;
     padding: var(--space-5);
     border: 0.0625rem solid var(--color-border);
     border-radius: var(--radius-md);
     background: var(--color-surface);
   }
 
+  .layout {
+    display: grid;
+    grid-template-areas:
+      "top"
+      "details"
+      "tech";
+    gap: var(--space-4);
+  }
+
+  .tech {
+    grid-area: tech;
+  }
+
+  @container project-card (min-width: 48rem) {
+    .layout {
+      grid-template-areas:
+        "top details"
+        "tech details";
+      grid-template-rows: auto 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+      column-gap: var(--space-6);
+    }
+  }
+
   .top {
     display: grid;
+    grid-area: top;
     gap: var(--space-1);
   }
 
@@ -100,7 +127,9 @@ const period = formatPeriod(project.period, lang, ui.project.ongoing[lang]);
 
   .details {
     display: grid;
+    grid-area: details;
     gap: var(--space-4);
+    align-content: start;
   }
 
   dt {

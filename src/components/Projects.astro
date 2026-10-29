@@ -1,9 +1,8 @@
 ---
 /**
  * Seção de projetos principais: um card por projeto do tipo `main`, com os em
- * andamento primeiro e os outros do mais recente para o mais antigo. Nas telas
- * largas, os cards se encaixam em duas colunas independentes, com o mesmo espaço
- * entre eles, sem buracos quando os textos têm tamanhos diferentes.
+ * andamento primeiro e os outros pela data inicial, do mais recente para o mais
+ * antigo, um abaixo do outro.
  */
 import ProjectCard from "./ProjectCard.astro";
 import Section from "./Section.astro";
@@ -53,17 +52,9 @@ const projects = withClients(
 
   .projects li {
     margin-bottom: var(--space-5);
-    break-inside: avoid;
   }
 
   .projects li:last-child {
     margin-bottom: 0;
-  }
-
-  @media (min-width: 64rem) {
-    .projects {
-      columns: 2;
-      column-gap: var(--space-5);
-    }
   }
 </style>
