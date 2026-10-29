@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Node version matches the Dockerfile
+        run: |
+          nvmrc="$(tr -d '[:space:]' < .nvmrc)"
+          dockerfile="$(sed -n 's/^FROM node:\([0-9.]*\)-.*/\1/p' Dockerfile)"
+          if [ "$nvmrc" != "$dockerfile" ]; then
+            echo "::error::.nvmrc ($nvmrc) and Dockerfile ($dockerfile) use different Node versions"
+            exit 1
+          fi
+
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm run check
+      - run: npm run build
+      - run: npm run lighthouse
+
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: lighthouse-reports
+          path: logs/lighthouse/
+          if-no-files-found: ignore
+          retention-days: 14
