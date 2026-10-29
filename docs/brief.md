@@ -38,7 +38,7 @@ Análise de 2026-10-28, feita no clone local depois de um `git fetch --prune`. C
   1. linha de base: arrumar as branches e o repositório sem mudar o site no ar;
   2. nova identidade visual (paleta, tipografia, logo, tema claro e escuro);
   3. estrutura do site com um arquivo de dados único (projetos, serviços, skills, linha do tempo, laboratório e textos da interface), em português e inglês;
-  4. seções: hero, sobre, serviços, projetos principais, participação pontual, linha do tempo, skills, laboratório e contato;
+  4. seções: hero, sobre, serviços, projetos principais, participação pontual, linha do tempo, skills, formação e certificações (incluída pelo M-012, em 2026-10-29), laboratório e contato;
   5. seletor de idioma PT/EN;
   6. contato (e-mail, WhatsApp e LinkedIn) e currículo em PDF, feito à parte pelo usuário e só linkado;
   7. SEO e qualidade: meta description, Open Graph, favicon, sitemap e Lighthouse 90 ou mais;
@@ -67,7 +67,7 @@ Análise de 2026-10-28, feita no clone local depois de um `git fetch --prune`. C
 - **Logo:** novo, simples e tipográfico (ex.: monograma ou o nome em fonte própria), em SVG, trocando de cor conforme o tema. Debata as opções com o usuário.
 - **Tema claro e escuro:** segue o tema do sistema do visitante, com um botão para trocar; a escolha fica salva no navegador. O script do tema fica inline no `<head>`, para a página não piscar no tema errado.
 - **Idiomas:** português em `/` e inglês em `/en/`, sem redirecionamento automático; links `hreflang` para os buscadores; o seletor fica sempre visível.
-- **Seções, nesta ordem:** hero, sobre (curto), serviços, projetos principais, participação pontual, linha do tempo, skills, laboratório e contato, mais o rodapé.
+- **Seções, nesta ordem:** hero, sobre (curto), serviços, projetos principais, participação pontual, linha do tempo, skills, formação e certificações (M-012, fora do menu), laboratório e contato, mais o rodapé.
 - **Hero:** a marca Guizani Data IT, uma frase de posicionamento (proponha opções ao usuário) e dois botões: "Vamos conversar" (contato) e "Ver projetos".
 - **Cards dos projetos principais:** cliente (com "via ITIX"), título, período, problema, papel e stack.
 - **Contato:**
@@ -110,8 +110,8 @@ src/
   data/schema.ts          # schema (Zod) que valida o YAML no build
   layouts/Base.astro      # <head>: SEO, hreflang, Open Graph, script do tema, analytics
   components/             # Header, LanguageSwitch, ThemeToggle, Hero, About, Services,
-                          # ProjectCard, Projects, OccasionalWork, Timeline, Skills, Lab,
-                          # Contact, Footer, CircuitBackground (SVG do hero)
+                          # ProjectCard, Projects, OccasionalWork, Timeline, Skills, Education, Lab,
+                          # Contact, Footer, BackToTop, CircuitBackground (SVG do hero)
   pages/index.astro       # português, em /
   pages/en/index.astro    # inglês, em /en/
   styles/tokens.css       # paleta dos dois temas, fontes, espaçamentos

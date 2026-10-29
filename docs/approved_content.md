@@ -52,6 +52,12 @@ Todos os projetos de clientes foram feitos pela consultoria **ITIX**, e no site 
 - **JSL, via ITIX: robô com Selenium** (2025-11 a 2026-03);
 - **Unimed de Goiânia, via ITIX: RPA** (2025-02).
 
+**Formação e certificações** (M-012, aprovado em 2026-10-29; seção entre as skills e o laboratório, uma linha por item; a Ufes, o curso de Python básico da Fundação Bradesco e a monitoria ficam de fora):
+
+- **Título da seção:** Formação e certificações / Education and certifications.
+- **Formação:** Tecnólogo em Ciência de Dados · UNINTER · 2024 – 2026 / Technologist degree in Data Science · UNINTER · 2024 – 2026.
+- **Certificação:** PCEP – Certified Entry-Level Python Programmer · Python Institute · jan. 2025 · Verificar / Verify (link para a verificação oficial da OpenEDG).
+
 **Laboratório** (projetos pessoais e de estudo ligados a engenharia de dados; só os repositórios públicos ganham link para o código):
 
 | Projeto | Período | Tecnologias | Repositório |
