@@ -7,7 +7,7 @@ Roteiro de teste de cada alteração testável do Portfólio DataIT: o que rodar
 - Estados: `pending.md` (pendentes, com a **Execução conjunta** no topo) e `done.md` (concluídos).
 - Cada item é uma seção `### T-NNN · <título>` com: **Roadmap** (o `M-NNN` que valida), **Commits**, **O que mudou** (resumo, onde aparece e cenários), **Passos** (ação e resultado esperado) e **Resultado** (data e hora de cada execução, inclusive as falhas).
 - Toda alteração testável ganha um `T-NNN` no `pending.md`, e a Execução conjunta é atualizada junto.
-- Quando houver testes automatizados (a partir do M-002: lint, Prettier, `astro check`, build e Lighthouse CI), o agente roda **todos** e informa o resultado; ao usuário, entrega só o que mudou e onde ver. Relatos do usuário são classificados como bug novo, comportamento esperado ou bug conhecido (com o `M-NNN`).
+- Quando houver testes automatizados (a partir do M-002: lint, Prettier, `astro check`, build e Lighthouse), o agente roda **todos** e informa o resultado; ao usuário, entrega só o que mudou e onde ver. Relatos do usuário são classificados como bug novo, comportamento esperado ou bug conhecido (com o `M-NNN`).
 - Passos só são marcados `[x]` com a confirmação do usuário. Passo que falha registra o erro no Resultado, e a seção fica no `pending.md` até a correção.
 - **Onde ficam as saídas:**
   - `logs/` (fora do git): a saída crua de cada execução, em `logs/<comando>__AAAA-MM-DD.log`, e os relatórios do Lighthouse em `logs/lighthouse/`;
@@ -16,32 +16,36 @@ Roteiro de teste de cada alteração testável do Portfólio DataIT: o que rodar
 
 ## Pré-requisitos comuns
 
-O projeto não usa Node instalado no sistema: todos os comandos rodam num contêiner Docker com a imagem oficial `node`, na versão do `.nvmrc`. Os comandos abaixo são para o PowerShell, na raiz do projeto; eles valem a partir do M-002, que cria o projeto Astro, e são conferidos lá.
+O projeto não usa Node instalado no sistema: todos os comandos rodam em contêineres Docker definidos no `compose.yaml` e no `Dockerfile`, com a imagem oficial `node` na versão do `.nvmrc`. Os comandos valem no PowerShell e no Git Bash, na raiz do projeto.
 
 **Ambiente:**
 
 - Docker Desktop instalado e rodando (`docker version` responde com o cliente e o servidor).
-- A versão do Node vem do `.nvmrc`:
+- Serviço `dev`: o Node, para instalação, servidor de desenvolvimento, lint, formatação, `astro check` e build. Serviço `lighthouse`: o mesmo Node com o Chromium.
+- As dependências ficam no volume `guizani-data-it_node_modules`, e não na pasta do projeto, porque no Windows o `node_modules` dentro de uma pasta montada é muito lento. Para reiniciar o ambiente do zero: `docker compose down -v` e rodar a instalação de novo. Depois de mudar o `Dockerfile` (por exemplo, a versão do Node): `docker compose build`.
+- O CI confere que a versão do `FROM` do `Dockerfile` é igual à do `.nvmrc`; quando o Dependabot sobe a imagem, o `.nvmrc` precisa subir no mesmo pull request.
 
-  ```powershell
-  $node = "node:$((Get-Content .nvmrc).Trim())"
-  ```
+**Comandos** (o `run --rm` cria um contêiner temporário, apagado no fim):
 
-- As dependências ficam num volume do Docker (`guizani-node-modules`), e não na pasta do projeto, porque no Windows o `node_modules` dentro de uma pasta montada é muito lento. Para reiniciar o ambiente do zero: `docker volume rm guizani-node-modules` e rodar a instalação de novo.
+| Para | Comando | Esperado |
+|---|---|---|
+| Instalar as dependências | `docker compose run --rm dev npm ci` | `found 0 vulnerabilities` |
+| Servidor de desenvolvimento | `docker compose up dev` e abrir <http://localhost:4321> (Ctrl+C para parar) | a página abre e recarrega ao salvar um arquivo |
+| Lint | `docker compose run --rm dev npm run lint` | nenhuma mensagem de erro |
+| Formatação (conferir) | `docker compose run --rm dev npm run format:check` | `All matched files use Prettier code style!` |
+| Tipos e schema | `docker compose run --rm dev npm run check` | `0 errors`, `0 warnings`, `0 hints` |
+| Build | `docker compose run --rm dev npm run build` | `Complete!` |
+| Lighthouse (build e verificação) | `docker compose run --rm lighthouse` | cada categoria com `ok` e a pasta dos relatórios |
 
-**Comandos** (cada um cria um contêiner temporário, que é apagado no fim, por causa do `--rm`):
+**Rodada completa** (a mesma sequência do CI), no Git Bash:
 
-| Para | Comando |
-|---|---|
-| Instalar as dependências | `docker run --rm -v "${PWD}:/app" -v guizani-node-modules:/app/node_modules -w /app $node npm ci` |
-| Servidor de desenvolvimento | `docker run --rm -it -v "${PWD}:/app" -v guizani-node-modules:/app/node_modules -w /app -p 4321:4321 $node npm run dev -- --host 0.0.0.0` e abrir <http://localhost:4321> |
-| Lint | `docker run --rm -v "${PWD}:/app" -v guizani-node-modules:/app/node_modules -w /app $node npm run lint` |
-| Formatação (conferir) | `docker run --rm -v "${PWD}:/app" -v guizani-node-modules:/app/node_modules -w /app $node npm run format:check` |
-| Tipos e schema | `docker run --rm -v "${PWD}:/app" -v guizani-node-modules:/app/node_modules -w /app $node npx astro check` |
-| Build | `docker run --rm -v "${PWD}:/app" -v guizani-node-modules:/app/node_modules -w /app $node npm run build` |
-| Lighthouse CI | definido no M-002 (o Lighthouse precisa de um Chrome, que a imagem `node` não tem) |
+```bash
+docker compose run --rm dev sh -c "npm ci && npm run lint && npm run format:check && npm run check" && docker compose run --rm lighthouse
+```
 
-Para guardar a saída de um comando em `logs/`, sempre em UTF-8: `<comando> 2>&1 | Out-File -Encoding utf8 logs/<comando>__AAAA-MM-DD.log`.
+**Lighthouse:** o `scripts/lighthouse-check.ts` serve o `dist/` com o `astro preview`, roda o Lighthouse 3 vezes por página no perfil de celular, usa a mediana e barra performance, acessibilidade ou SEO abaixo de 90 (boas práticas só é informada). Os relatórios JSON e HTML de cada execução ficam em `logs/lighthouse/check__<data e hora>/`; o HTML abre no navegador. As notas no contêiner podem diferir um pouco das do CI, porque o Lighthouse simula um celular a partir da velocidade da máquina.
+
+**Logs:** para guardar a saída de um comando em `logs/`, sempre em UTF-8: no PowerShell, `<comando> 2>&1 | Out-File -Encoding utf8 logs/<comando>__AAAA-MM-DD.log`; no Git Bash, `<comando> > logs/<comando>__AAAA-MM-DD.log 2>&1`.
 
 **Conferir o site:**
 
