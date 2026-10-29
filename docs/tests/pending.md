@@ -28,6 +28,7 @@
 
 **Resultado:**
 - 2026-10-29 00:35, pelo agente, no contêiner: lint, Prettier, `astro check` (0/0/0), `npm test` (9 ok) e build (2 páginas) passaram; Lighthouse com 100 nas quatro categorias em `/` e em `/en/`. No HTML gerado, `lang="pt-BR"` e `lang="en"`, os três links `hreflang` (`pt-BR`, `en` e `x-default`) e o seletor com `href`, `hreflang` e o nome para os leitores de tela certos nas duas páginas. A primeira rodada do lint acusou `no-deprecated` no `name` do seletor, corrigido antes do commit. Falta: a conferência do usuário.
+- 2026-10-29, pelo usuário: o servidor de desenvolvimento mostrou `Cannot read properties of undefined (reading 'switchLabel')` (bug novo: o servidor não recarregava o schema). Corrigido em `2d602bc`, com o teste `d338cfe` (10 testes, 10 ok; o teste novo falha sem a correção). Servidor reiniciado; `/` e `/en/` respondem 200.
 
 ### T-005 · Seções do site
 
