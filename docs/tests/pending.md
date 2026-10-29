@@ -4,6 +4,26 @@
 
 1. Conferência do repositório no GitHub e do site no ar → T-001
 2. Conferência da verificação do domínio e do CNAME, depois do C-004 e do C-006 → T-001
+3. Rodada completa no contêiner: `npm ci`, lint, Prettier, `astro check`, build e Lighthouse (`docs/tests/README.md`, **Rodada completa**) → T-002
+4. Servidor de desenvolvimento com recarga ao salvar → T-002
+5. Primeira execução do CI no GitHub, depois do push → T-002
+
+### T-002 · Estrutura inicial do projeto
+
+**Roadmap:** M-002.
+
+**Commits:** `9666049` a `9e5b3a7`.
+
+**O que mudou:** a `main` passou a ser um projeto Astro 7 com TypeScript `strictest`, rodando só em Docker (`compose.yaml`, serviços `dev` e `lighthouse`), com ESLint, Prettier, `astro check`, a verificação do Lighthouse 13 (`scripts/lighthouse-check.ts`), o CI e o deploy manual no GitHub Actions e o Dependabot. A página é provisória. Onde ver: os comandos do `README.md`; <http://localhost:4321> com o servidor de desenvolvimento; a aba Actions do repositório, depois do push.
+
+**Passos:**
+- [ ] Rodada completa no contêiner: `npm ci` com `found 0 vulnerabilities`; lint sem erros; `All matched files use Prettier code style!`; `astro check` com `0 errors`, `0 warnings`, `0 hints`; build `Complete!`; Lighthouse com `ok` em todas as categorias.
+- [ ] A verificação do Lighthouse falha (`FAIL` e saída 1) quando uma nota fica abaixo do mínimo.
+- [ ] `docker compose up dev` e <http://localhost:4321> mostra a página provisória "Guizani Data IT"; ao mudar e salvar o `src/pages/index.astro`, a página recarrega sozinha.
+- [ ] CI no GitHub verde no push da `main`, com o relatório do Lighthouse anexado como artefato (`lighthouse-reports`).
+
+**Resultado:**
+- 2026-10-28 22:30, pelo agente, no contêiner: `npm ci` com 0 vulnerabilidades; lint, Prettier, `astro check` (0/0/0) e build passaram; Lighthouse na página provisória com performance 100, acessibilidade 100, boas práticas 100 e SEO 100. Com o mínimo de performance trocado para 101 numa cópia fora do git, a verificação deu `FAIL` e saída 1. `docker compose up dev` respondeu 200 em <http://localhost:4321> com o título "Guizani Data IT". A conferência do `.nvmrc` contra o `Dockerfile` deu `26.13.0` nos dois. Falta: a recarga ao salvar (confirmação do usuário) e o CI no GitHub (depois do push).
 
 ### T-001 · Linha de base do repositório
 
