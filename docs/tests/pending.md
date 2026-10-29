@@ -6,7 +6,7 @@
 2. Conferência da verificação do domínio e do CNAME, depois do C-004 e do C-006 → T-001
 3. Rodada completa no contêiner: `npm ci`, lint, Prettier, `astro check`, build e Lighthouse (`docs/tests/README.md`, **Rodada completa**) → T-002
 4. ~~Servidor de desenvolvimento com recarga ao salvar → T-002~~ (ok em 2026-10-28)
-5. Primeira execução do CI no GitHub, depois do push → T-002
+5. ~~Primeira execução do CI no GitHub, depois do push → T-002~~ (ok em 2026-10-28)
 6. Rodada completa com o `npm test` e o build quebrando com dados inválidos → T-003
 7. `site.yaml` no VS Code com a extensão YAML → T-003
 8. Página provisória no computador e no celular, nos dois temas → T-004
