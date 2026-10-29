@@ -3,7 +3,7 @@
 ## Execução conjunta
 
 1. Conferência do repositório no GitHub e do site no ar → T-001
-2. Conferência da verificação do domínio e do CNAME, depois do C-004 e do C-006 → T-001
+2. ~~Conferência da verificação do domínio e do CNAME, depois do C-004 e do C-006 → T-001~~ (ok em 2026-10-29, pelo agente; falta a confirmação do usuário)
 3. Rodada completa no contêiner: `npm ci`, lint, Prettier, `astro check`, build e Lighthouse (`docs/tests/README.md`, **Rodada completa**) → T-002
 4. ~~Servidor de desenvolvimento com recarga ao salvar → T-002~~ (ok em 2026-10-28)
 5. ~~Primeira execução do CI no GitHub, depois do push → T-002~~ (ok em 2026-10-28)
@@ -29,6 +29,7 @@
 **Resultado:**
 - 2026-10-29 00:35, pelo agente, no contêiner: lint, Prettier, `astro check` (0/0/0), `npm test` (9 ok) e build (2 páginas) passaram; Lighthouse com 100 nas quatro categorias em `/` e em `/en/`. No HTML gerado, `lang="pt-BR"` e `lang="en"`, os três links `hreflang` (`pt-BR`, `en` e `x-default`) e o seletor com `href`, `hreflang` e o nome para os leitores de tela certos nas duas páginas. A primeira rodada do lint acusou `no-deprecated` no `name` do seletor, corrigido antes do commit. Falta: a conferência do usuário.
 - 2026-10-29, pelo usuário: o servidor de desenvolvimento mostrou `Cannot read properties of undefined (reading 'switchLabel')` (bug novo: o servidor não recarregava o schema). Corrigido em `2d602bc`, com o teste `d338cfe` (10 testes, 10 ok; o teste novo falha sem a correção). Servidor reiniciado; `/` e `/en/` respondem 200.
+- 2026-10-29, pelo agente: CI `40813664533` (push do `e3a07dc`) verde, com 10 testes ok e Lighthouse 100 nas quatro categorias em `/` e `/en/`.
 
 ### T-005 · Seções do site
 
@@ -125,3 +126,4 @@
 **Resultado:**
 - 2026-10-28 21:15, pelo agente: pela API e por `curl`, nome, descrição, branch padrão, lista de branches (`legacy/curriculo-2024`, `main`, `release/guizani-data-it`), origem do Pages, `https_enforced: true` e site no ar idêntico à `release/guizani-data-it` conferem. Falta a confirmação do usuário e o C-004.
 - 2026-10-28 22:45, pelo agente: depois do C-004, `protected_domain_state` está `verified`. O CNAME do C-006 aparece no `b.sec.dns.br` (TTL de 1 hora) e no `8.8.8.8`, mas a checagem de DNS do Pages (`pages/health`) ainda responde `InvalidARecordError`; falta o "Check again" no GitHub.
+- 2026-10-29, pelo agente: `pages/health` responde `is_valid: true` e `is_cname_to_github_user_domain: true`; `protected_domain_state: verified`, `https_enforced: true`, certificado aprovado. Falta a confirmação do usuário nos passos.
