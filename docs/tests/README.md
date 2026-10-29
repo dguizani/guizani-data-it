@@ -38,10 +38,10 @@ O projeto não usa Node instalado no sistema: todos os comandos rodam em contêi
 | Build | `docker compose run --rm dev npm run build` | `Complete!` |
 | Lighthouse (build e verificação) | `docker compose run --rm lighthouse` | cada categoria com `ok` e a pasta dos relatórios |
 
-**Rodada completa** (a mesma sequência do CI), no Git Bash:
+**Rodada completa** (a mesma sequência do CI, a partir de uma pasta sem os arquivos gerados `.astro/` e `dist/`), no Git Bash:
 
 ```bash
-docker compose run --rm dev sh -c "npm ci && npm run lint && npm run format:check && npm run check && npm test" && docker compose run --rm lighthouse
+docker compose run --rm dev sh -c "rm -rf .astro dist && npm ci && npm run lint && npm run format:check && npm run check && npm test" && docker compose run --rm lighthouse
 ```
 
 **Lighthouse:** o `scripts/lighthouse-check.ts` serve o `dist/` com o `astro preview`, roda o Lighthouse 3 vezes por página no perfil de celular, usa a mediana e barra performance, acessibilidade ou SEO abaixo de 90 (boas práticas só é informada). Os relatórios JSON e HTML de cada execução ficam em `logs/lighthouse/check__<data e hora>/`; o HTML abre no navegador. As notas no contêiner podem diferir um pouco das do CI, porque o Lighthouse simula um celular a partir da velocidade da máquina.
