@@ -483,6 +483,40 @@ brand:
     primary: Guizani
     secondary: Data IT
 
+hero:
+  tagline:
+    pt: >-
+      Pipelines, data warehouses e automações para empresas que precisam confiar
+      nos próprios dados.
+    en: >-
+      Pipelines, data warehouses and automation for companies that need to
+      trust their own data.
+  byline:
+    pt: Davi Guizani · engenheiro de dados
+    en: Davi Guizani · data engineer
+
+about:
+  text:
+    pt: >-
+      Sou Davi Guizani, engenheiro de dados com mais de 5 anos de experiência e
+      fundador da Guizani Data IT. Construo pipelines, data warehouses e
+      automações para empresas de saúde, varejo, logística e investimentos,
+      sempre com o mesmo objetivo: dados confiáveis, no lugar certo, para quem
+      precisa decidir.
+    en: >-
+      I'm Davi Guizani, a data engineer with more than 5 years of experience and
+      the founder of Guizani Data IT. I build pipelines, data warehouses and
+      automation for companies in healthcare, retail, logistics and
+      investments, always with the same goal: reliable data, in the right
+      place, for the people who make decisions.
+  photoAlt:
+    pt: >-
+      Davi Guizani, de óculos e camiseta preta, com as mãos juntas diante do
+      rosto, sobre um fundo cinza-escuro.
+    en: >-
+      Davi Guizani, wearing glasses and a black T-shirt, with his hands joined
+      in front of his face, against a dark gray background.
+
 contact:
   owner: Davi Guizani
   cnpj: 62.058.173/0001-18
@@ -569,7 +603,13 @@ ui:
     github:
       pt: GitHub
       en: GitHub
+    resume:
+      pt: Currículo em PDF
+      en: Résumé (PDF)
   footer:
+    companyId:
+      pt: CNPJ
+      en: CNPJ (Brazilian company ID)
     analyticsNotice:
       pt: Este site conta visitas de forma anônima, sem cookies.
       en: This site counts visits anonymously, without cookies.
@@ -580,3 +620,12 @@ ui:
     themeToggle:
       pt: Alternar entre tema claro e escuro
       en: Toggle light and dark theme
+    skipToContent:
+      pt: Pular para o conteúdo
+      en: Skip to content
+    mainNav:
+      pt: Navegação principal
+      en: Main navigation
+    externalLink:
+      pt: (abre em outra aba)
+      en: (opens in a new tab)

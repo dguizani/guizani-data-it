@@ -245,11 +245,60 @@ export const contact = z
       .describe("WhatsApp de contato."),
     linkedin: z.url().describe("Endereço do perfil do LinkedIn."),
     github: z.url().describe("Endereço do perfil do GitHub."),
+    resume: z
+      .strictObject({
+        pt: z
+          .string()
+          .regex(/^\/[\w.-]+\.pdf$/, "use a path in public/, like /resume.pdf")
+          .describe(
+            "Caminho do currículo em português, dentro de public/ (ex.: /davi-guizani-cv-pt.pdf).",
+          ),
+        en: z
+          .string()
+          .regex(/^\/[\w.-]+\.pdf$/, "use a path in public/, like /resume.pdf")
+          .describe(
+            "Caminho do currículo em inglês, dentro de public/ (ex.: /davi-guizani-cv-en.pdf).",
+          ),
+      })
+      .optional()
+      .describe(
+        "Currículos em PDF; enquanto não existirem, o link não aparece.",
+      ),
   })
   .describe("Dados de contato e da empresa.");
 
 /** Dados de contato e da empresa. */
 export type Contact = z.infer<typeof contact>;
+
+/** Topo da página: a frase de posicionamento e a linha com o nome e o papel. */
+export const hero = z
+  .strictObject({
+    tagline: localizedText.describe(
+      "Frase de posicionamento, logo abaixo do nome da empresa.",
+    ),
+    byline: localizedText.describe(
+      "Linha com o nome e o papel (ex.: Davi Guizani · engenheiro de dados).",
+    ),
+  })
+  .describe("Textos do hero.");
+
+/** Textos do hero. */
+export type Hero = z.infer<typeof hero>;
+
+/** Seção Sobre: um texto curto e a foto. */
+export const about = z
+  .strictObject({
+    text: localizedText.describe(
+      "Texto curto sobre o Davi e a Guizani Data IT.",
+    ),
+    photoAlt: localizedText.describe(
+      "Descrição da foto para os leitores de tela.",
+    ),
+  })
+  .describe("Textos da seção Sobre.");
+
+/** Textos da seção Sobre. */
+export type About = z.infer<typeof about>;
 
 /** Textos da interface: títulos das seções, rótulos e textos de acessibilidade. */
 export const ui = z
@@ -299,10 +348,14 @@ export const ui = z
         whatsapp: localizedText,
         linkedin: localizedText,
         github: localizedText,
+        resume: localizedText.describe("Link para o currículo em PDF."),
       })
       .describe("Rótulos dos canais de contato."),
     footer: z
       .strictObject({
+        companyId: localizedText.describe(
+          "Rótulo do CNPJ no rodapé (ex.: CNPJ).",
+        ),
         analyticsNotice: localizedText.describe(
           "Aviso sobre a contagem de visitas.",
         ),
@@ -315,6 +368,13 @@ export const ui = z
         ),
         themeToggle: localizedText.describe(
           "Nome do botão que alterna entre o tema claro e o escuro.",
+        ),
+        skipToContent: localizedText.describe(
+          "Link escondido que leva direto ao conteúdo, para quem navega pelo teclado.",
+        ),
+        mainNav: localizedText.describe("Nome da navegação principal."),
+        externalLink: localizedText.describe(
+          "Aviso, depois do nome de um link, de que ele abre em outra aba.",
         ),
       })
       .describe("Textos de acessibilidade, lidos pelos leitores de tela."),
@@ -368,6 +428,8 @@ export const siteSchema = z
       .array(labItem)
       .describe("Projetos pessoais e de estudo, na ordem em que aparecem."),
     brand,
+    hero,
+    about,
     contact,
     ui,
   })
