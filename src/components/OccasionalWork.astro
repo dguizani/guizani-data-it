@@ -1,0 +1,82 @@
+---
+/**
+ * Seção de participação pontual: uma linha por projeto do tipo `occasional`,
+ * com o período, o cliente (com a consultoria), o título e o resumo.
+ */
+import Section from "./Section.astro";
+import {
+  clientLabel,
+  formatPeriod,
+  isOccasionalProject,
+  sortProjects,
+  withClients,
+  type Lang,
+} from "../data/format.ts";
+import type { Site } from "../data/schema.ts";
+
+/** Propriedades da seção de participação pontual. */
+interface Props {
+  /** Todo o conteúdo do site. */
+  site: Site;
+  /** Idioma da página. */
+  lang: Lang;
+}
+
+const { site, lang } = Astro.props;
+const projects = withClients(
+  sortProjects(site.projects.filter(isOccasionalProject)),
+  site.clients,
+);
+---
+
+<Section id="occasional-work" title={site.ui.sections.occasionalWork[lang]}>
+  <ul class="items">
+    {projects.map(({ project, client }) => (
+      <li class="item">
+        <p class="period">
+          {formatPeriod(project.period, lang, site.ui.project.ongoing[lang])}
+        </p>
+        <p class="name">
+          <strong>{clientLabel(client, lang)}</strong>{" "}
+          {project.consultancy !== undefined && (
+            <span class="via">
+              {site.ui.project.via[lang]} {project.consultancy}
+            </span>
+          )}{" "}
+          <span>· {project.title[lang]}</span>
+        </p>
+        <p class="summary">{project.summary[lang]}</p>
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<style>
+  .items {
+    display: grid;
+    gap: var(--space-4);
+    padding: 0;
+    list-style: none;
+  }
+
+  .item {
+    display: grid;
+    gap: var(--space-1);
+    padding-left: var(--space-4);
+    border-left: 0.1875rem solid var(--color-primary);
+  }
+
+  .period {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+
+  .via {
+    color: var(--color-text-muted);
+  }
+
+  .summary {
+    color: var(--color-text-muted);
+  }
+</style>

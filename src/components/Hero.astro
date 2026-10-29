@@ -1,0 +1,135 @@
+---
+/**
+ * Topo da página: o nome da empresa, a frase de posicionamento, a linha com o
+ * nome e o papel do Davi, as principais tecnologias e os botões para o contato
+ * e os projetos, sobre o fundo de circuito.
+ */
+import CircuitBackground from "./CircuitBackground.astro";
+import { skillLabel, type Lang } from "../data/format.ts";
+import type { Site } from "../data/schema.ts";
+
+/** Propriedades do hero. */
+interface Props {
+  /** Todo o conteúdo do site. */
+  site: Site;
+  /** Idioma da página. */
+  lang: Lang;
+}
+
+/** Quantas tecnologias aparecem no hero, na ordem dos grupos de skills. */
+const featuredSkills = 6;
+
+const { site, lang } = Astro.props;
+const skills = site.skills
+  .flatMap((group) => group.items)
+  .slice(0, featuredSkills)
+  .map((item) => skillLabel(item, lang));
+---
+
+<section class="hero">
+  <CircuitBackground />
+  <div class="content">
+    <h1>{site.brand.name}</h1>
+    <p class="tagline">{site.hero.tagline[lang]}</p>
+    <p class="byline">{site.hero.byline[lang]}</p>
+    <ul class="skills">
+      {skills.map((skill) => (
+        <li>{skill}</li>
+      ))}
+    </ul>
+    <div class="actions">
+      <a class="button primary" href="#contact">
+        {site.ui.hero.contactButton[lang]}
+      </a>
+      <a class="button secondary" href="#projects">
+        {site.ui.hero.projectsButton[lang]}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    border-block: 0.0625rem solid var(--color-border);
+  }
+
+  .content {
+    position: relative;
+    display: grid;
+    gap: var(--space-4);
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding: var(--space-7) var(--gutter);
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .tagline {
+    max-width: 40rem;
+    font-size: var(--text-lg);
+  }
+
+  .byline {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-3);
+    padding: 0;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    list-style: none;
+  }
+
+  .skills li:not(:last-child)::after {
+    content: "·";
+    margin-left: var(--space-3);
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+
+  .button {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: var(--space-2) var(--space-5);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .primary {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+  }
+
+  .secondary {
+    border: 0.0625rem solid var(--color-primary);
+    color: var(--color-text);
+  }
+
+  @media (min-width: 48rem) {
+    .content {
+      padding-block: var(--space-8);
+    }
+
+    .tagline {
+      font-size: var(--text-xl);
+    }
+  }
+</style>

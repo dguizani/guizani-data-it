@@ -1,0 +1,59 @@
+---
+/**
+ * Seção de projetos principais: um card por projeto do tipo `main`, com os em
+ * andamento primeiro e os outros do mais recente para o mais antigo.
+ */
+import ProjectCard from "./ProjectCard.astro";
+import Section from "./Section.astro";
+import {
+  isMainProject,
+  sortProjects,
+  withClients,
+  type Lang,
+} from "../data/format.ts";
+import type { Site } from "../data/schema.ts";
+
+/** Propriedades da seção de projetos. */
+interface Props {
+  /** Todo o conteúdo do site. */
+  site: Site;
+  /** Idioma da página. */
+  lang: Lang;
+}
+
+const { site, lang } = Astro.props;
+const projects = withClients(
+  sortProjects(site.projects.filter(isMainProject)),
+  site.clients,
+);
+---
+
+<Section id="projects" title={site.ui.sections.projects[lang]}>
+  <ul class="projects">
+    {projects.map(({ project, client }) => (
+      <li>
+        <ProjectCard
+          project={project}
+          client={client}
+          ui={site.ui}
+          lang={lang}
+        />
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<style>
+  .projects {
+    display: grid;
+    gap: var(--space-5);
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (min-width: 64rem) {
+    .projects {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

@@ -1,0 +1,122 @@
+---
+/**
+ * Seção de contato: botões para o e-mail, o WhatsApp (com a mensagem pronta do
+ * idioma) e o LinkedIn, e o link para o currículo em PDF do idioma, que só
+ * aparece quando os PDFs estão no `site.yaml`.
+ */
+import Section from "./Section.astro";
+import { whatsappUrl, type Lang } from "../data/format.ts";
+import type { Site } from "../data/schema.ts";
+
+/** Propriedades da seção de contato. */
+interface Props {
+  /** Todo o conteúdo do site. */
+  site: Site;
+  /** Idioma da página. */
+  lang: Lang;
+}
+
+const { site, lang } = Astro.props;
+const { contact, ui } = site;
+const channels = [
+  {
+    label: ui.contact.email[lang],
+    value: contact.email,
+    href: `mailto:${contact.email}`,
+    external: false,
+  },
+  {
+    label: ui.contact.whatsapp[lang],
+    value: contact.whatsapp.display,
+    href: whatsappUrl(contact.whatsapp.number, contact.whatsapp.message[lang]),
+    external: true,
+  },
+  {
+    label: ui.contact.linkedin[lang],
+    value: contact.linkedin
+      .replace(/^https:\/\/(www\.)?/, "")
+      .replace(/\/$/, ""),
+    href: contact.linkedin,
+    external: true,
+  },
+];
+const resume = contact.resume?.[lang];
+---
+
+<Section id="contact" title={ui.sections.contact[lang]}>
+  <ul class="channels">
+    {channels.map((channel) => (
+      <li>
+        <a
+          class="channel"
+          href={channel.href}
+          {...(channel.external
+            ? { target: "_blank", rel: "noopener noreferrer" }
+            : {})}
+        >
+          <span class="label">{channel.label}</span>
+          <span class="value">{channel.value}</span>
+          {channel.external && (
+            <span class="visually-hidden">{ui.a11y.externalLink[lang]}</span>
+          )}
+        </a>
+      </li>
+    ))}
+  </ul>
+  {resume !== undefined && (
+    <p>
+      <a class="resume" href={resume}>
+        {ui.contact.resume[lang]}
+      </a>
+    </p>
+  )}
+</Section>
+
+<style>
+  .channels {
+    display: grid;
+    gap: var(--space-3);
+    padding: 0;
+    list-style: none;
+  }
+
+  .channel {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-4) var(--space-5);
+    border: 0.0625rem solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .channel:hover {
+    border-color: var(--color-primary);
+  }
+
+  .label {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .value {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+
+  .resume {
+    font-weight: 600;
+  }
+
+  @media (min-width: 48rem) {
+    .channels {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

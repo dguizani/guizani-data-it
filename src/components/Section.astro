@@ -1,0 +1,61 @@
+---
+/**
+ * Seção da página com o título e o conteúdo centralizados na largura do site.
+ * O `id` serve de âncora para os links do cabeçalho e dos botões.
+ */
+
+/** Propriedades da seção. */
+interface Props {
+  /** Identificador da seção, usado como âncora (ex.: `projects`). */
+  id: string;
+  /** Título da seção. */
+  title: string;
+}
+
+const { id, title } = Astro.props;
+const titleId = `${id}-title`;
+---
+
+<section class="section" id={id} aria-labelledby={titleId}>
+  <div class="container">
+    <h2 id={titleId}>{title}</h2>
+    <slot />
+  </div>
+</section>
+
+<style>
+  .section {
+    padding-block: var(--space-7);
+    scroll-margin-top: var(--space-4);
+  }
+
+  .container {
+    display: grid;
+    gap: var(--space-5);
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  h2 {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  h2::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 0.25rem;
+    margin-bottom: var(--space-3);
+    border-radius: 0.125rem;
+    background: var(--color-accent);
+  }
+
+  @media (min-width: 48rem) {
+    .section {
+      padding-block: var(--space-8);
+    }
+  }
+</style>

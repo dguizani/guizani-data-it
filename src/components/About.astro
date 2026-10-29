@@ -1,0 +1,63 @@
+---
+/**
+ * Seção Sobre: a foto do Davi, otimizada no build (AVIF e WebP em dois
+ * tamanhos), e um texto curto.
+ */
+import { Picture } from "astro:assets";
+import Section from "./Section.astro";
+import profile from "../assets/profile.jpg";
+import type { Lang } from "../data/format.ts";
+import type { Site } from "../data/schema.ts";
+
+/** Propriedades da seção Sobre. */
+interface Props {
+  /** Todo o conteúdo do site. */
+  site: Site;
+  /** Idioma da página. */
+  lang: Lang;
+}
+
+const { site, lang } = Astro.props;
+---
+
+<Section id="about" title={site.ui.sections.about[lang]}>
+  <div class="about">
+    <Picture
+      class="photo"
+      src={profile}
+      alt={site.about.photoAlt[lang]}
+      formats={["avif", "webp"]}
+      widths={[192, 384]}
+      sizes="12rem"
+    />
+    <p class="text">{site.about.text[lang]}</p>
+  </div>
+</Section>
+
+<style>
+  .about {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+  }
+
+  .about :global(.photo) {
+    width: 12rem;
+    height: 12rem;
+    border: 0.1875rem solid var(--color-primary);
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .text {
+    max-width: 44rem;
+    font-size: var(--text-lg);
+  }
+
+  @media (min-width: 48rem) {
+    .about {
+      grid-template-columns: auto 1fr;
+      gap: var(--space-7);
+    }
+  }
+</style>

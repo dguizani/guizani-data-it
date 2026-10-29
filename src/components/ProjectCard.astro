@@ -1,0 +1,135 @@
+---
+/**
+ * Card de um projeto principal: o cliente (ou o setor, quando o nome não pode
+ * aparecer) com a consultoria, o título, o período, o problema, o papel e a
+ * stack em etiquetas.
+ */
+import {
+  clientLabel,
+  formatPeriod,
+  type Lang,
+  type MainProject,
+} from "../data/format.ts";
+import type { Client, Ui } from "../data/schema.ts";
+
+/** Propriedades do card de projeto. */
+interface Props {
+  /** Projeto principal mostrado no card. */
+  project: MainProject;
+  /** Cliente do projeto. */
+  client: Client;
+  /** Textos da interface. */
+  ui: Ui;
+  /** Idioma da página. */
+  lang: Lang;
+}
+
+const { project, client, ui, lang } = Astro.props;
+const period = formatPeriod(project.period, lang, ui.project.ongoing[lang]);
+---
+
+<article class="card">
+  <header class="top">
+    <p class="client">
+      {clientLabel(client, lang)}{" "}
+      {project.consultancy !== undefined && (
+        <span class="via">
+          {ui.project.via[lang]} {project.consultancy}
+        </span>
+      )}
+    </p>
+    <h3>{project.title[lang]}</h3>
+    <p class="period">{period}</p>
+  </header>
+  <dl class="details">
+    <div>
+      <dt>{ui.project.problem[lang]}</dt>
+      <dd>{project.problem[lang]}</dd>
+    </div>
+    <div>
+      <dt>{ui.project.role[lang]}</dt>
+      <dd>{project.role[lang]}</dd>
+    </div>
+    <div>
+      <dt>{ui.project.stack[lang]}</dt>
+      <dd>
+        <ul class="stack">
+          {project.stack.map((item) => (
+            <li>{item}</li>
+          ))}
+        </ul>
+      </dd>
+    </div>
+  </dl>
+</article>
+
+<style>
+  .card {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border: 0.0625rem solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  .top {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .client {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .via {
+    color: var(--color-text-muted);
+    font-weight: 400;
+  }
+
+  h3 {
+    font-size: var(--text-xl);
+  }
+
+  .period {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+
+  .details {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  dt {
+    margin-bottom: var(--space-1);
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .stack li {
+    padding: var(--space-1) var(--space-2);
+    border: 0.0625rem solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+</style>

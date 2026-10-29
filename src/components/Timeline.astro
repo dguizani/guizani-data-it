@@ -1,0 +1,93 @@
+---
+/**
+ * Seção da linha do tempo: todos os projetos de clientes, inclusive os que só
+ * aparecem aqui (como os RPAs), do mais recente para o mais antigo, numa linha
+ * vertical com nós, no estilo do fundo de circuito.
+ */
+import Section from "./Section.astro";
+import {
+  clientLabel,
+  formatPeriod,
+  sortProjects,
+  withClients,
+  type Lang,
+} from "../data/format.ts";
+import type { Site } from "../data/schema.ts";
+
+/** Propriedades da linha do tempo. */
+interface Props {
+  /** Todo o conteúdo do site. */
+  site: Site;
+  /** Idioma da página. */
+  lang: Lang;
+}
+
+const { site, lang } = Astro.props;
+const projects = withClients(sortProjects(site.projects), site.clients);
+---
+
+<Section id="timeline" title={site.ui.sections.timeline[lang]}>
+  <ol class="timeline">
+    {projects.map(({ project, client }) => (
+      <li class="entry">
+        <p class="period">
+          {formatPeriod(project.period, lang, site.ui.project.ongoing[lang])}
+        </p>
+        <p>
+          <strong>{clientLabel(client, lang)}</strong>{" "}
+          {project.consultancy !== undefined && (
+            <span class="via">
+              {site.ui.project.via[lang]} {project.consultancy}
+            </span>
+          )}
+        </p>
+        <p class="title">{project.title[lang]}</p>
+      </li>
+    ))}
+  </ol>
+</Section>
+
+<style>
+  .timeline {
+    display: grid;
+    gap: var(--space-5);
+    margin: 0;
+    padding: 0 0 0 var(--space-5);
+    border-left: 0.125rem solid var(--color-border);
+    list-style: none;
+  }
+
+  .entry {
+    position: relative;
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .entry::before {
+    content: "";
+    position: absolute;
+    top: 0.3rem;
+    left: calc(-1 * var(--space-5) - 0.4375rem);
+    width: 0.75rem;
+    height: 0.75rem;
+    border: 0.125rem solid var(--color-primary);
+    border-radius: 50%;
+    background: var(--color-bg);
+  }
+
+  .entry:first-child::before {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+  }
+
+  .period {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+
+  .via,
+  .title {
+    color: var(--color-text-muted);
+  }
+</style>

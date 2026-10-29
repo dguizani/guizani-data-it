@@ -1,0 +1,54 @@
+---
+/**
+ * Página inicial completa num idioma: o cabeçalho, as seções na ordem aprovada
+ * (hero, sobre, serviços, projetos principais, participação pontual, linha do
+ * tempo, skills, laboratório e contato) e o rodapé.
+ *
+ * As páginas de cada idioma só escolhem o idioma e o endereço do início.
+ */
+import About from "./About.astro";
+import Contact from "./Contact.astro";
+import Footer from "./Footer.astro";
+import Header from "./Header.astro";
+import Hero from "./Hero.astro";
+import Lab from "./Lab.astro";
+import OccasionalWork from "./OccasionalWork.astro";
+import Projects from "./Projects.astro";
+import Services from "./Services.astro";
+import Skills from "./Skills.astro";
+import Timeline from "./Timeline.astro";
+import Base from "../layouts/Base.astro";
+import { htmlLang, type Lang } from "../data/format.ts";
+import { getSite } from "../data/site.ts";
+
+/** Propriedades da página inicial. */
+interface Props {
+  /** Idioma da página. */
+  lang: Lang;
+  /** Endereço do início da página no idioma (ex.: `/`, `/en/`). */
+  homeHref: string;
+}
+
+const { lang, homeHref } = Astro.props;
+const site = await getSite();
+---
+
+<Base
+  lang={htmlLang[lang]}
+  title={site.brand.name}
+  description={site.hero.tagline[lang]}
+>
+  <Header site={site} lang={lang} homeHref={homeHref} />
+  <main id="main">
+    <Hero site={site} lang={lang} />
+    <About site={site} lang={lang} />
+    <Services site={site} lang={lang} />
+    <Projects site={site} lang={lang} />
+    <OccasionalWork site={site} lang={lang} />
+    <Timeline site={site} lang={lang} />
+    <Skills site={site} lang={lang} />
+    <Lab site={site} lang={lang} />
+    <Contact site={site} lang={lang} />
+  </main>
+  <Footer site={site} lang={lang} />
+</Base>

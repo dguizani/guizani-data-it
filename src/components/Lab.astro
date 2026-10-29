@@ -1,0 +1,87 @@
+---
+/**
+ * Seção do Laboratório: projetos pessoais e de estudo em cards pequenos, com o
+ * nome, o período, as tecnologias, a descrição e o link para o código (ou o
+ * aviso de repositório privado).
+ */
+import Section from "./Section.astro";
+import { formatPeriod, type Lang } from "../data/format.ts";
+import type { Site } from "../data/schema.ts";
+
+/** Propriedades do Laboratório. */
+interface Props {
+  /** Todo o conteúdo do site. */
+  site: Site;
+  /** Idioma da página. */
+  lang: Lang;
+}
+
+const { site, lang } = Astro.props;
+---
+
+<Section id="lab" title={site.ui.sections.lab[lang]}>
+  <ul class="items">
+    {site.lab.map((item) => (
+      <li class="item">
+        <h3>{item.name}</h3>
+        <p class="period">
+          {formatPeriod(item.period, lang, site.ui.project.ongoing[lang])}
+          {" · "}
+          {item.technologies.join(", ")}
+        </p>
+        <p>{item.description[lang]}</p>
+        {item.repository === undefined ? (
+          <p class="private">{site.ui.lab.privateRepository[lang]}</p>
+        ) : (
+          <a href={item.repository} target="_blank" rel="noopener noreferrer">
+            {site.ui.lab.repository[lang]}
+            <span class="visually-hidden">
+              {item.name} {site.ui.a11y.externalLink[lang]}
+            </span>
+          </a>
+        )}
+      </li>
+    ))}
+  </ul>
+</Section>
+
+<style>
+  .items {
+    display: grid;
+    gap: var(--space-4);
+    padding: 0;
+    list-style: none;
+  }
+
+  .item {
+    display: grid;
+    gap: var(--space-2);
+    align-content: start;
+    padding: var(--space-5);
+    border: 0.0625rem solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-surface);
+  }
+
+  h3 {
+    font-family: var(--font-mono);
+    font-size: var(--text-base);
+  }
+
+  .period,
+  .private {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+
+  a {
+    font-weight: 600;
+  }
+
+  @media (min-width: 48rem) {
+    .items {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

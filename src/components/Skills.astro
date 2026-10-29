@@ -1,0 +1,80 @@
+---
+/**
+ * Seção de skills: os grupos (como Orquestração e Bancos), cada um com as
+ * skills em etiquetas.
+ */
+import Section from "./Section.astro";
+import { skillLabel, type Lang } from "../data/format.ts";
+import type { Site } from "../data/schema.ts";
+
+/** Propriedades da seção de skills. */
+interface Props {
+  /** Todo o conteúdo do site. */
+  site: Site;
+  /** Idioma da página. */
+  lang: Lang;
+}
+
+const { site, lang } = Astro.props;
+---
+
+<Section id="skills" title={site.ui.sections.skills[lang]}>
+  <dl class="groups">
+    {site.skills.map((group) => (
+      <div class="group">
+        <dt>{group.name[lang]}</dt>
+        <dd>
+          <ul class="items">
+            {group.items.map((item) => (
+              <li>{skillLabel(item, lang)}</li>
+            ))}
+          </ul>
+        </dd>
+      </div>
+    ))}
+  </dl>
+</Section>
+
+<style>
+  .groups {
+    display: grid;
+    gap: var(--space-4);
+  }
+
+  .group {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  dt {
+    font-weight: 700;
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  .items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: 0;
+    list-style: none;
+  }
+
+  .items li {
+    padding: var(--space-1) var(--space-3);
+    border: 0.0625rem solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+  }
+
+  @media (min-width: 48rem) {
+    .groups {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-5) var(--space-6);
+    }
+  }
+</style>
