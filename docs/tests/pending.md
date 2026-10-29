@@ -9,6 +9,24 @@
 5. Primeira execução do CI no GitHub, depois do push → T-002
 6. Rodada completa com o `npm test` e o build quebrando com dados inválidos → T-003
 7. `site.yaml` no VS Code com a extensão YAML → T-003
+8. Página provisória no computador e no celular, nos dois temas → T-004
+
+### T-004 · Identidade visual
+
+**Roadmap:** M-004.
+
+**Commits:** `98e6776`, `59f1d6d`, `27973ea`, `3729bbb` e `abf7aee`.
+
+**O que mudou:** a página provisória mostra a identidade nova: o logo "G de circuito" com GUIZANI / DATA IT, o botão de tema (sol no escuro, lua no claro), o fundo de circuito com o texto binário "data" e os botões do hero (amarelo e contorno azul), com Inter e JetBrains Mono. O tema segue o sistema na primeira visita e guarda a escolha do botão. Onde ver: `docker compose up dev` e <http://localhost:4321>, no computador e no celular (`docs/tests/README.md`, **Conferir o site**).
+
+**Passos:**
+- [ ] Na primeira visita, a página abre no tema do sistema (claro ou escuro), sem piscar no tema errado.
+- [ ] O botão alterna entre claro e escuro; ao recarregar a página, a escolha continua.
+- [ ] No celular, o logo, o botão de tema e os dois botões do hero cabem sem quebrar, e o fundo de circuito não atrapalha a leitura.
+- [ ] Rodada completa no contêiner e Lighthouse com 90 ou mais em performance, acessibilidade e SEO.
+
+**Resultado:**
+- 2026-10-29 00:00, pelo agente, no contêiner: lint, Prettier, `astro check` (0/0/0), `npm test` (9 ok) e build passaram a partir de uma pasta limpa; Lighthouse com performance 100, acessibilidade 100, boas práticas 100 e SEO 100. Capturas no Chromium em `logs/m004/` (390 px e 1280 px, nos dois temas): logo, botão de tema com o ícone certo em cada tema, fundo de circuito e botões legíveis. A primeira captura mostrou o texto binário cortado (o `pattern` começava antes do retângulo) e o binário poluindo o texto no desktop; os dois foram corrigidos antes do commit. Falta: a conferência do usuário.
 
 ### T-003 · Arquivo de dados e schema
 
