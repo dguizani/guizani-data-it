@@ -382,6 +382,9 @@ export const ui = z
         skipToContent: localizedText.describe(
           "Link escondido que leva direto ao conteúdo, para quem navega pelo teclado.",
         ),
+        backToTop: localizedText.describe(
+          "Nome do botão flutuante que volta ao início da página, também mostrado ao passar o mouse.",
+        ),
         mainNav: localizedText.describe("Nome da navegação principal."),
         externalLink: localizedText.describe(
           "Aviso, depois do nome de um link, de que ele abre em outra aba.",

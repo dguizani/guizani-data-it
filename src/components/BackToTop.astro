@@ -1,0 +1,94 @@
+---
+/**
+ * Botão flutuante, no canto inferior direito, que volta ao início da página.
+ *
+ * É um link para `#top`, que o navegador entende como o início da página. Sem
+ * JavaScript, fica sempre visível; com JavaScript, só aparece depois que o hero
+ * sai da tela.
+ */
+
+/** Propriedades do botão de voltar ao topo. */
+interface Props {
+  /** Nome do botão para os leitores de tela, também mostrado ao passar o mouse. */
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<a
+  class="back-to-top"
+  href="#top"
+  aria-label={label}
+  title={label}
+  data-back-to-top
+>
+  <svg
+    viewBox="0 0 24 24"
+    width="20"
+    height="20"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M12 19V5M5 12l7-7 7 7"></path>
+  </svg>
+</a>
+
+<script>
+  const button = document.querySelector<HTMLElement>("[data-back-to-top]");
+  const hero = document.querySelector(".hero");
+  if (button !== null) {
+    if (hero === null) {
+      button.dataset.visible = "true";
+    } else {
+      new IntersectionObserver(([entry]) => {
+        button.dataset.visible = String(!(entry?.isIntersecting ?? false));
+      }).observe(hero);
+    }
+  }
+</script>
+
+<style>
+  .back-to-top {
+    position: fixed;
+    right: max(var(--gutter), env(safe-area-inset-right));
+    bottom: max(var(--gutter), env(safe-area-inset-bottom));
+    z-index: 10;
+    display: grid;
+    place-items: center;
+    width: 3rem;
+    height: 3rem;
+    border: 0.0625rem solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s ease;
+  }
+
+  .back-to-top:hover {
+    border-color: var(--color-primary);
+  }
+
+  @media (scripting: enabled) {
+    .back-to-top:not([data-visible="true"]) {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .back-to-top {
+      transition: none;
+    }
+  }
+
+  svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+</style>

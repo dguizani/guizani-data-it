@@ -2,12 +2,13 @@
 /**
  * Página inicial completa num idioma: o cabeçalho, as seções na ordem aprovada
  * (hero, sobre, serviços, projetos principais, participação pontual, linha do
- * tempo, skills, laboratório e contato) e o rodapé.
+ * tempo, skills, laboratório e contato), o rodapé e o botão de voltar ao topo.
  *
  * As páginas de cada idioma só escolhem o idioma. Os links `hreflang` apontam
  * para as duas versões, com a em português como padrão (`x-default`).
  */
 import About from "./About.astro";
+import BackToTop from "./BackToTop.astro";
 import Contact from "./Contact.astro";
 import Footer from "./Footer.astro";
 import Header from "./Header.astro";
@@ -60,4 +61,5 @@ const alternates = [
     <Contact site={site} lang={lang} />
   </main>
   <Footer site={site} lang={lang} />
+  <BackToTop label={site.ui.a11y.backToTop[lang]} />
 </Base>

@@ -630,6 +630,9 @@ ui:
     skipToContent:
       pt: Pular para o conteúdo
       en: Skip to content
+    backToTop:
+      pt: Voltar ao topo
+      en: Back to top
     mainNav:
       pt: Navegação principal
       en: Main navigation
