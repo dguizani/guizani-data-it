@@ -28,10 +28,15 @@
 - Os links `hreflang` usam endereços completos, montados a partir do `site` do `astro.config.ts`; sem ele, o build para com uma mensagem.
 - Captura da página em inglês num celular de 360 px em `logs/m006/` (fora do git): o logo, o seletor e o botão de tema cabem no cabeçalho.
 
+**Correções:**
+- 2026-10-29: o usuário abriu o site no servidor de desenvolvimento e viu `Cannot read properties of undefined (reading 'switchLabel')` no `Header.astro`. Causa: o servidor só recarrega o schema da coleção quando o próprio `content.config.ts` muda; com o `schema.ts` alterado, ele validou o `site.yaml` novo com o schema antigo (que recusa o campo `language`) e ficou com a última versão válida, sem os textos do seletor. O build e o CI não têm o problema, porque partem do zero. Provavelmente é a mesma causa do erro 500 registrado no M-003. Correção: uma integração no `astro.config.ts` chama o `addWatchFile` do Astro para o `src/data/schema.ts`, e o servidor reinicia quando ele muda (`2d602bc`). Reproduzido com o servidor no ar (campo novo no YAML recusado; depois de pôr o campo no schema, o servidor reiniciou e aceitou o arquivo). Teste novo: `tests/astro-config.test.ts` confere que o schema é vigiado e falha sem a integração (`d338cfe`).
+
 **Commits:**
 - `5b42355` feat: textos do seletor e funções de idioma.
 - `b6f429e` feat: página em inglês, seletor de idioma e `hreflang`.
 - `b9d0232` test: `/en/` na verificação do Lighthouse.
+- `2d602bc` fix: o servidor de desenvolvimento reinicia quando o schema muda.
+- `d338cfe` test: a configuração do Astro vigia o schema.
 
 **Resultado:**
 
