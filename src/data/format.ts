@@ -108,24 +108,29 @@ function sortKey(value: string, yearOnlyMonth: string): string {
 }
 
 /**
- * Ordena os projetos: os em andamento primeiro; depois, do fim mais recente
- * para o mais antigo e, no mesmo fim, do início mais recente para o mais antigo.
+ * Ordena os projetos: os em andamento primeiro; depois, do início mais recente
+ * para o mais antigo e, no mesmo início, do fim mais recente para o mais antigo.
  *
  * @param projects - Projetos em qualquer ordem.
  * @returns Uma nova lista, ordenada.
  */
 export function sortProjects<T extends Project>(projects: readonly T[]): T[] {
   return projects.toSorted((a, b) => {
+    const ongoingA = a.period.end === null;
+    const ongoingB = b.period.end === null;
+    if (ongoingA !== ongoingB) {
+      return ongoingA ? -1 : 1;
+    }
+    const startA = sortKey(a.period.start, "01");
+    const startB = sortKey(b.period.start, "01");
+    if (startA !== startB) {
+      return startB.localeCompare(startA);
+    }
     const endA =
       a.period.end === null ? "9999-99" : sortKey(a.period.end, "12");
     const endB =
       b.period.end === null ? "9999-99" : sortKey(b.period.end, "12");
-    if (endA !== endB) {
-      return endB.localeCompare(endA);
-    }
-    return sortKey(b.period.start, "01").localeCompare(
-      sortKey(a.period.start, "01"),
-    );
+    return endB.localeCompare(endA);
   });
 }
 

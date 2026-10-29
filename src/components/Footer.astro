@@ -15,6 +15,7 @@ interface Props {
 
 const { site, lang } = Astro.props;
 const year = new Date().getFullYear();
+const legalLine = `© ${String(year)} ${site.brand.name} · ${site.ui.footer.companyId[lang]} ${site.contact.cnpj}`;
 const links = [
   { href: site.contact.linkedin, label: site.ui.contact.linkedin[lang] },
   { href: site.contact.github, label: site.ui.contact.github[lang] },
@@ -23,10 +24,7 @@ const links = [
 
 <footer class="footer">
   <div class="container">
-    <p>
-      © {year}
-      {site.brand.name} · {site.ui.footer.companyId[lang]} {site.contact.cnpj}
-    </p>
+    <p>{legalLine}</p>
     <ul class="links">
       {links.map((link) => (
         <li>
