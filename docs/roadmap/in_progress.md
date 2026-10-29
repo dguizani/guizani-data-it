@@ -18,24 +18,43 @@
 **Decisões** (2026-10-28, aprovadas pelo usuário):
 1. Node 26.13.0 (LTS): `.nvmrc` com `26.13.0`, `engines` com `>=26.12.1 <27` e a imagem `node:26.13.0-trixie-slim`.
 2. Docker por `compose.yaml` e um `Dockerfile` de dois estágios: `base` (só o Node, para instalação, servidor de desenvolvimento, lint, build e `astro check`) e `lighthouse` (a base com o Chromium). O Dependabot atualiza o `FROM` do `Dockerfile`, e o CI confere que a versão dele é igual à do `.nvmrc`.
-3. Lighthouse CI no GitHub Actions e, localmente, no estágio `lighthouse`. A referência do site atual é medida de novo com o Lighthouse do `@lhci/cli` (12.6.1), para a comparação ser justa.
+3. ~~Lighthouse CI no GitHub Actions e, localmente, no estágio `lighthouse`. A referência do site atual é medida de novo com o Lighthouse do `@lhci/cli` (12.6.1), para a comparação ser justa.~~ Substituída pela decisão 6.
 4. TypeScript 6.0.x, a mais nova aceita pelo `@astrojs/check` e pelo `typescript-eslint`; subir para a 7 quando os dois aceitarem.
 5. `* text=auto eol=lf` no `.gitattributes`.
+6. Sem o `@lhci/cli`: o pacote `lighthouse` 13.6.0 e um script próprio (`scripts/lighthouse-check.ts`) servem o `dist/` com o `astro preview`, rodam 3 vezes por página no perfil de celular, usam a mediana, salvam os relatórios em `logs/lighthouse/` e barram performance, acessibilidade e SEO abaixo de 90. Roda no CI e, localmente, no serviço `lighthouse`. A referência do M-001 já foi medida com o 13.6.0, então não é medida de novo (2026-10-28, aprovado pelo usuário, depois de o `npm audit` mostrar 16 vulnerabilidades conhecidas no `@lhci/cli` 0.15.1, 13 altas, e 0 no `lighthouse` 13.6.0).
+
+**Ajustes na implementação:**
+- O ESLint 10 precisa do `jiti` para ler o `eslint.config.ts`. A opção `--flag unstable_native_nodejs_ts_config`, que usa o TypeScript nativo do Node, também funcionou, mas foi descartada por ser instável.
+- O parser do Astro não aceita o `projectService` do `typescript-eslint`; os arquivos `.astro` usam `project: true`.
+- O `astro.config.ts` liga o polling do Vite, porque o contêiner não recebe os eventos de arquivo da pasta montada do Windows.
+- O workflow de deploy confere, antes de publicar, que a origem do Pages é "GitHub Actions" (`build_type: workflow`), e se recusa a publicar enquanto ela for a branch `release/guizani-data-it`.
+- O Dependabot ignora o TypeScript a partir da 6.1.0 (decisão 4) e as versões maiores da imagem `node` (a linha do projeto é a 26 LTS).
+- `src/pages/index.astro` é uma página provisória, com o texto fixo, só para validar a estrutura; ela é substituída no M-005 pelas seções, com os textos do `site.yaml`.
+- Os arquivos da landing page antiga (`index.html`, `style.css`, `logo_1.png`) saíram da `main`; continuam na `release/guizani-data-it` e no histórico.
 
 **Passos:**
-- [ ] `.gitattributes` com `eol=lf`.
-- [ ] `.nvmrc`, `Dockerfile` e `compose.yaml`.
-- [ ] Projeto Astro com o `tsconfig` `strictest`, o npm e o `engines`; os arquivos da landing page antiga saem da `main` (continuam na `release/guizani-data-it`), e o `CNAME` vai para `public/`.
-- [ ] ESLint (`typescript-eslint`, `eslint-plugin-astro`) e Prettier (`prettier-plugin-astro`, CSS e YAML), com os scripts `lint`, `format` e `format:check`.
-- [ ] Lighthouse CI (`lighthouserc.json`), com os relatórios em `logs/lighthouse/`.
-- [ ] Medir de novo a referência do site atual com o Lighthouse 12.6.1.
-- [ ] `README.md` em português, com um resumo em inglês; comandos no `README.md` e no `tests/README.md`.
-- [ ] Workflow do CI: versão do `.nvmrc` igual à do `Dockerfile`, ESLint, Prettier (`--check`), `astro check`, build e Lighthouse CI (barra abaixo de 90 em performance, acessibilidade e SEO, no celular), com o Node do `.nvmrc`.
-- [ ] Workflow de deploy do Pages (`configure-pages`, `upload-pages-artifact`, `deploy-pages`) só com `workflow_dispatch`.
-- [ ] Dependabot: npm, GitHub Actions e imagem do Docker, semanal; ligar os alertas de segurança no repositório (com autorização).
-- [ ] `T-002` com a rodada completa no contêiner e no CI.
+- [x] `.gitattributes` com `eol=lf` (`9666049`).
+- [x] `.nvmrc`, `Dockerfile` e `compose.yaml` (`ef7cf13`).
+- [x] Projeto Astro com o `tsconfig` `strictest`, o npm e o `engines`; os arquivos da landing page antiga saem da `main` (continuam na `release/guizani-data-it`), e o `CNAME` vai para `public/` (`f24e4b8`).
+- [x] ESLint (`typescript-eslint`, `eslint-plugin-astro`) e Prettier (`prettier-plugin-astro`, CSS e YAML), com os scripts `lint`, `format` e `format:check` (`f24e4b8`).
+- [x] ~~Lighthouse CI (`lighthouserc.json`), com os relatórios em `logs/lighthouse/`.~~ Script do Lighthouse 13 (decisão 6), com os relatórios em `logs/lighthouse/` (`f24e4b8`).
+- [x] ~~Medir de novo a referência do site atual com o Lighthouse 12.6.1.~~ Desnecessário pela decisão 6.
+- [x] `README.md` em português, com um resumo em inglês; comandos no `README.md` e no `tests/README.md` (`adfde1e`, `9e5b3a7`).
+- [x] Workflow do CI: versão do `.nvmrc` igual à do `Dockerfile`, ESLint, Prettier (`--check`), `astro check`, build e Lighthouse (barra abaixo de 90 em performance, acessibilidade e SEO, no celular), com o Node do `.nvmrc` (`5a6ae6f`).
+- [x] Workflow de deploy do Pages (`configure-pages`, `upload-pages-artifact`, `deploy-pages`) só com `workflow_dispatch` (`5a6ae6f`).
+- [x] Dependabot: npm, GitHub Actions e imagem do Docker, semanal (`07e528f`).
+- [ ] Ligar os alertas de segurança e as correções automáticas do Dependabot no repositório (com autorização).
+- [ ] Push e primeira execução do CI no GitHub (com autorização).
+- [x] `T-002` com a rodada completa no contêiner e no CI.
 
 **Commits:**
+- `9666049` chore: fim de linha LF no `.gitattributes`.
+- `ef7cf13` chore: `.nvmrc`, `.npmrc`, `Dockerfile`, `compose.yaml` e `.dockerignore`.
+- `f24e4b8` feat: projeto Astro, ESLint, Prettier e o script do Lighthouse; saída da landing page antiga.
+- `5a6ae6f` feat: workflows do CI e do deploy.
+- `07e528f` chore: Dependabot.
+- `adfde1e` docs: `README.md`.
+- `9e5b3a7` docs: comandos do Docker no `tests/README.md`.
 
 **Resultado:**
 
