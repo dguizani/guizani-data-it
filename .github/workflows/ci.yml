@@ -6,6 +6,9 @@ on:
   pull_request:
   workflow_call:
 
+env:
+  ASTRO_TELEMETRY_DISABLED: "1"
+
 permissions:
   contents: read
 

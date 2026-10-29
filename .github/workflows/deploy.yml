@@ -3,6 +3,9 @@ name: Deploy
 on:
   workflow_dispatch:
 
+env:
+  ASTRO_TELEMETRY_DISABLED: "1"
+
 permissions:
   contents: read
 

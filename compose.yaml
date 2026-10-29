@@ -6,6 +6,8 @@ services:
       context: .
       target: base
     image: guizani-data-it-dev
+    environment:
+      ASTRO_TELEMETRY_DISABLED: "1"
     command: npm run dev
     volumes:
       - .:/app
@@ -18,6 +20,8 @@ services:
       context: .
       target: lighthouse
     image: guizani-data-it-lighthouse
+    environment:
+      ASTRO_TELEMETRY_DISABLED: "1"
     command: sh -c "npm run build && npm run lighthouse"
     volumes:
       - .:/app
