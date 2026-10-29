@@ -1,0 +1,554 @@
+clients:
+  unimed-goiania:
+    name: Unimed de Goiânia
+    isClientPublic: true
+    sector:
+      pt: operadora de planos de saúde de grande porte
+      en: large health insurance provider
+  truckpad:
+    name: TruckPad
+    isClientPublic: true
+    sector:
+      pt: plataforma digital de fretes e pagamentos para o transporte rodoviário
+      en: digital freight and payments platform for road transport
+  integral-medica:
+    name: Integral Médica
+    isClientPublic: true
+    sector:
+      pt: grupo de nutrição esportiva e suplementos, com várias marcas
+      en: sports nutrition and supplements group with several brands
+  jsl:
+    name: JSL
+    isClientPublic: true
+    sector:
+      pt: grupo de logística de grande porte
+      en: large logistics group
+  vita:
+    name: Vita
+    isClientPublic: true
+    sector:
+      pt: gestora de investimentos
+      en: investment management firm
+  skystone:
+    name: Skystone
+    isClientPublic: true
+    sector:
+      pt: indústria de mineração
+      en: mining company
+  academia-foguete:
+    name: Academia Foguete
+    isClientPublic: true
+    sector:
+      pt: plataforma de streaming de cursos
+      en: online course streaming platform
+
+projects:
+  - id: truckpad-bi
+    kind: main
+    client: truckpad
+    consultancy: ITIX
+    title:
+      pt: Reestruturação do BI
+      en: BI restructuring
+    period:
+      start: "2026"
+      end:
+    problem:
+      pt: >-
+        O BI dependia de pipelines legados e de painéis sem controle de versão,
+        com dados espalhados entre MongoDB, PostgreSQL e Oracle.
+      en: >-
+        BI relied on legacy pipelines and dashboards without version control,
+        with data scattered across MongoDB, PostgreSQL and Oracle.
+    role:
+      pt: >-
+        Responsável pela nova arquitetura: migração para o Airflow, stages
+        incrementais do MongoDB e do PostgreSQL, DW dimensional em PostgreSQL
+        com frameworks de dimensão e fato, uma camada de views só de leitura
+        para o Power BI, DAGs de teste, de backfill e de atualização dos
+        painéis, versionamento dos painéis no Git e atendimento às solicitações
+        de titulares da LGPD.
+      en: >-
+        Owner of the new architecture: migration to Airflow, incremental stages
+        from MongoDB and PostgreSQL, a dimensional DW in PostgreSQL with
+        dimension and fact frameworks, a read-only view layer for Power BI,
+        DAGs for testing, backfill and dashboard refresh, dashboard version
+        control in Git, and handling of data subject requests under the LGPD
+        (Brazil's data protection law).
+    stack:
+      - Python
+      - Apache Airflow
+      - MongoDB
+      - PostgreSQL
+      - Oracle
+      - SQL Server
+      - Power BI
+      - Docker
+
+  - id: jsl-invoice-automation
+    kind: main
+    client: jsl
+    consultancy: ITIX
+    title:
+      pt: Automação do pagamento de notas
+      en: Invoice payment automation
+    period:
+      start: "2026"
+      end: "2026"
+    problem:
+      pt: >-
+        As requisições de compra das notas de serviço eram lançadas à mão no
+        SAP, a partir de planilhas, e-mails e anexos do SharePoint.
+      en: >-
+        Purchase requisitions for service invoices were entered into SAP by
+        hand, from spreadsheets, e-mails and SharePoint attachments.
+    role:
+      pt: >-
+        Principal desenvolvedor do robô que lê a planilha de governança, cruza
+        com o faturamento enviado pelo fornecedor por e-mail, cria as
+        requisições no SAP, padroniza os anexos e devolve o status e o
+        aprovador à planilha, com uma interface desktop para a operação.
+      en: >-
+        Lead developer of the bot that reads the governance spreadsheet,
+        matches it against the billing the supplier sends by e-mail, creates
+        the requisitions in SAP, standardizes the attachments and writes the
+        status and the approver back to the spreadsheet, with a desktop
+        interface for the operations team.
+    stack:
+      - Python
+      - SAP GUI Scripting
+      - Selenium
+      - pandas
+      - MySQL
+      - Microsoft 365 (MSAL)
+      - SharePoint
+      - PySide6
+      - pypdf
+
+  - id: jsl-selenium-bot
+    kind: timeline
+    client: jsl
+    consultancy: ITIX
+    title:
+      pt: Robô com Selenium
+      en: Selenium bot
+    period:
+      start: "2025-11"
+      end: "2026-03"
+
+  - id: integral-medica-cdp
+    kind: main
+    client: integral-medica
+    consultancy: ITIX
+    title:
+      pt: Customer Data Platform (CDP)
+      en: Customer Data Platform (CDP)
+    period:
+      start: "2024"
+      end: "2026"
+    problem:
+      pt: >-
+        Dados de clientes das várias marcas do grupo espalhados entre
+        e-commerce, marketplace, CRM, atendimento e redes sociais, sem uma
+        visão única do cliente.
+      en: >-
+        Customer data from the group's many brands was scattered across
+        e-commerce, marketplaces, CRM, customer service and social media, with
+        no single view of the customer.
+    role:
+      pt: >-
+        Um dos dois principais desenvolvedores: ingestão de VTEX, Shopify,
+        AnyMarket, Salesforce Marketing Cloud, Zendesk, Instagram, TikTok e
+        YouTube; unificação do cliente (nome, e-mail, telefone, endereço,
+        nascimento e gênero) com a origem de cada dado; DAGs de validação; e a
+        infraestrutura do Airflow em Docker.
+      en: >-
+        One of the two lead developers: ingestion from VTEX, Shopify,
+        AnyMarket, Salesforce Marketing Cloud, Zendesk, Instagram, TikTok and
+        YouTube; customer unification (name, e-mail, phone, address, date of
+        birth and gender) keeping the source of each field; validation DAGs;
+        and the Airflow infrastructure on Docker.
+    stack:
+      - Python
+      - Apache Airflow
+      - PostgreSQL
+      - SQL Server
+      - REST APIs
+      - Google Cloud
+      - Selenium
+      - Docker
+
+  - id: unimed-dw
+    kind: main
+    client: unimed-goiania
+    consultancy: ITIX
+    title:
+      pt: Data warehouse corporativo
+      en: Corporate data warehouse
+    period:
+      start: "2022"
+      end: "2025"
+    problem:
+      pt: >-
+        As áreas de negócio de uma das maiores operadoras de saúde do país
+        dependiam de relatórios manuais e consultas diretas ao sistema de
+        gestão, sem uma visão única dos dados.
+      en: >-
+        The business areas of one of the country's largest health insurance
+        providers relied on manual reports and direct queries to the
+        management system, with no single view of the data.
+    role:
+      pt: >-
+        Engenheiro de dados no time que construiu e manteve o DW em camadas
+        (stage, ODS, DW e tabelas flat), com data marts de auditoria de
+        autorizações, contas médicas, faturamento, controladoria, regulação
+        médica, perfil e saúde da carteira, rede credenciada, sinistralidade e
+        gestão de pessoas; um framework interno de stages, dimensões e fatos; e
+        a publicação automática de extratos no Tableau.
+      en: >-
+        Data engineer on the team that built and maintained the layered DW
+        (stage, ODS, DW and flat tables), with data marts for authorization
+        audit, medical claims, billing, controllership, medical regulation,
+        member portfolio profile and health, provider network, loss ratio and
+        people management; an internal framework for stages, dimensions and
+        facts; and automated publishing of extracts to Tableau.
+    stack:
+      - Python
+      - Apache Airflow
+      - Oracle
+      - PostgreSQL
+      - SQLAlchemy
+      - pandas
+      - PyArrow
+      - Tableau (Hyper API, Server Client)
+      - Docker
+
+  - id: skystone-bi
+    kind: occasional
+    client: skystone
+    consultancy: ITIX
+    title:
+      pt: BI
+      en: BI
+    period:
+      start: "2025-07"
+      end: "2025-07"
+    summary:
+      pt: Contribuição pontual num projeto de BI com Airflow e data warehouse.
+      en: Short contribution to a BI project with Airflow and a data warehouse.
+    stack:
+      - Apache Airflow
+
+  - id: vita-omie-integration
+    kind: main
+    client: vita
+    consultancy: ITIX
+    title:
+      pt: Integração com o ERP Omie
+      en: Omie ERP integration
+    period:
+      start: "2025"
+      end: "2025"
+    problem:
+      pt: >-
+        Os dados financeiros e operacionais do ERP Omie não estavam integrados
+        a relatórios e dashboards.
+      en: >-
+        Financial and operational data from the Omie ERP was not integrated
+        with reports and dashboards.
+    role:
+      pt: >-
+        Parte do time que construiu uma API serverless que extrai os dados da
+        API do Omie, trata com pandas, grava no PostgreSQL e alimenta os
+        dashboards.
+      en: >-
+        Part of the team that built a serverless API that extracts data from
+        the Omie API, transforms it with pandas, loads it into PostgreSQL and
+        feeds the dashboards.
+    stack:
+      - Python
+      - FastAPI
+      - AWS Lambda (Mangum)
+      - API Gateway
+      - Secrets Manager
+      - S3
+      - pandas
+      - PostgreSQL
+
+  - id: academia-foguete-data-analysis
+    kind: occasional
+    client: academia-foguete
+    consultancy: ITIX
+    title:
+      pt: Análise de dados
+      en: Data analysis
+    period:
+      start: "2025-05"
+      end: "2025-06"
+    summary:
+      pt: >-
+        Extração das informações de eventos via API e armazenamento no
+        PostgreSQL, para uma plataforma de streaming de cursos.
+      en: >-
+        Extraction of event data through an API and storage in PostgreSQL, for
+        an online course streaming platform.
+    stack:
+      - Apache Airflow
+      - PostgreSQL
+      - pandas
+
+  - id: unimed-rpa
+    kind: timeline
+    client: unimed-goiania
+    consultancy: ITIX
+    title:
+      pt: RPA
+      en: RPA
+    period:
+      start: "2025-02"
+      end: "2025-02"
+
+services:
+  - id: data-pipelines
+    title:
+      pt: Pipelines e integração de dados
+      en: Data pipelines and integration
+    description:
+      pt: >-
+        ETL/ELT com Airflow, ingestão de APIs, bancos e redes sociais, cargas
+        incrementais e unificação de clientes (CDP).
+      en: >-
+        ETL/ELT with Airflow, ingestion from APIs, databases and social media,
+        incremental loads and customer unification (CDP).
+  - id: data-warehouse-bi
+    title:
+      pt: Data Warehouse e BI
+      en: Data warehouse and BI
+    description:
+      pt: Modelagem dimensional, data marts, Tableau e Power BI.
+      en: Dimensional modeling, data marts, Tableau and Power BI.
+  - id: data-modernization
+    title:
+      pt: Modernização e governança de dados
+      en: Data modernization and governance
+    description:
+      pt: >-
+        Migração de BI legado, versionamento dos pipelines e dos painéis,
+        testes de dados e LGPD.
+      en: >-
+        Legacy BI migration, version control for pipelines and dashboards, data
+        testing and LGPD compliance.
+  - id: process-automation
+    title:
+      pt: Automação de processos
+      en: Process automation
+    description:
+      pt: >-
+        RPA com SAP, Selenium e Microsoft 365, e APIs de integração (ex.: ERP).
+      en: >-
+        RPA with SAP, Selenium and Microsoft 365, plus integration APIs (e.g.
+        ERP).
+
+skills:
+  - id: orchestration
+    name:
+      pt: Orquestração
+      en: Orchestration
+    items:
+      - Apache Airflow
+      - Docker
+  - id: databases
+    name:
+      pt: Bancos
+      en: Databases
+    items:
+      - PostgreSQL
+      - Oracle
+      - SQL Server
+      - MongoDB
+      - MySQL
+  - id: processing
+    name:
+      pt: Processamento
+      en: Processing
+    items:
+      - Python
+      - SQL
+      - pandas
+      - PyArrow
+      - Polars
+  - id: modeling
+    name:
+      pt: Modelagem
+      en: Modeling
+    items:
+      - pt: Dimensional (stage, ODS, DW e flat)
+        en: Dimensional (stage, ODS, DW and flat)
+  - id: bi
+    name:
+      pt: BI
+      en: BI
+    items:
+      - Tableau
+      - Power BI
+  - id: cloud
+    name:
+      pt: Cloud
+      en: Cloud
+    items:
+      - AWS (Lambda, S3, Secrets Manager)
+      - Google Cloud
+  - id: automation
+    name:
+      pt: Automação
+      en: Automation
+    items:
+      - SAP GUI
+      - Selenium
+      - Playwright
+  - id: governance
+    name:
+      pt: Governança
+      en: Governance
+    items:
+      - Git
+      - pt: Testes de dados
+        en: Data testing
+      - LGPD
+
+lab:
+  - id: intern-data-rpa-course
+    name: intern-data-rpa-course
+    period:
+      start: "2026"
+      end: "2026"
+    technologies:
+      - Python
+    description:
+      pt: Curso de Python para dados e RPA que montei para estagiários.
+      en: Python for data and RPA course I built for interns.
+  - id: uninter
+    name: uninter
+    period:
+      start: "2025"
+      end: "2026"
+    technologies:
+      - pandas
+      - matplotlib
+    description:
+      pt: >-
+        Trabalhos da graduação em Ciência de Dados na UNINTER: análise do
+        emprego formal (CAGED) em Linhares e um trabalho de processamento de
+        linguagem natural.
+      en: >-
+        Data Science degree coursework at UNINTER: an analysis of formal
+        employment data (CAGED) in Linhares and a natural language processing
+        assignment.
+    repository: https://github.com/dguizani/uninter
+  - id: polars-python-studying
+    name: polars-python-studying
+    period:
+      start: "2023"
+      end: "2025"
+    technologies:
+      - Polars
+    description:
+      pt: >-
+        Comparação lado a lado entre pandas e Polars: criação de DataFrames,
+        seleção, filtros, encadeamento e execução lazy e eager.
+      en: >-
+        Side-by-side comparison of pandas and Polars: DataFrame creation,
+        selection, filtering, chaining, and lazy vs. eager execution.
+    repository: https://github.com/dguizani/polars-python-studying
+
+contact:
+  company: Guizani Data IT
+  owner: Davi Guizani
+  cnpj: 62.058.173/0001-18
+  email: contato@guizani.com.br
+  whatsapp:
+    number: "5527997942740"
+    display: (27) 99794-2740
+    message:
+      pt: >-
+        Olá, Davi! Vi o site da Guizani Data IT e gostaria de conversar sobre um
+        projeto de dados.
+      en: >-
+        Hi, Davi! I saw the Guizani Data IT website and would like to talk
+        about a data project.
+  linkedin: https://www.linkedin.com/in/davi-guizani/
+  github: https://github.com/dguizani
+
+ui:
+  sections:
+    about:
+      pt: Sobre
+      en: About
+    services:
+      pt: Serviços
+      en: Services
+    projects:
+      pt: Projetos principais
+      en: Featured projects
+    occasionalWork:
+      pt: Participação pontual
+      en: Short engagements
+    timeline:
+      pt: Linha do tempo
+      en: Timeline
+    skills:
+      pt: Skills
+      en: Skills
+    lab:
+      pt: Laboratório
+      en: Lab
+    contact:
+      pt: Contato
+      en: Contact
+  hero:
+    contactButton:
+      pt: Vamos conversar
+      en: Let's talk
+    projectsButton:
+      pt: Ver projetos
+      en: See projects
+  project:
+    via:
+      pt: via
+      en: via
+    ongoing:
+      pt: em andamento
+      en: ongoing
+    problem:
+      pt: Problema
+      en: Problem
+    role:
+      pt: Papel
+      en: Role
+    stack:
+      pt: Stack
+      en: Stack
+  lab:
+    repository:
+      pt: Ver o código
+      en: View the code
+    privateRepository:
+      pt: Repositório privado
+      en: Private repository
+  contact:
+    email:
+      pt: E-mail
+      en: Email
+    whatsapp:
+      pt: WhatsApp
+      en: WhatsApp
+    linkedin:
+      pt: LinkedIn
+      en: LinkedIn
+    github:
+      pt: GitHub
+      en: GitHub
+  footer:
+    analyticsNotice:
+      pt: Este site conta visitas de forma anônima, sem cookies.
+      en: This site counts visits anonymously, without cookies.
