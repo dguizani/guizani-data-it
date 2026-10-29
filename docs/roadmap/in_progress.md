@@ -35,6 +35,7 @@
 - O texto binário do `CircuitBackground` é um `<pattern>` do SVG com uma linha que se repete na vertical, em vez de um `.map()` com JSX: o parser do Astro no ESLint não resolve o tipo do JSX dentro de expressões (`no-unsafe-return`), e o `pattern` também deixa o SVG menor (2,2 KB no HTML).
 - Nas telas a partir de 48rem, uma máscara em gradiente esmaece o lado esquerdo do fundo, onde fica o texto do hero, como no banner, em que o desenho fica no centro e à direita.
 - As capturas da página nos dois temas, no celular (390 px) e no desktop (1280 px), ficam em `logs/m004/` (fora do git).
+- O servidor de desenvolvimento não vigia mais `logs/` e `references/` (`fe6789c`): cada relatório do Lighthouse gerava um evento à toa.
 
 **Commits:**
 - `98e6776` feat: `brand` e `ui.a11y` no `site.yaml` e no schema.
@@ -42,6 +43,7 @@
 - `27973ea` feat: `Base.astro` com o script do tema.
 - `3729bbb` feat: `Logo`, `ThemeToggle` e `CircuitBackground`.
 - `abf7aee` feat: página provisória com a identidade.
+- `fe6789c` chore: `logs/` e `references/` fora da vigilância do servidor de desenvolvimento.
 
 **Resultado:**
 
@@ -90,6 +92,8 @@
 **Correções:**
 - 2026-10-28: o lint falhou no CI (`40804842940`) com `Unsafe member access .data on a type that cannot be resolved`: os tipos do `astro:content` ficam em `.astro/`, gerada pelo `astro sync`, e no CI o lint roda antes do `check` e do build. Aqui a pasta já existia, por isso passou. Correção: o `lint` roda `astro sync && eslint .` (`63c3a10`), e a **Rodada completa** do `tests/README.md` começa apagando `.astro/` e `dist/` (`71d3e55`), o que reproduz o ambiente do CI.
 
+- 2026-10-29: o servidor de desenvolvimento respondeu 500 ("The site collection has no entry") uma vez, depois de a instalação das fontes trocar o `package-lock.json` com ele no ar e de outros contêineres apagarem e regerarem a `.astro/`. Não foi reproduzido: com o YAML inválido na subida, o servidor para com a mensagem do schema; com o YAML inválido no ar, com ou sem mudança no schema, ele registra o erro, mantém a última versão válida e se recupera quando o arquivo é corrigido. Como prevenção, o loader passou a registrar a vigilância antes da primeira leitura e a registrar no log o erro de uma releitura (`15c7d61`).
+
 **Commits:**
 - `7dbe943` feat: `site.yaml`, schema Zod, loader e `getSite()`.
 - `1315828` test: 9 testes do schema com o `node:test`, `npm test` no CI.
@@ -97,6 +101,7 @@
 - `d9a9f79` feat: Laboratório depois da P-002.
 - `6c68d4e` chore: telemetria do Astro desligada.
 - `63c3a10` fix: `astro sync` antes do ESLint.
+- `15c7d61` fix: vigilância do loader antes da primeira leitura.
 - `71d3e55` docs: rodada completa a partir de uma pasta limpa.
 
 **Resultado:**
