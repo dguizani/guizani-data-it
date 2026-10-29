@@ -1,0 +1,117 @@
+---
+/**
+ * Fundo decorativo do hero, inspirado no banner do LinkedIn: linhas de circuito
+ * com anéis nas pontas e uma coluna de texto binário com a palavra "data".
+ *
+ * As trilhas são desenhadas duas vezes a partir do mesmo grupo: uma linha larga
+ * e transparente faz o brilho, sem filtro de desfoque, e uma linha fina por
+ * cima faz o traço. Fica atrás do conteúdo, em baixa opacidade, e é escondido
+ * dos leitores de tela.
+ */
+
+/** Uma linha de texto binário: a palavra "data" em ASCII, repetida pelo `pattern`. */
+const binaryLine = "01100100 01100001 01110100 01100001";
+---
+
+<svg
+  class="circuit"
+  viewBox="0 0 1200 400"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <g id="circuit-traces">
+      <path d="M320 60h160l40 40h180"></path>
+      <path d="M320 130h90l50 50h140"></path>
+      <path d="M320 300h120l50-50h170"></path>
+      <path d="M320 350h230l40-40h120"></path>
+      <path d="M560 0v40l40 40h110"></path>
+      <path d="M640 400v-40l40-40h80"></path>
+      <path d="M1200 70H990l-40 40H790"></path>
+      <path d="M1200 150h-130l-50 50H890"></path>
+      <path d="M1200 260h-170l-40 40H820"></path>
+      <path d="M1200 340h-90l-40 40H930"></path>
+      <path d="M760 200h80"></path>
+      <circle cx="706" cy="100" r="6"></circle>
+      <circle cx="606" cy="180" r="6"></circle>
+      <circle cx="666" cy="250" r="6"></circle>
+      <circle cx="676" cy="310" r="6"></circle>
+      <circle cx="716" cy="80" r="6"></circle>
+      <circle cx="766" cy="320" r="6"></circle>
+      <circle cx="784" cy="110" r="6"></circle>
+      <circle cx="884" cy="200" r="6"></circle>
+      <circle cx="814" cy="300" r="6"></circle>
+      <circle cx="924" cy="380" r="6"></circle>
+      <circle cx="754" cy="200" r="6"></circle>
+      <circle cx="846" cy="200" r="6"></circle>
+    </g>
+    <pattern
+      id="circuit-binary"
+      x="24"
+      y="12"
+      width="300"
+      height="22"
+      patternUnits="userSpaceOnUse"
+    >
+      <text class="binary" x="0" y="16">
+        {binaryLine}
+      </text>
+    </pattern>
+  </defs>
+  <rect
+    x="24"
+    y="12"
+    width="300"
+    height="374"
+    fill="url(#circuit-binary)"
+  ></rect>
+  <use class="glow" href="#circuit-traces"></use>
+  <use class="trace" href="#circuit-traces"></use>
+</svg>
+
+<style>
+  .circuit {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    opacity: var(--circuit-opacity);
+    pointer-events: none;
+  }
+
+  @media (min-width: 48rem) {
+    .circuit {
+      mask-image: linear-gradient(
+        90deg,
+        rgb(0 0 0 / 0.35) 0%,
+        rgb(0 0 0 / 0.35) 30%,
+        #000 65%
+      );
+    }
+  }
+
+  .binary {
+    fill: var(--color-circuit);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    opacity: 0.55;
+  }
+
+  use {
+    fill: none;
+    stroke: var(--color-circuit);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .glow {
+    stroke-width: 7;
+    stroke-opacity: 0.18;
+  }
+
+  .trace {
+    stroke-width: 1.75;
+  }
+</style>

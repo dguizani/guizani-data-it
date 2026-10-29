@@ -1,0 +1,92 @@
+---
+/**
+ * Logo da Guizani Data IT: o símbolo "G de circuito" (um G desenhado como
+ * trilha de circuito, terminando num ponto amarelo) e o nome em duas linhas.
+ *
+ * O símbolo é decorativo e fica escondido dos leitores de tela; o link é lido
+ * pelo `label`. As cores seguem o tema.
+ */
+
+/** Propriedades do logo. */
+interface Props {
+  /** Endereço do link do logo, normalmente o início da página. */
+  href: string;
+  /** Nome do link para os leitores de tela. */
+  label: string;
+  /** Parte de cima do nome (ex.: Guizani). */
+  primary: string;
+  /** Parte de baixo do nome (ex.: Data IT). */
+  secondary: string;
+}
+
+const { href, label, primary, secondary } = Astro.props;
+---
+
+<a class="logo" href={href} aria-label={label}>
+  <svg
+    class="symbol"
+    viewBox="0 0 64 64"
+    width="40"
+    height="40"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path
+      class="trace"
+      d="M50 12H18a6 6 0 0 0-6 6v28a6 6 0 0 0 6 6h26a6 6 0 0 0 6-6V34H34"
+    ></path>
+    <circle class="node" cx="32" cy="34" r="6"></circle>
+  </svg>
+  <span class="wordmark" aria-hidden="true">
+    <span class="primary">{primary}</span>
+    <span class="secondary">{secondary}</span>
+  </span>
+</a>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .symbol {
+    flex: none;
+  }
+
+  .trace {
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .node {
+    fill: var(--color-accent);
+  }
+
+  .wordmark {
+    display: grid;
+    line-height: 1;
+  }
+
+  .primary {
+    font-size: var(--text-lg);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .secondary {
+    margin-top: var(--space-1);
+    color: var(--color-primary);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+  }
+</style>
