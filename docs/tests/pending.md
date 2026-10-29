@@ -10,6 +10,25 @@
 6. Rodada completa com o `npm test` e o build quebrando com dados inválidos → T-003
 7. `site.yaml` no VS Code com a extensão YAML → T-003
 8. Página provisória no computador e no celular, nos dois temas → T-004
+9. Página completa no celular e no computador (30 segundos, projetos, contato, textos novos) → T-005
+
+### T-005 · Seções do site
+
+**Roadmap:** M-005.
+
+**Commits:** `dae8e40`, `4dbc651`, `a258ce4`, `095f0c9` e `01cf5d2`.
+
+**O que mudou:** a página em `/` passou a ter o site completo em português: cabeçalho (com links para Serviços, Projetos e Contato nas telas largas), hero, Sobre com a foto, Serviços, Projetos principais, Participação pontual, Linha do tempo, Skills, Laboratório, Contato e rodapé, com todos os textos vindos do `site.yaml`. O link do currículo em PDF ainda não aparece (C-002). Onde ver: `docker compose up dev` e <http://localhost:4321>, no computador e no celular.
+
+**Passos:**
+- [ ] No celular, em até 30 segundos, dá para saber o que a Guizani Data IT faz, as principais tecnologias e como entrar em contato.
+- [ ] Os 5 projetos principais aparecem com o cliente "via ITIX", o problema, o papel e a stack; as 2 participações pontuais e as 9 entradas da linha do tempo aparecem do mais recente para o mais antigo.
+- [ ] Os botões de contato abrem o e-mail, o WhatsApp com a mensagem pronta e o LinkedIn; os links externos abrem em outra aba.
+- [ ] Revisão dos textos novos da interface (descrição da foto, "pular para o conteúdo", "(abre em outra aba)", "Currículo em PDF", "CNPJ (Brazilian company ID)").
+- [ ] Rodada completa no contêiner e Lighthouse com 90 ou mais em performance, acessibilidade e SEO.
+
+**Resultado:**
+- 2026-10-29 00:20, pelo agente, no contêiner: lint, Prettier, `astro check` (0/0/0), `npm test` (9 ok) e build passaram; Lighthouse com performance 100, acessibilidade 100, boas práticas 100 e SEO 100 na página completa. Capturas da página inteira em `logs/m005/` (celular no tema escuro e desktop no claro, cortadas em partes): todas as seções na ordem aprovada. A primeira captura mostrou o nome do cliente grudado no "via" ("TruckPadvia ITIX", "via ITIX· BI"), corrigido antes do commit. Com o `isClientPublic` da Unimed desligado numa cópia temporária, o nome sumiu do HTML e o setor apareceu nos 3 lugares. Falta: a conferência do usuário.
 
 ### T-004 · Identidade visual
 
