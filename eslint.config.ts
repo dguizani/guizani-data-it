@@ -21,6 +21,22 @@ export default defineConfig(
       },
     },
   },
+  {
+    rules: {
+      "@typescript-eslint/no-floating-promises": [
+        "error",
+        {
+          allowForKnownSafeCalls: [
+            {
+              from: "package",
+              package: "node:test",
+              name: ["describe", "it", "suite", "test"],
+            },
+          ],
+        },
+      ],
+    },
+  },
   astro.configs.recommended,
   {
     files: ["**/*.astro"],
