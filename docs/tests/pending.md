@@ -46,3 +46,4 @@
 
 **Resultado:**
 - 2026-10-28 21:15, pelo agente: pela API e por `curl`, nome, descrição, branch padrão, lista de branches (`legacy/curriculo-2024`, `main`, `release/guizani-data-it`), origem do Pages, `https_enforced: true` e site no ar idêntico à `release/guizani-data-it` conferem. Falta a confirmação do usuário e o C-004.
+- 2026-10-28 22:45, pelo agente: depois do C-004, `protected_domain_state` está `verified`. O CNAME do C-006 aparece no `b.sec.dns.br` (TTL de 1 hora) e no `8.8.8.8`, mas a checagem de DNS do Pages (`pages/health`) ainda responde `InvalidARecordError`; falta o "Check again" no GitHub.
