@@ -15,12 +15,14 @@
 4. Autorizados na hora: a troca da origem do Pages para "GitHub Actions" e o push na `main`.
 
 **Passos:**
-- [ ] `deploy.yml` rodando a cada push na `main`.
-- [ ] Trocar a origem do Pages para "GitHub Actions".
-- [ ] Push na `main` e deploy verde.
-- [ ] Conferir o site novo no ar, com o domínio, o certificado e o "Enforce HTTPS".
+- [x] `deploy.yml` rodando a cada push na `main` (`b52b99f`).
+- [x] Trocar a origem do Pages para "GitHub Actions" (pela API, `build_type: workflow`).
+- [x] Push na `main` e deploy verde (`40814613861`).
+- [x] Conferir o site novo no ar, com o domínio, o certificado e o "Enforce HTTPS".
 - [ ] Validar o T-007.
 
 **Commits:**
+- `80bd3d4`: registro da melhoria e do teste.
+- `b52b99f`: deploy a cada push na `main`.
 
 **Resultado:**
