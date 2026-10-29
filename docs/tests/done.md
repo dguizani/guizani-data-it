@@ -1,5 +1,23 @@
 # Testes · concluídos
 
+### T-010 · Botão flutuante para voltar ao topo
+
+**Roadmap:** M-014.
+
+**Commits:** `ab36e71`.
+
+**O que mudou:** um botão com uma seta para cima, no canto inferior direito, que aparece quando o hero sai da tela e leva de volta ao início da página com rolagem suave (sem animação para quem pede menos movimento). O nome para leitores de tela e a dica ao passar o mouse são "Voltar ao topo" / "Back to top". Aparece em `/` e em `/en/`.
+
+**Passos:**
+- [x] Rodada completa e Lighthouse. Esperado: tudo verde, `pass 10, fail 0`, Lighthouse 90 ou mais.
+- [x] Desktop, nos dois idiomas e nos dois temas: no topo, sem botão; ao rolar além do hero, o botão aparece com um fade; o clique volta ao topo.
+- [x] Celular (ou o modo de dispositivo do Chrome): o mesmo comportamento, com o botão sem sair da tela.
+- [x] Teclado: com Tab, o botão recebe o foco visível quando está aparecendo, e o Enter volta ao topo. No topo, escondido, ele não recebe foco.
+- [x] Mouse parado sobre o botão. Esperado: a dica "Voltar ao topo" ("Back to top" em `/en/`).
+
+**Resultado:**
+- 2026-10-29: rodada e Lighthouse verdes pelo agente (100 nas quatro categorias, logs em `logs/m014-checks__2026-10-29.log` e `logs/m014-lighthouse__2026-10-29.log`); comportamento conferido com o `puppeteer-core` em `logs/m014/`. Validado pelo usuário em 2026-10-29.
+
 ### T-009 · Projetos principais em uma coluna
 
 **Roadmap:** M-013.
