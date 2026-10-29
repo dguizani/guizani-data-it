@@ -1,5 +1,44 @@
 # Roadmap · em andamento
 
+### M-002 · Estrutura inicial do projeto
+
+**Objetivo:** criar o projeto Astro e todo o ferramental (Docker, lint, formatação, CI, Dependabot), sem conteúdo ainda. Origem: prompt de construção, 2026-10-28.
+
+**Depende de:** M-001.
+
+**Contexto:** `docs/brief.md`, seções **Tecnologias**, **Padrões de código**, **Arquitetura** e **Como subir**.
+
+**Achados** (2026-10-28):
+- Aviso de segurança mais recente do Node: 2026-10-21 (10 CVEs, o mais grave o CVE-2026-111497, escrita fora dos limites no decodificador Brotli), corrigido na 26.12.1. A 26.13.0, de 2026-10-28, é a primeira LTS da linha 26 ("Lithium") e é posterior à correção.
+- Versões estáveis: Astro 7.4.4, `@astrojs/check` 0.9.12, TypeScript 7.0.2, ESLint 10.13.0, `typescript-eslint` 8.72.1, `eslint-plugin-astro` 3.2.1, Prettier 3.9.10, `prettier-plugin-astro` 1.1.2, `@lhci/cli` 0.15.1, Lighthouse 13.6.0.
+- O `@astrojs/check` aceita o TypeScript `^5.0.0 || ^6.0.0`, e o `typescript-eslint` aceita `>=4.8.4 <6.1.0`: o TypeScript 7 ainda não funciona com eles.
+- O `@lhci/cli` 0.15.1 usa o Lighthouse 12.6.1, e a referência do M-001 foi medida com o 13.6.0.
+- As imagens `node:26.13.0-trixie-slim` e `node:26.13.0-bookworm-slim` existem.
+
+**Decisões** (2026-10-28, aprovadas pelo usuário):
+1. Node 26.13.0 (LTS): `.nvmrc` com `26.13.0`, `engines` com `>=26.12.1 <27` e a imagem `node:26.13.0-trixie-slim`.
+2. Docker por `compose.yaml` e um `Dockerfile` de dois estágios: `base` (só o Node, para instalação, servidor de desenvolvimento, lint, build e `astro check`) e `lighthouse` (a base com o Chromium). O Dependabot atualiza o `FROM` do `Dockerfile`, e o CI confere que a versão dele é igual à do `.nvmrc`.
+3. Lighthouse CI no GitHub Actions e, localmente, no estágio `lighthouse`. A referência do site atual é medida de novo com o Lighthouse do `@lhci/cli` (12.6.1), para a comparação ser justa.
+4. TypeScript 6.0.x, a mais nova aceita pelo `@astrojs/check` e pelo `typescript-eslint`; subir para a 7 quando os dois aceitarem.
+5. `* text=auto eol=lf` no `.gitattributes`.
+
+**Passos:**
+- [ ] `.gitattributes` com `eol=lf`.
+- [ ] `.nvmrc`, `Dockerfile` e `compose.yaml`.
+- [ ] Projeto Astro com o `tsconfig` `strictest`, o npm e o `engines`; os arquivos da landing page antiga saem da `main` (continuam na `release/guizani-data-it`), e o `CNAME` vai para `public/`.
+- [ ] ESLint (`typescript-eslint`, `eslint-plugin-astro`) e Prettier (`prettier-plugin-astro`, CSS e YAML), com os scripts `lint`, `format` e `format:check`.
+- [ ] Lighthouse CI (`lighthouserc.json`), com os relatórios em `logs/lighthouse/`.
+- [ ] Medir de novo a referência do site atual com o Lighthouse 12.6.1.
+- [ ] `README.md` em português, com um resumo em inglês; comandos no `README.md` e no `tests/README.md`.
+- [ ] Workflow do CI: versão do `.nvmrc` igual à do `Dockerfile`, ESLint, Prettier (`--check`), `astro check`, build e Lighthouse CI (barra abaixo de 90 em performance, acessibilidade e SEO, no celular), com o Node do `.nvmrc`.
+- [ ] Workflow de deploy do Pages (`configure-pages`, `upload-pages-artifact`, `deploy-pages`) só com `workflow_dispatch`.
+- [ ] Dependabot: npm, GitHub Actions e imagem do Docker, semanal; ligar os alertas de segurança no repositório (com autorização).
+- [ ] `T-002` com a rodada completa no contêiner e no CI.
+
+**Commits:**
+
+**Resultado:**
+
 ### M-001 · Linha de base do repositório
 
 **Objetivo:** arrumar as branches e o repositório no GitHub para a construção do site novo, sem mudar o site no ar. Origem: prompt de construção, 2026-10-28.

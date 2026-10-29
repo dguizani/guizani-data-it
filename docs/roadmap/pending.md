@@ -2,38 +2,6 @@
 
 Na ordem de execução. A especificação de cada entrega está em `docs/brief.md` (seção indicada em **Contexto**) e os textos em `docs/approved_content.md`.
 
-### M-002 · Estrutura inicial do projeto
-
-**Objetivo:** criar o projeto Astro e todo o ferramental (Docker, lint, formatação, CI, Dependabot), sem conteúdo ainda. Origem: prompt de construção, 2026-10-28.
-
-**Depende de:** M-001.
-
-**Contexto:** `docs/brief.md`, seções **Tecnologias**, **Padrões de código**, **Arquitetura** e **Como subir**.
-
-**Ideias para o debate:**
-1. **Versão do Node:** conferir o aviso de segurança mais recente (<https://nodejs.org/en/blog/vulnerability>) e escolher a versão 26 LTS com o piso 26.12.1, mostrando ao usuário antes de fixar.
-2. **Docker:** só `docker run` (comandos longos, documentados no `tests/README.md`) ou um `compose.yaml` com o serviço do Node (comandos curtos, como `docker compose run --rm node npm run build`, e é o que o Dependabot consegue atualizar no ecossistema `docker`). Com o `compose.yaml`, a versão fica em dois lugares (`.nvmrc` e a imagem), e o CI precisa conferir que são iguais.
-3. **Lighthouse local:** a imagem `node` não tem Chrome. Opções: uma imagem própria (`Dockerfile` com Chromium) só para o Lighthouse, ou rodar o Lighthouse CI só no GitHub Actions e, localmente, usar o PageSpeed Insights depois do deploy.
-4. **Fim de linha:** o `.gitattributes` atual (`* text=auto`) faz o git gravar os arquivos com CRLF no checkout do Windows (aviso "LF will be replaced by CRLF", visto em 2026-10-28), e o Prettier espera LF: o `format:check` local falharia num clone novo. Sugestão: `* text=auto eol=lf` no `.gitattributes`.
-
-**Decisões:**
-
-**Passos:**
-- [ ] Escolher e mostrar a versão do Node; gravar no `.nvmrc` e no `engines` do `package.json`.
-- [ ] Criar o projeto Astro (última versão estável) pelo contêiner, com o `tsconfig` `strictest` e o npm.
-- [ ] Ambiente Docker (comandos ou `compose.yaml`, conforme o debate) e os comandos no `README.md` e no `tests/README.md`.
-- [ ] ESLint (`typescript-eslint`, `eslint-plugin-astro`) e Prettier (`prettier-plugin-astro`, CSS e YAML), com os scripts `lint`, `format` e `format:check`.
-- [ ] Completar o `.gitignore` com o que o Astro gera (`.astro/`).
-- [ ] `README.md` em português, com um resumo em inglês.
-- [ ] Workflow do CI: ESLint, Prettier (`--check`), `astro check`, build e Lighthouse CI (barra abaixo de 90 em performance, acessibilidade e SEO, no celular), com o Node do `.nvmrc`.
-- [ ] Workflow de deploy do Pages (`configure-pages`, `upload-pages-artifact`, `deploy-pages`) só com `workflow_dispatch`.
-- [ ] Dependabot: npm, GitHub Actions e imagem do Docker, semanal; ligar os alertas de segurança no repositório (com autorização).
-- [ ] `T-NNN` com a rodada completa no contêiner e no CI.
-
-**Commits:**
-
-**Resultado:**
-
 ### M-003 · Arquivo de dados e schema
 
 **Objetivo:** guardar todo o conteúdo do site em `src/data/site.yaml`, nos dois idiomas lado a lado, validado no build por um schema Zod. Origem: prompt de construção, 2026-10-28.
