@@ -1,0 +1,7 @@
+dist/
+.astro/
+logs/
+references/
+docs/
+CLAUDE.md
+package-lock.json
