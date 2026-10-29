@@ -16,3 +16,20 @@
 12. ~~Ordem dos projetos e rodapé no site, nos dois idiomas → T-008~~ (ok em 2026-10-29)
 13. ~~Projetos principais no desktop, no tablet e no celular, nos dois idiomas e nos dois temas → T-009~~ (ok em 2026-10-29)
 14. ~~Botão de voltar ao topo no desktop e no celular, nos dois idiomas e nos dois temas → T-010~~ (ok em 2026-10-29)
+15. Seção de formação e certificações no desktop e no celular, nos dois idiomas e nos dois temas → T-011
+
+### T-011 · Formação e certificações
+
+**Roadmap:** M-012.
+
+**Commits:** `0a72f74`, `1828e7e`.
+
+**O que mudou:** seção nova "Formação e certificações" ("Education and certifications" em `/en/`), entre as Skills e o Laboratório, fora do menu. Uma linha para o Tecnólogo em Ciência de Dados (UNINTER, 2024 – 2026) e outra para a PCEP (Python Institute, jan. 2025), com o link "Verificar" para a verificação oficial da OpenEDG, em outra aba.
+
+**Passos:**
+- [ ] Rodada completa e Lighthouse. Esperado: tudo verde, `pass 10, fail 0`, Lighthouse 90 ou mais.
+- [ ] Desktop e celular, nos dois idiomas e nos dois temas. Esperado: a seção entre as Skills e o Laboratório, com os textos aprovados, sem nada no idioma errado.
+- [ ] Link "Verificar". Esperado: abre em outra aba a página da OpenEDG com a certificação válida.
+
+**Resultado:**
+- 2026-10-29: rodada e Lighthouse verdes pelo agente (100 nas quatro categorias; logs em `logs/m012-checks__2026-10-29.log` e `logs/m012-lighthouse__2026-10-29.log`); textos, link e nome acessível conferidos com o `puppeteer-core`. Falta a confirmação do usuário.

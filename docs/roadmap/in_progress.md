@@ -26,15 +26,19 @@
 1. Entram a formação na Uninter e a certificação PCEP. O curso de Python básico da Fundação Bradesco e a monitoria ficam de fora. (2026-10-29, aprovado pelo usuário.)
 2. Seção própria e curta, "Formação e certificações", entre as Skills e o Laboratório, fora do menu. (2026-10-29, aprovado pelo usuário.)
 3. Uma linha por item, no estilo das participações pontuais: formação com o curso, a instituição e o período; certificação com o nome, o emissor, a data e um link "Verificar" para a página oficial. Sem logos nem imagens de diplomas. Os dados ficam no `site.yaml` (ex.: `education` e `certifications`). (2026-10-29, aprovado pelo usuário.)
+4. A Ufes (Sistemas de Informação, não concluído) fica de fora. (2026-10-29, aprovado pelo usuário.)
+5. Textos aprovados pelo usuário em 2026-10-29, registrados no `docs/approved_content.md`; o período da formação aparece só com os anos. (2026-10-29, aprovado pelo usuário.)
 
 **Passos:**
 - [x] Receber do usuário os dados do LinkedIn (2026-10-29).
-- [ ] Debater onde e como mostrar, e o que entra (decisões 1 a 3; falta a Ufes); atualizar o `docs/brief.md`.
-- [ ] Textos nos dois idiomas no `docs/approved_content.md`, revisados pelo usuário.
-- [ ] Schema e dados no `site.yaml`.
-- [ ] Componente da seção, nos dois idiomas e nos dois temas.
-- [ ] `T-NNN` com a seção nova no celular e no desktop.
+- [x] Debater onde e como mostrar, e o que entra (decisões 1 a 4); atualizar o `docs/brief.md` (`1828e7e`).
+- [x] Textos nos dois idiomas no `docs/approved_content.md`, revisados pelo usuário (`1828e7e`).
+- [x] Schema e dados no `site.yaml` (`0a72f74`): listas `education` e `certifications`, título em `ui.sections.education` e o rótulo `ui.education.verify`.
+- [x] Componente `Education.astro`, nos dois idiomas e nos dois temas (`0a72f74`). Conferido pelo agente com o `puppeteer-core` (texto da seção, link de verificação e nome acessível do link nos dois idiomas), capturas em `logs/m012-*.png` (fora do git); Lighthouse 100 nas quatro categorias.
+- [ ] T-011 com a seção nova no celular e no desktop.
 
 **Commits:**
+- `0a72f74`: seção de formação e certificações.
+- `1828e7e`: textos aprovados e o brief.
 
 **Resultado:**
