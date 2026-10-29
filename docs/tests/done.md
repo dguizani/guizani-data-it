@@ -1,5 +1,22 @@
 # Testes · concluídos
 
+### T-009 · Projetos principais em uma coluna
+
+**Roadmap:** M-013.
+
+**Commits:** `477e028`.
+
+**O que mudou:** os cards dos projetos principais ficam um abaixo do outro em qualquer tela. Quando o card tem 48rem ou mais (telas a partir de cerca de 870 px), ele se divide em duas colunas: à esquerda, o cliente, o título e o período em cima, e a stack embaixo; à direita, o problema e o papel. Abaixo disso, a ordem é a de antes: topo, problema, papel, stack. Aparece na seção "Projetos principais" de `/` e de `/en/`.
+
+**Passos:**
+- [x] Rodada completa (lint, Prettier, `astro check`, `npm test`). Esperado: tudo verde, `pass 10, fail 0`.
+- [x] Desktop, nos dois idiomas e nos dois temas. Esperado: os cinco cards um abaixo do outro, cada um em duas colunas, como descrito acima.
+- [x] Tablet e celular (modo de dispositivo do Chrome, F12). Esperado: cards empilhados, na ordem topo, problema, papel, stack; nada cortado nem com rolagem lateral.
+- [x] Redimensionar a janela do desktop devagar. Esperado: a troca entre os dois layouts acontece sem sobreposição nem salto estranho.
+
+**Resultado:**
+- 2026-10-29: rodada verde pelo agente (log em `logs/m013-checks__2026-10-29.log`); capturas conferidas pelo agente em `logs/m013/`. Validado pelo usuário em 2026-10-29.
+
 ### T-008 · Ordem dos projetos e espaço no copyright
 
 **Roadmap:** M-011.
