@@ -16,7 +16,7 @@ import { launch } from "chrome-launcher";
 import lighthouse from "lighthouse";
 
 /** Páginas verificadas, relativas à raiz do site. */
-const pages: readonly string[] = ["/"];
+const pages: readonly string[] = ["/", "/en/"];
 
 /** Número de execuções por página; a nota considerada é a mediana delas. */
 const runsPerPage = 3;
