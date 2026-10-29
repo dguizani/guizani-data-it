@@ -1,0 +1,55 @@
+---
+/**
+ * Seletor de idioma: um link com o nome curto do outro idioma (ex.: EN), que
+ * leva ao início da página nesse idioma. O nome lido pelos leitores de tela já
+ * vem escrito no outro idioma, marcado com o `lang` dele.
+ */
+
+/** Propriedades do seletor de idioma. */
+interface Props {
+  /** Endereço do início da página no outro idioma (ex.: `/en/`). */
+  href: string;
+  /** Texto do link, com o nome curto do outro idioma (ex.: EN). */
+  label: string;
+  /** Nome do link para os leitores de tela, no outro idioma. */
+  accessibleName: string;
+  /** Idioma do destino, no formato do atributo `lang` (ex.: `en`). */
+  targetLang: string;
+}
+
+const { href, label, accessibleName, targetLang } = Astro.props;
+---
+
+<a
+  class="language-switch"
+  href={href}
+  hreflang={targetLang}
+  lang={targetLang}
+  aria-label={accessibleName}
+  title={accessibleName}
+>
+  {label}
+</a>
+
+<style>
+  .language-switch {
+    display: inline-grid;
+    place-items: center;
+    min-width: 2.75rem;
+    height: 2.75rem;
+    padding-inline: var(--space-2);
+    border: 0.0625rem solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+
+  .language-switch:hover {
+    border-color: var(--color-primary);
+  }
+</style>

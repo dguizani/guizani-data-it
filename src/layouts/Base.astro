@@ -23,9 +23,11 @@ interface Props {
   title: string;
   /** Descrição da página para os buscadores. */
   description: string;
+  /** Versões da página em cada idioma, para os links `hreflang` (ex.: `pt-BR`, `en`, `x-default`). */
+  alternates: readonly { hreflang: string; href: string }[];
 }
 
-const { lang, title, description } = Astro.props;
+const { lang, title, description, alternates } = Astro.props;
 ---
 
 <html lang={lang}>
@@ -35,6 +37,13 @@ const { lang, title, description } = Astro.props;
     <meta name="description" content={description} />
     <meta name="color-scheme" content="dark light" />
     <title>{title}</title>
+    {alternates.map((alternate) => (
+      <link
+        rel="alternate"
+        hreflang={alternate.hreflang}
+        href={alternate.href}
+      />
+    ))}
     <link
       rel="preload"
       href={interLatin}

@@ -4,7 +4,8 @@
  * (hero, sobre, serviços, projetos principais, participação pontual, linha do
  * tempo, skills, laboratório e contato) e o rodapé.
  *
- * As páginas de cada idioma só escolhem o idioma e o endereço do início.
+ * As páginas de cada idioma só escolhem o idioma. Os links `hreflang` apontam
+ * para as duas versões, com a em português como padrão (`x-default`).
  */
 import About from "./About.astro";
 import Contact from "./Contact.astro";
@@ -18,27 +19,35 @@ import Services from "./Services.astro";
 import Skills from "./Skills.astro";
 import Timeline from "./Timeline.astro";
 import Base from "../layouts/Base.astro";
-import { htmlLang, type Lang } from "../data/format.ts";
+import { homePath, htmlLang, type Lang } from "../data/format.ts";
 import { getSite } from "../data/site.ts";
 
 /** Propriedades da página inicial. */
 interface Props {
   /** Idioma da página. */
   lang: Lang;
-  /** Endereço do início da página no idioma (ex.: `/`, `/en/`). */
-  homeHref: string;
 }
 
-const { lang, homeHref } = Astro.props;
+const { lang } = Astro.props;
 const site = await getSite();
+if (Astro.site === undefined) {
+  throw new Error("Set site in astro.config.ts to build the hreflang links");
+}
+const origin = Astro.site;
+const alternates = [
+  { hreflang: htmlLang.pt, href: new URL(homePath.pt, origin).href },
+  { hreflang: htmlLang.en, href: new URL(homePath.en, origin).href },
+  { hreflang: "x-default", href: new URL(homePath.pt, origin).href },
+];
 ---
 
 <Base
   lang={htmlLang[lang]}
   title={site.brand.name}
   description={site.hero.tagline[lang]}
+  alternates={alternates}
 >
-  <Header site={site} lang={lang} homeHref={homeHref} />
+  <Header site={site} lang={lang} />
   <main id="main">
     <Hero site={site} lang={lang} />
     <About site={site} lang={lang} />

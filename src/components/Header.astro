@@ -1,11 +1,12 @@
 ---
 /**
  * Cabeçalho do site: o link "pular para o conteúdo", o logo, a navegação (só
- * nas telas largas) e o botão de tema.
+ * nas telas largas), o seletor de idioma e o botão de tema.
  */
+import LanguageSwitch from "./LanguageSwitch.astro";
 import Logo from "./Logo.astro";
 import ThemeToggle from "./ThemeToggle.astro";
-import type { Lang } from "../data/format.ts";
+import { homePath, htmlLang, otherLang, type Lang } from "../data/format.ts";
 import type { Site } from "../data/schema.ts";
 
 /** Propriedades do cabeçalho. */
@@ -14,11 +15,10 @@ interface Props {
   site: Site;
   /** Idioma da página. */
   lang: Lang;
-  /** Endereço do início da página no idioma (ex.: `/`, `/en/`). */
-  homeHref: string;
 }
 
-const { site, lang, homeHref } = Astro.props;
+const { site, lang } = Astro.props;
+const target = otherLang(lang);
 const links = [
   { href: "#services", label: site.ui.sections.services[lang] },
   { href: "#projects", label: site.ui.sections.projects[lang] },
@@ -31,7 +31,7 @@ const links = [
 </a>
 <header class="header">
   <Logo
-    href={homeHref}
+    href={homePath[lang]}
     label={site.ui.a11y.home[lang]}
     primary={site.brand.wordmark.primary}
     secondary={site.brand.wordmark.secondary}
@@ -46,6 +46,12 @@ const links = [
     </ul>
   </nav>
   <div class="actions">
+    <LanguageSwitch
+      href={homePath[target]}
+      label={site.ui.language.switchLabel[lang]}
+      accessibleName={site.ui.language.switchName[lang]}
+      targetLang={htmlLang[target]}
+    />
     <ThemeToggle label={site.ui.a11y.themeToggle[lang]} />
   </div>
 </header>
