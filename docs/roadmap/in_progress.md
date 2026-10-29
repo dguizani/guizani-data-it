@@ -23,14 +23,29 @@
 12. Componentes recebem o idioma como parâmetro; o M-006 acrescenta a página `/en/`, o seletor e o `hreflang`.
 
 **Passos:**
-- [ ] Textos novos no `site.yaml` e no schema (hero, sobre, rótulos, currículo opcional).
-- [ ] Funções de formatação (idioma, período, cliente, ordem dos projetos, link do WhatsApp).
-- [ ] Foto em `src/assets/`.
-- [ ] Componentes das seções e a página em português.
-- [ ] Conferir no celular o critério dos 30 segundos; Lighthouse 90 ou mais.
-- [ ] `T-005`.
+- [x] Textos novos no `site.yaml` e no schema (hero, sobre, rótulos, currículo opcional) (`4dbc651`).
+- [x] Funções de formatação (idioma, período, cliente, ordem dos projetos, link do WhatsApp) (`a258ce4`).
+- [x] Foto em `src/assets/` (`095f0c9`).
+- [x] Componentes das seções e a página em português (`dae8e40`, `01cf5d2`).
+- [x] Conferir no celular o critério dos 30 segundos; Lighthouse 90 ou mais (pelo agente, com capturas em `logs/m005/`; a conferência do usuário fica no T-005).
+- [x] `T-005`.
+
+**Ajustes na implementação:**
+- O ESLint não aplica mais a `no-unsafe-return` nos arquivos `.astro` (`dae8e40`): o parser do Astro não resolve o tipo do JSX dentro de expressões, como num `.map()`, e o `astro check` já confere esses tipos.
+- Dois componentes além da lista do briefing: `Section.astro` (título e largura comuns a todas as seções) e `HomePage.astro` (a página completa num idioma; as páginas de cada idioma só escolhem o idioma).
+- As funções de formatação ficam em `src/data/format.ts`: períodos (`Intl.DateTimeFormat`, sem textos de mês no YAML), nome ou setor do cliente, ordem dos projetos (um fim só com o ano conta como dezembro) e link do WhatsApp.
+- Textos novos da interface no `site.yaml`: a descrição da foto, "pular para o conteúdo", o nome da navegação, o aviso "(abre em outra aba)" dos links externos, o rótulo do currículo e o do CNPJ (em inglês, "CNPJ (Brazilian company ID)").
+- A descrição para os buscadores usa a frase do hero até o M-007.
+- A foto em `src/assets/profile.jpg` é um JPEG de 45 KB (768 × 768, qualidade 90) feito do PNG original de 1,8 MB, que continua em `references/`.
+- Nas capturas, o nome do cliente aparecia grudado no "via" ("TruckPadvia ITIX"): o Astro descarta o espaço da quebra de linha que o Prettier cria antes do `<span>`. Corrigido antes do commit com um `{" "}` explícito.
+- Com o `isClientPublic` da Unimed desligado numa cópia temporária do YAML, o nome sumiu do HTML e o setor apareceu nos 3 lugares (card e duas entradas da linha do tempo).
 
 **Commits:**
+- `dae8e40` chore: `no-unsafe-return` desligada nos `.astro`.
+- `4dbc651` feat: hero, sobre e os textos novos da interface no `site.yaml`.
+- `a258ce4` feat: funções de formatação.
+- `095f0c9` feat: foto de perfil.
+- `01cf5d2` feat: componentes das seções e a página em português.
 
 **Resultado:**
 
