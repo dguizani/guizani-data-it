@@ -27,6 +27,7 @@
 **Resultado:**
 - 2026-10-28 23:05, pelo agente, no contêiner: lint, Prettier, `astro check` (0/0/0), `npm test` (9 testes, 9 ok) e build passaram. Com o `en` de `projects[0].title` apagado, o build saiu com 1 e a mensagem `projects.0.title.en: Required`; com um erro de sintaxe na linha 9, saiu com 1 e `Nested mappings are not allowed in compact mappings at line 9, column 11`. O `site.yaml` foi restaurado depois (conferido com `cmp`). O JSON Schema gerado tem 185 descrições. Falta: a conferência no VS Code e a revisão do inglês (usuário).
 - 2026-10-28, pelo usuário: versão em inglês aprovada como está. Depois da P-002, o Laboratório ficou com 4 itens (`guizani-supermarket` incluído, `python-financeiro-pessoal` fora); a rodada no contêiner continuou passando (`npm test` 9 ok, build `Complete!`).
+- 2026-10-28 23:15, pelo agente: o CI `40804842940` (push do `76ea40f`) falhou no lint (`Unsafe member access .data on a type that cannot be resolved`), porque a `.astro/` não existe num checkout limpo. Reproduzido no contêiner apagando a `.astro/` (7 erros). Corrigido em `63c3a10`; a rodada completa a partir de uma pasta limpa passou (lint, Prettier, `astro check` 0/0/0, `npm test` 9 ok, build e Lighthouse 100 nas quatro categorias). Falta o CI verde depois do push.
 
 ### T-002 · Estrutura inicial do projeto
 
