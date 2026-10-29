@@ -27,6 +27,7 @@
 
 **Resultado:**
 - 2026-10-29 00:00, pelo agente, no contêiner: lint, Prettier, `astro check` (0/0/0), `npm test` (9 ok) e build passaram a partir de uma pasta limpa; Lighthouse com performance 100, acessibilidade 100, boas práticas 100 e SEO 100. Capturas no Chromium em `logs/m004/` (390 px e 1280 px, nos dois temas): logo, botão de tema com o ícone certo em cada tema, fundo de circuito e botões legíveis. A primeira captura mostrou o texto binário cortado (o `pattern` começava antes do retângulo) e o binário poluindo o texto no desktop; os dois foram corrigidos antes do commit. Falta: a conferência do usuário.
+- 2026-10-29, pelo usuário: "gostei muito do resultado" (aprovou a identidade na página provisória). CI `40810456521` (push do `3c9816a`) verde, com `npm test` 9 ok e Lighthouse 100 nas quatro categorias.
 
 ### T-003 · Arquivo de dados e schema
 
