@@ -24,6 +24,7 @@ O Node não é instalado na máquina: tudo roda em contêineres Docker, definido
 | Formatar o código                | `docker compose run --rm dev npm run format`                                |
 | Conferir a formatação            | `docker compose run --rm dev npm run format:check`                          |
 | Tipos e schema                   | `docker compose run --rm dev npm run check`                                 |
+| Testes                           | `docker compose run --rm dev npm test`                                      |
 | Build                            | `docker compose run --rm dev npm run build`                                 |
 | Lighthouse (build e verificação) | `docker compose run --rm lighthouse`                                        |
 
@@ -34,16 +35,32 @@ O Node não é instalado na máquina: tudo roda em contêineres Docker, definido
 ## Estrutura
 
 ```
+src/data/             conteúdo do site (site.yaml) e o schema que o valida
 src/pages/            páginas (português em /, inglês em /en/)
 public/               arquivos servidos como estão (CNAME e, depois, favicon, PDFs, imagens)
 scripts/              scripts do projeto (verificação do Lighthouse)
+tests/                testes automatizados (node:test)
 docs/                 briefing, regras e arquivos de controle do projeto
 .github/              workflows do GitHub Actions e Dependabot
 ```
 
+## Editar o conteúdo
+
+Todo o texto do site fica em [`src/data/site.yaml`](src/data/site.yaml), em português (`pt`) e inglês (`en`) lado a lado. O schema em [`src/data/schema.ts`](src/data/schema.ts) valida o arquivo: um campo faltando, uma tradução vazia ou um cliente que não existe quebra o `npm run check`, o `npm test` e o build, com o caminho do campo na mensagem.
+
+Para incluir um projeto:
+
+1. Se o cliente é novo, adicione-o em `clients`, com o nome, o setor nos dois idiomas e `isClientPublic`.
+2. Copie um item de `projects` do mesmo tipo (`main`, `occasional` ou `timeline`), troque o `id` e preencha os campos.
+3. Rode `docker compose run --rm dev npm run check` e confira o site com `docker compose up dev`.
+
+Com a extensão YAML da Red Hat no VS Code, o editor completa os campos e mostra a descrição de cada um ao passar o mouse. O schema do editor é gerado em `.astro/collections/site.schema.json` pelo `npm run check`, pelo build ou pelo servidor de desenvolvimento.
+
+Para esconder o nome de um cliente, troque `isClientPublic` para `false`: o site mostra o setor no lugar do nome, sem reescrever os cards.
+
 ## Deploy
 
-- **CI** (`.github/workflows/ci.yml`): a cada push na `main` e em cada pull request, confere que o Node do `.nvmrc` é o mesmo do `Dockerfile` e roda lint, Prettier, `astro check`, build e Lighthouse.
+- **CI** (`.github/workflows/ci.yml`): a cada push na `main` e em cada pull request, confere que o Node do `.nvmrc` é o mesmo do `Dockerfile` e roda lint, Prettier, `astro check`, testes, build e Lighthouse.
 - **Deploy** (`.github/workflows/deploy.yml`): por enquanto só manual. Ele se recusa a publicar enquanto o GitHub Pages estiver publicando a partir de uma branch; a troca da origem para "GitHub Actions" é feita no lançamento.
 - Até o lançamento, o site no ar é a landing page antiga, da branch `release/guizani-data-it`.
 
