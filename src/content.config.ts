@@ -16,7 +16,10 @@ const siteEntryId = "site";
  *
  * Diferente do `file()` do Astro, um erro de sintaxe no YAML interrompe o build,
  * com a linha e a coluna do erro. No servidor de desenvolvimento, a entrada é
- * recarregada a cada mudança no arquivo.
+ * recarregada a cada mudança no arquivo; a vigilância é registrada antes da
+ * primeira leitura, para o servidor se recuperar quando um arquivo inválido é
+ * corrigido, e um erro numa releitura é registrado no log sem derrubar o
+ * servidor, que continua com a última versão válida.
  *
  * @param fileName - Caminho do arquivo YAML, a partir da raiz do projeto.
  * @returns O loader da coleção.
@@ -50,13 +53,17 @@ function singleYamlFileLoader(fileName: string): Loader {
         });
       };
 
-      await sync();
       watcher?.add(filePath);
       watcher?.on("change", (changedPath) => {
         if (changedPath === filePath) {
-          void sync();
+          sync().catch((error: unknown) => {
+            context.logger.error(
+              error instanceof Error ? error.message : String(error),
+            );
+          });
         }
       });
+      await sync();
     },
   };
 }
