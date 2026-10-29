@@ -2,33 +2,6 @@
 
 Na ordem de execução. A especificação de cada entrega está em `docs/brief.md` (seção indicada em **Contexto**) e os textos em `docs/approved_content.md`.
 
-### M-012 · Formação e certificações
-
-**Objetivo:** mostrar no site a escolaridade, os cursos, os diplomas e as certificações, tendo o LinkedIn do usuário como base. Origem: pedido do usuário, 2026-10-29.
-
-**Depende de:** —
-
-**Contexto:** não está nas seções do MVP (`docs/brief.md`, **Escopo**, item 4); é uma mudança de escopo, e o brief é atualizado junto com as decisões.
-
-**Ideias para o debate:**
-- Fonte dos dados: o agente não acessa o LinkedIn logado; o usuário cola as seções "Formação acadêmica" e "Licenças e certificados" ou entrega a exportação de dados do LinkedIn (Configurações → Privacidade dos dados → Obter uma cópia dos seus dados). A exportação fica fora do git.
-- Onde mostrar: uma seção nova (ex.: entre a linha do tempo e as skills), ou dentro do "Sobre"; decidir também a posição no menu.
-- O que entra: só formação e certificações relevantes para engenharia de dados, ou tudo o que está no LinkedIn; se os cursos curtos aparecem ou ficam de fora.
-- Como mostrar: instituição, título, período ou data de emissão, e o link de verificação da certificação, quando houver. Sem imagem de diploma nem de certificado (documentos pessoais não entram no repositório).
-- Dados: um bloco novo no `site.yaml` (ex.: `education` e `certifications`), com schema no Zod e os textos nos dois idiomas.
-
-**Passos:**
-- [ ] Receber do usuário os dados do LinkedIn.
-- [ ] Debater onde e como mostrar, e o que entra; atualizar o `docs/brief.md`.
-- [ ] Textos nos dois idiomas no `docs/approved_content.md`, revisados pelo usuário.
-- [ ] Schema e dados no `site.yaml`.
-- [ ] Componente da seção, nos dois idiomas e nos dois temas.
-- [ ] `T-NNN` com a seção nova no celular e no desktop.
-
-**Commits:**
-
-**Resultado:**
-
 ### M-007 · SEO e qualidade
 
 **Objetivo:** meta description, Open Graph com uma imagem por idioma, favicon, sitemap, `robots.txt` e Lighthouse 90 ou mais em performance, acessibilidade e SEO, no celular. Origem: prompt de construção, 2026-10-28.
