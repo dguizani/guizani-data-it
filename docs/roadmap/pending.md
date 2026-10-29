@@ -2,26 +2,6 @@
 
 Na ordem de execução. A especificação de cada entrega está em `docs/brief.md` (seção indicada em **Contexto**) e os textos em `docs/approved_content.md`.
 
-### M-003 · Arquivo de dados e schema
-
-**Objetivo:** guardar todo o conteúdo do site em `src/data/site.yaml`, nos dois idiomas lado a lado, validado no build por um schema Zod. Origem: prompt de construção, 2026-10-28.
-
-**Depende de:** M-002.
-
-**Contexto:** `docs/approved_content.md` (todo o conteúdo) e `docs/brief.md`, seções **Funcionalidades do MVP** (arquivo de dados único) e **Arquitetura** (textos da interface).
-
-**Passos:**
-- [ ] Desenhar as chaves do YAML (em inglês) e o schema Zod, com descrição em cada campo; campo faltando ou sem a versão em inglês quebra o build.
-- [ ] Campo `isClientPublic` e o setor em cada cliente: desligado, o nome do cliente é trocado pelo setor, sem reescrever o card.
-- [ ] Seção de textos da interface (títulos, rótulos, textos de acessibilidade), também nos dois idiomas.
-- [ ] Escrever a versão em inglês de todo o conteúdo aprovado e mostrar ao usuário para revisão.
-- [ ] Escrever a descrição de uma linha de cada item do Laboratório (README dos repositórios públicos; perguntar ao usuário sobre os privados) e mostrar antes de gravar.
-- [ ] Teste de que o build quebra com um campo faltando e com uma tradução faltando.
-
-**Commits:**
-
-**Resultado:**
-
 ### M-004 · Identidade visual
 
 **Objetivo:** paleta nas cores do Python sobre base escura, fontes, logo novo em SVG, tema claro e escuro com botão e o fundo de circuito do hero. Origem: prompt de construção, 2026-10-28.

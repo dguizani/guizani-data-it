@@ -1,5 +1,41 @@
 # Roadmap · em andamento
 
+### M-003 · Arquivo de dados e schema
+
+**Objetivo:** guardar todo o conteúdo do site em `src/data/site.yaml`, nos dois idiomas lado a lado, validado no build por um schema Zod. Origem: prompt de construção, 2026-10-28.
+
+**Depende de:** M-002.
+
+**Contexto:** `docs/approved_content.md` (todo o conteúdo) e `docs/brief.md`, seções **Funcionalidades do MVP** (arquivo de dados único) e **Arquitetura** (textos da interface).
+
+**Achados** (2026-10-28):
+- O `file()` loader do Astro 7 lê YAML, mas trata cada chave do topo do arquivo como um item separado e, num erro de sintaxe, só registra uma mensagem e segue sem os dados. O leitor de YAML dele (`@astrojs/internal-helpers/yaml`) é interno.
+- O `astro/zod` do Astro 7 é o Zod 4 (`zod/v4`), com `z.strictObject`, `z.url()`, `z.email()` e `.describe()`.
+- Laboratório: o `python-financeiro-pessoal` público só tem `.gitignore`, `LICENSE` e um README vazio (um commit, 2025-09-26, nas branches `main` e `develop`); o `uninter` também usa NLTK, scikit-learn e Base dos Dados.
+
+**Decisões** (2026-10-28, aprovadas pelo usuário):
+1. Uma *content collection* `site` lê o `src/data/site.yaml` e valida com o schema de `src/data/schema.ts`, no `astro check` e no build, com o caminho do campo no erro. Como o `file()` não serve para um arquivo único com seções diferentes e não quebra o build num erro de sintaxe, a coleção usa um loader próprio, com o pacote `yaml` (sem dependências próprias).
+2. Todo texto traduzível é `{ pt, en }`, os dois obrigatórios e não vazios; nomes de tecnologia ficam numa língua só.
+3. Clientes cadastrados uma vez (`clients`: nome, setor nos dois idiomas e `isClientPublic`); os projetos citam o cliente pelo identificador, e o schema recusa um identificador que não existe.
+4. Períodos com `start` e `end` em `AAAA` ou `AAAA-MM`; `end` vazio é "em andamento".
+5. Uma lista de projetos com `kind`: `main` (card completo), `occasional` (participação pontual, uma linha) e `timeline` (só na linha do tempo, os RPAs). A linha do tempo é montada a partir de todos.
+6. Testes do schema com o `node:test` (arquivo válido passa; campo faltando, `en` vazio e cliente inexistente são recusados), no `npm test` e no CI.
+7. JSON Schema do `site.yaml` para o VS Code, com a extensão YAML da Red Hat (autocomplete e a descrição de cada campo).
+8. Laboratório: descrições do `polars-python-studying` e do `uninter` aprovadas; o `intern-data-rpa-course` entra com a descrição proposta, a confirmar na P-002; o `python-financeiro-pessoal` e o `guizani-supermarket` ficam fora do `site.yaml` até a P-002.
+
+**Passos:**
+- [ ] Schema Zod com descrição em cada campo e o loader da coleção `site`.
+- [ ] `site.yaml` com todo o conteúdo aprovado, com a versão em inglês para o usuário revisar.
+- [ ] Testes do schema (`npm test`) e o passo no CI.
+- [ ] JSON Schema para o VS Code.
+- [ ] Revisão da versão em inglês pelo usuário.
+- [ ] Responder a P-002 e completar o Laboratório.
+- [ ] `T-003`.
+
+**Commits:**
+
+**Resultado:**
+
 ### M-002 · Estrutura inicial do projeto
 
 **Objetivo:** criar o projeto Astro e todo o ferramental (Docker, lint, formatação, CI, Dependabot), sem conteúdo ainda. Origem: prompt de construção, 2026-10-28.
