@@ -40,12 +40,16 @@
 - Nas capturas, o nome do cliente aparecia grudado no "via" ("TruckPadvia ITIX"): o Astro descarta o espaço da quebra de linha que o Prettier cria antes do `<span>`. Corrigido antes do commit com um `{" "}` explícito.
 - Com o `isClientPublic` da Unimed desligado numa cópia temporária do YAML, o nome sumiu do HTML e o setor apareceu nos 3 lugares (card e duas entradas da linha do tempo).
 
+**Correções:**
+- 2026-10-29: o usuário não gostou da grade de duas colunas dos Projetos principais: cada linha ficava com a altura do card mais alto, deixando espaços verticais desiguais (o maior embaixo do card da Vita). Opções debatidas: um card por linha com duas colunas internas, duas colunas com a mesma altura e duas colunas soltas. Escolhida pelo usuário: duas colunas soltas, com as colunas do CSS (`columns: 2`), em que cada coluna tem o mesmo espaço entre os cards e a leitura desce pela coluna da esquerda e depois pela da direita (`d40c558`).
+
 **Commits:**
 - `dae8e40` chore: `no-unsafe-return` desligada nos `.astro`.
 - `4dbc651` feat: hero, sobre e os textos novos da interface no `site.yaml`.
 - `a258ce4` feat: funções de formatação.
 - `095f0c9` feat: foto de perfil.
 - `01cf5d2` feat: componentes das seções e a página em português.
+- `d40c558` fix: cards dos projetos em duas colunas soltas.
 
 **Resultado:**
 
