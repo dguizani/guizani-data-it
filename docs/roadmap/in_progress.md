@@ -15,14 +15,23 @@
 4. A verificação do Lighthouse mede `/` e `/en/`, as duas com o mínimo de 90.
 
 **Passos:**
-- [ ] Textos do seletor no `site.yaml` e no schema.
-- [ ] `LanguageSwitch` no cabeçalho.
-- [ ] `hreflang` no `Base.astro`.
-- [ ] Página `src/pages/en/index.astro`.
-- [ ] `/en/` na verificação do Lighthouse.
-- [ ] `T-006`.
+- [x] Textos do seletor no `site.yaml` e no schema (`5b42355`).
+- [x] `LanguageSwitch` no cabeçalho (`b6f429e`).
+- [x] `hreflang` no `Base.astro` (`b6f429e`).
+- [x] Página `src/pages/en/index.astro` (`b6f429e`).
+- [x] `/en/` na verificação do Lighthouse (`b9d0232`).
+- [x] `T-006`.
+
+**Ajustes na implementação:**
+- O cabeçalho e a página tiram os endereços de cada idioma de `homePath` (`src/data/format.ts`), em vez de receberem o `homeHref` por parâmetro.
+- A propriedade do nome do seletor para os leitores de tela chama-se `accessibleName`: com `name`, o parser do Astro no ESLint confundia com a variável global `window.name`, obsoleta (`no-deprecated`).
+- Os links `hreflang` usam endereços completos, montados a partir do `site` do `astro.config.ts`; sem ele, o build para com uma mensagem.
+- Captura da página em inglês num celular de 360 px em `logs/m006/` (fora do git): o logo, o seletor e o botão de tema cabem no cabeçalho.
 
 **Commits:**
+- `5b42355` feat: textos do seletor e funções de idioma.
+- `b6f429e` feat: página em inglês, seletor de idioma e `hreflang`.
+- `b9d0232` test: `/en/` na verificação do Lighthouse.
 
 **Resultado:**
 
