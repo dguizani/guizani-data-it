@@ -11,6 +11,23 @@
 7. `site.yaml` no VS Code com a extensão YAML → T-003
 8. Página provisória no computador e no celular, nos dois temas → T-004
 9. Página completa no celular e no computador (30 segundos, projetos, contato, textos novos) → T-005
+10. Seletor de idioma e página em inglês → T-006
+
+### T-006 · Idiomas
+
+**Roadmap:** M-006.
+
+**Commits:** `5b42355`, `b6f429e` e `b9d0232`.
+
+**O que mudou:** o site tem a versão em inglês em `/en/`, com o mesmo conteúdo, e um seletor no cabeçalho ("EN" na página em português e "PT" na em inglês) que leva ao início da outra versão. As duas páginas têm os links `hreflang` para os buscadores. Onde ver: `docker compose up dev`, <http://localhost:4321> e <http://localhost:4321/en/>.
+
+**Passos:**
+- [ ] O seletor aparece no cabeçalho, no computador e no celular, e leva de uma versão para a outra.
+- [ ] Na página em inglês, nenhum texto aparece em português (inclusive o WhatsApp, que abre com a mensagem em inglês).
+- [ ] Rodada completa no contêiner e Lighthouse com 90 ou mais em `/` e em `/en/`.
+
+**Resultado:**
+- 2026-10-29 00:35, pelo agente, no contêiner: lint, Prettier, `astro check` (0/0/0), `npm test` (9 ok) e build (2 páginas) passaram; Lighthouse com 100 nas quatro categorias em `/` e em `/en/`. No HTML gerado, `lang="pt-BR"` e `lang="en"`, os três links `hreflang` (`pt-BR`, `en` e `x-default`) e o seletor com `href`, `hreflang` e o nome para os leitores de tela certos nas duas páginas. A primeira rodada do lint acusou `no-deprecated` no `name` do seletor, corrigido antes do commit. Falta: a conferência do usuário.
 
 ### T-005 · Seções do site
 
