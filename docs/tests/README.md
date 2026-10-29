@@ -34,7 +34,7 @@ O projeto não usa Node instalado no sistema: todos os comandos rodam em contêi
 | Lint | `docker compose run --rm dev npm run lint` | nenhuma mensagem de erro |
 | Formatação (conferir) | `docker compose run --rm dev npm run format:check` | `All matched files use Prettier code style!` |
 | Tipos e schema | `docker compose run --rm dev npm run check` | `0 errors`, `0 warnings`, `0 hints` |
-| Testes do schema | `docker compose run --rm dev npm test` | `fail 0` |
+| Testes | `docker compose run --rm dev npm test` | `fail 0` |
 | Build | `docker compose run --rm dev npm run build` | `Complete!` |
 | Lighthouse (build e verificação) | `docker compose run --rm lighthouse` | cada categoria com `ok` e a pasta dos relatórios |
 
