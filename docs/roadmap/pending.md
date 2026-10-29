@@ -2,23 +2,6 @@
 
 Na ordem de execução. A especificação de cada entrega está em `docs/brief.md` (seção indicada em **Contexto**) e os textos em `docs/approved_content.md`.
 
-### M-006 · Idiomas
-
-**Objetivo:** português em `/` e inglês em `/en/`, com o seletor sempre visível e os links `hreflang`, sem redirecionamento automático. Origem: prompt de construção, 2026-10-28.
-
-**Depende de:** M-005 (pode andar junto com ele, se o debate decidir).
-
-**Contexto:** `docs/brief.md`, seção **Funcionalidades do MVP** (idiomas).
-
-**Passos:**
-- [ ] Páginas `src/pages/index.astro` e `src/pages/en/index.astro`, com o `lang` certo no `<html>`.
-- [ ] `LanguageSwitch` no cabeçalho, levando à mesma seção no outro idioma.
-- [ ] Links `hreflang` (`pt-BR`, `en` e `x-default`) no `Base.astro`.
-
-**Commits:**
-
-**Resultado:**
-
 ### M-007 · SEO e qualidade
 
 **Objetivo:** meta description, Open Graph com uma imagem por idioma, favicon, sitemap, `robots.txt` e Lighthouse 90 ou mais em performance, acessibilidade e SEO, no celular. Origem: prompt de construção, 2026-10-28.

@@ -1,5 +1,31 @@
 # Roadmap · em andamento
 
+### M-006 · Idiomas
+
+**Objetivo:** português em `/` e inglês em `/en/`, com o seletor sempre visível e os links `hreflang`, sem redirecionamento automático. Origem: prompt de construção, 2026-10-28.
+
+**Depende de:** M-005.
+
+**Contexto:** `docs/brief.md`, seção **Funcionalidades do MVP** (idiomas).
+
+**Decisões** (2026-10-29, aprovadas pelo usuário):
+1. Português em `/` e inglês em `/en/`, sem redirecionamento automático; a página em inglês usa o mesmo `HomePage.astro`, com o idioma `en`.
+2. Seletor no cabeçalho, ao lado do botão de tema, sempre visível (também no celular): um link com o nome do outro idioma ("EN" na página em português, "PT" na em inglês), chamado "Read this site in English" / "Ler este site em português" pelos leitores de tela, que leva ao início da outra página (sem script).
+3. Links `hreflang` para `pt-BR` e `en`, com o `x-default` em `/`, nas duas páginas.
+4. A verificação do Lighthouse mede `/` e `/en/`, as duas com o mínimo de 90.
+
+**Passos:**
+- [ ] Textos do seletor no `site.yaml` e no schema.
+- [ ] `LanguageSwitch` no cabeçalho.
+- [ ] `hreflang` no `Base.astro`.
+- [ ] Página `src/pages/en/index.astro`.
+- [ ] `/en/` na verificação do Lighthouse.
+- [ ] `T-006`.
+
+**Commits:**
+
+**Resultado:**
+
 ### M-005 · Seções do site
 
 **Objetivo:** montar a página com as seções na ordem aprovada: hero, sobre, serviços, projetos principais, participação pontual, linha do tempo, skills, laboratório, contato e rodapé. Origem: prompt de construção, 2026-10-28.
