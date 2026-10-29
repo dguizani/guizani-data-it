@@ -1,5 +1,39 @@
 # Roadmap · em andamento
 
+### M-005 · Seções do site
+
+**Objetivo:** montar a página com as seções na ordem aprovada: hero, sobre, serviços, projetos principais, participação pontual, linha do tempo, skills, laboratório, contato e rodapé. Origem: prompt de construção, 2026-10-28.
+
+**Depende de:** M-003 e M-004; C-002 (currículos) só para o link do PDF.
+
+**Contexto:** `docs/brief.md`, seção **Funcionalidades do MVP** (seções, hero, cards, contato, rodapé), e `docs/approved_content.md`.
+
+**Decisões** (2026-10-29, aprovadas pelo usuário):
+1. Frase do hero: "Pipelines, data warehouses e automações para empresas que precisam confiar nos próprios dados." / "Pipelines, data warehouses and automation for companies that need to trust their own data."
+2. Sobre: "Sou Davi Guizani, engenheiro de dados com mais de 5 anos de experiência e fundador da Guizani Data IT. Construo pipelines, data warehouses e automações para empresas de saúde, varejo, logística e investimentos, sempre com o mesmo objetivo: dados confiáveis, no lugar certo, para quem precisa decidir." / "I'm Davi Guizani, a data engineer with more than 5 years of experience and the founder of Guizani Data IT. I build pipelines, data warehouses and automation for companies in healthcare, retail, logistics and investments, always with the same goal: reliable data, in the right place, for the people who make decisions."
+3. Cabeçalho: logo, seletor de idioma (M-006) e botão de tema; no desktop, links para Serviços, Projetos e Contato; no celular, sem menu; link "pular para o conteúdo".
+4. Hero: nome, frase, a linha "Davi Guizani · engenheiro de dados", as seis tecnologias principais em fonte mono e os dois botões.
+5. Projetos principais: card com o cliente (com "via ITIX"), título, período, problema, papel e stack em etiquetas; os em andamento primeiro, depois do mais recente para o mais antigo; períodos como "2022 – 2025", "2026 – em andamento" e "jul. 2025".
+6. Participação pontual: uma linha por projeto (período, cliente e resumo).
+7. Linha do tempo: linha vertical com nós, com todos os projetos, do mais recente para o mais antigo.
+8. Skills em grupos com etiquetas; Laboratório em cards pequenos, com "Ver o código" nos públicos e "Repositório privado" nos outros.
+9. Contato: botões de e-mail, WhatsApp (com a mensagem do idioma) e LinkedIn; o link do currículo só aparece quando os PDFs existirem (campo opcional no YAML, C-002).
+10. Rodapé: CNPJ, LinkedIn e GitHub; o aviso de contagem de visitas entra só no M-008.
+11. Foto: cópia em JPEG de alta qualidade em `src/assets/`, com o texto alternativo no YAML e versões AVIF e WebP geradas no build.
+12. Componentes recebem o idioma como parâmetro; o M-006 acrescenta a página `/en/`, o seletor e o `hreflang`.
+
+**Passos:**
+- [ ] Textos novos no `site.yaml` e no schema (hero, sobre, rótulos, currículo opcional).
+- [ ] Funções de formatação (idioma, período, cliente, ordem dos projetos, link do WhatsApp).
+- [ ] Foto em `src/assets/`.
+- [ ] Componentes das seções e a página em português.
+- [ ] Conferir no celular o critério dos 30 segundos; Lighthouse 90 ou mais.
+- [ ] `T-005`.
+
+**Commits:**
+
+**Resultado:**
+
 ### M-004 · Identidade visual
 
 **Objetivo:** paleta nas cores do Python sobre base escura, fontes, logo novo em SVG, tema claro e escuro com botão e o fundo de circuito do hero. Origem: prompt de construção, 2026-10-28.
