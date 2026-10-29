@@ -24,15 +24,25 @@
 8. Laboratório: descrições do `polars-python-studying` e do `uninter` aprovadas; o `intern-data-rpa-course` entra com a descrição proposta, a confirmar na P-002; o `python-financeiro-pessoal` e o `guizani-supermarket` ficam fora do `site.yaml` até a P-002.
 
 **Passos:**
-- [ ] Schema Zod com descrição em cada campo e o loader da coleção `site`.
-- [ ] `site.yaml` com todo o conteúdo aprovado, com a versão em inglês para o usuário revisar.
-- [ ] Testes do schema (`npm test`) e o passo no CI.
-- [ ] JSON Schema para o VS Code.
+- [x] Schema Zod com descrição em cada campo e o loader da coleção `site` (`7dbe943`).
+- [x] `site.yaml` com todo o conteúdo aprovado, com a versão em inglês para o usuário revisar (`7dbe943`).
+- [x] Testes do schema (`npm test`) e o passo no CI (`1315828`).
+- [x] JSON Schema para o VS Code (`1fc754a`), usando o que o Astro já gera em `.astro/collections/site.schema.json`.
+- [x] Guia de edição do conteúdo no `README.md`.
 - [ ] Revisão da versão em inglês pelo usuário.
 - [ ] Responder a P-002 e completar o Laboratório.
-- [ ] `T-003`.
+- [x] `T-003`.
+
+**Ajustes na implementação:**
+- O loader próprio (`src/content.config.ts`) lê o arquivo inteiro como a entrada `site` da coleção; a função `getSite()` (`src/data/site.ts`) entrega o conteúdo já tipado aos componentes.
+- O `yaml` 2.9.1 entrou como dependência de desenvolvimento, porque só é usado no build.
+- O ESLint aceita as chamadas `describe` e `it` do `node:test` sem `await` (`no-floating-promises`), como o próprio `node:test` espera.
+- A ordem de `projects` no YAML não importa: o site ordena pelas datas.
 
 **Commits:**
+- `7dbe943` feat: `site.yaml`, schema Zod, loader e `getSite()`.
+- `1315828` test: 9 testes do schema com o `node:test`, `npm test` no CI.
+- `1fc754a` chore: JSON Schema do `site.yaml` no VS Code.
 
 **Resultado:**
 
