@@ -5,8 +5,27 @@
 1. Conferência do repositório no GitHub e do site no ar → T-001
 2. Conferência da verificação do domínio e do CNAME, depois do C-004 e do C-006 → T-001
 3. Rodada completa no contêiner: `npm ci`, lint, Prettier, `astro check`, build e Lighthouse (`docs/tests/README.md`, **Rodada completa**) → T-002
-4. Servidor de desenvolvimento com recarga ao salvar → T-002
+4. ~~Servidor de desenvolvimento com recarga ao salvar → T-002~~ (ok em 2026-10-28)
 5. Primeira execução do CI no GitHub, depois do push → T-002
+6. Rodada completa com o `npm test` e o build quebrando com dados inválidos → T-003
+7. `site.yaml` no VS Code com a extensão YAML → T-003
+
+### T-003 · Arquivo de dados e schema
+
+**Roadmap:** M-003.
+
+**Commits:** `7dbe943`, `1315828` e `1fc754a`.
+
+**O que mudou:** todo o conteúdo aprovado está em `src/data/site.yaml`, com a versão em inglês para revisar, validado pelo schema de `src/data/schema.ts` no `astro check`, nos testes e no build. Onde ver: o próprio `src/data/site.yaml` no VS Code (com a extensão YAML, o autocomplete e a descrição de cada campo ao passar o mouse); o guia **Editar o conteúdo** do `README.md`. A página ainda não mostra o conteúdo (M-005).
+
+**Passos:**
+- [ ] Rodada completa no contêiner, agora com o `npm test`: 9 testes, `fail 0`.
+- [ ] O build quebra com o caminho do campo quando falta uma tradução, e com a linha e a coluna quando o YAML tem erro de sintaxe.
+- [ ] No VS Code, com a extensão YAML da Red Hat, o `site.yaml` mostra a descrição dos campos e acusa um campo com nome errado.
+- [ ] Revisão da versão em inglês de todo o conteúdo.
+
+**Resultado:**
+- 2026-10-28 23:05, pelo agente, no contêiner: lint, Prettier, `astro check` (0/0/0), `npm test` (9 testes, 9 ok) e build passaram. Com o `en` de `projects[0].title` apagado, o build saiu com 1 e a mensagem `projects.0.title.en: Required`; com um erro de sintaxe na linha 9, saiu com 1 e `Nested mappings are not allowed in compact mappings at line 9, column 11`. O `site.yaml` foi restaurado depois (conferido com `cmp`). O JSON Schema gerado tem 185 descrições. Falta: a conferência no VS Code e a revisão do inglês (usuário).
 
 ### T-002 · Estrutura inicial do projeto
 
