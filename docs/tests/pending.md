@@ -22,10 +22,11 @@
 - [ ] Rodada completa no contêiner, agora com o `npm test`: 9 testes, `fail 0`.
 - [ ] O build quebra com o caminho do campo quando falta uma tradução, e com a linha e a coluna quando o YAML tem erro de sintaxe.
 - [ ] No VS Code, com a extensão YAML da Red Hat, o `site.yaml` mostra a descrição dos campos e acusa um campo com nome errado.
-- [ ] Revisão da versão em inglês de todo o conteúdo.
+- [x] Revisão da versão em inglês de todo o conteúdo.
 
 **Resultado:**
 - 2026-10-28 23:05, pelo agente, no contêiner: lint, Prettier, `astro check` (0/0/0), `npm test` (9 testes, 9 ok) e build passaram. Com o `en` de `projects[0].title` apagado, o build saiu com 1 e a mensagem `projects.0.title.en: Required`; com um erro de sintaxe na linha 9, saiu com 1 e `Nested mappings are not allowed in compact mappings at line 9, column 11`. O `site.yaml` foi restaurado depois (conferido com `cmp`). O JSON Schema gerado tem 185 descrições. Falta: a conferência no VS Code e a revisão do inglês (usuário).
+- 2026-10-28, pelo usuário: versão em inglês aprovada como está. Depois da P-002, o Laboratório ficou com 4 itens (`guizani-supermarket` incluído, `python-financeiro-pessoal` fora); a rodada no contêiner continuou passando (`npm test` 9 ok, build `Complete!`).
 
 ### T-002 · Estrutura inicial do projeto
 
