@@ -2,29 +2,6 @@
 
 Na ordem de execução. A especificação de cada entrega está em `docs/brief.md` (seção indicada em **Contexto**) e os textos em `docs/approved_content.md`.
 
-### M-014 · Botão flutuante para voltar ao topo
-
-**Objetivo:** um botão fixo no canto da tela que leva de volta ao início da página. Origem: pedido do usuário, 2026-10-29.
-
-**Depende de:** —
-
-**Ideias para o debate:**
-- Quando aparece: sempre, ou só depois de rolar uma parte da página (ex.: passar do hero). Mostrar só depois exige um pouco de JavaScript (um `IntersectionObserver` no hero); sempre visível funciona só com HTML e CSS.
-- Como funciona: um link para `#main` (ou para o topo), sem JavaScript, com a rolagem suave do CSS, desligada para quem pede menos movimento (`prefers-reduced-motion`).
-- Onde fica: no canto inferior direito, sem cobrir o conteúdo nem o botão de contato no celular, e com o recuo da área segura dos iPhones.
-- Aparência: ícone de seta (SVG inline), nos dois temas, com o mesmo estilo dos botões do cabeçalho.
-- Acessibilidade e textos: rótulo para leitor de tela nos dois idiomas, no `site.yaml` (ex.: "Voltar ao topo" / "Back to top"), e foco visível no teclado.
-
-**Passos:**
-- [ ] Debater as ideias acima.
-- [ ] Texto do rótulo nos dois idiomas no `docs/approved_content.md` e no `site.yaml`, revisado pelo usuário.
-- [ ] Componente do botão, nos dois idiomas e nos dois temas.
-- [ ] `T-NNN` com o botão no celular e no desktop.
-
-**Commits:**
-
-**Resultado:**
-
 ### M-012 · Formação e certificações
 
 **Objetivo:** mostrar no site a escolaridade, os cursos, os diplomas e as certificações, tendo o LinkedIn do usuário como base. Origem: pedido do usuário, 2026-10-29.
