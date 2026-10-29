@@ -1,0 +1,27 @@
+name: guizani-data-it
+
+services:
+  dev:
+    build:
+      context: .
+      target: base
+    image: guizani-data-it-dev
+    command: npm run dev
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+    ports:
+      - "4321:4321"
+
+  lighthouse:
+    build:
+      context: .
+      target: lighthouse
+    image: guizani-data-it-lighthouse
+    command: sh -c "npm run build && npm run lighthouse"
+    volumes:
+      - .:/app
+      - node_modules:/app/node_modules
+
+volumes:
+  node_modules:
