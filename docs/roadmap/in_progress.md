@@ -43,8 +43,8 @@
 - [x] Workflow do CI: versão do `.nvmrc` igual à do `Dockerfile`, ESLint, Prettier (`--check`), `astro check`, build e Lighthouse (barra abaixo de 90 em performance, acessibilidade e SEO, no celular), com o Node do `.nvmrc` (`5a6ae6f`).
 - [x] Workflow de deploy do Pages (`configure-pages`, `upload-pages-artifact`, `deploy-pages`) só com `workflow_dispatch` (`5a6ae6f`).
 - [x] Dependabot: npm, GitHub Actions e imagem do Docker, semanal (`07e528f`).
-- [ ] Ligar os alertas de segurança e as correções automáticas do Dependabot no repositório (com autorização).
-- [ ] Push e primeira execução do CI no GitHub (com autorização).
+- [x] Ligar os alertas de segurança e as correções automáticas do Dependabot no repositório (2026-10-28: os alertas já estavam ligados; correções automáticas ligadas com autorização).
+- [x] Push e primeira execução do CI no GitHub (2026-10-28, push até `c816a7a`; CI `40801729242` verde em 1min9s).
 - [x] `T-002` com a rodada completa no contêiner e no CI.
 
 **Commits:**
