@@ -29,6 +29,7 @@
 
 **Resultado:**
 - 2026-10-29 00:20, pelo agente, no contêiner: lint, Prettier, `astro check` (0/0/0), `npm test` (9 ok) e build passaram; Lighthouse com performance 100, acessibilidade 100, boas práticas 100 e SEO 100 na página completa. Capturas da página inteira em `logs/m005/` (celular no tema escuro e desktop no claro, cortadas em partes): todas as seções na ordem aprovada. A primeira captura mostrou o nome do cliente grudado no "via" ("TruckPadvia ITIX", "via ITIX· BI"), corrigido antes do commit. Com o `isClientPublic` da Unimed desligado numa cópia temporária, o nome sumiu do HTML e o setor apareceu nos 3 lugares. Falta: a conferência do usuário.
+- 2026-10-29, pelo usuário: a grade de duas colunas dos Projetos principais deixava espaços verticais desiguais entre os cards (o maior embaixo do card da Vita). Corrigido em `d40c558`, com duas colunas soltas, como o usuário escolheu; na captura do desktop, o espaço entre os cards ficou igual nas duas colunas.
 
 ### T-004 · Identidade visual
 
