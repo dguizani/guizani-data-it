@@ -20,14 +20,15 @@
 5. No `<head>`: canônico, Open Graph (tipo, endereço, título, descrição, imagem com medidas e texto alternativo, idioma e idioma alternativo, nome do site) e o cartão grande do X/Twitter.
 
 **Passos:**
-- [ ] Título e descrição por idioma, vindos do `site.yaml` (decisão 1).
-- [ ] Página-molde e script das imagens Open Graph e do favicon (decisões 2 e 3).
-- [ ] Favicon no `<head>`.
-- [ ] Sitemap (`@astrojs/sitemap`) e `robots.txt` (decisão 4).
-- [ ] Canônico, Open Graph e cartão do X no `<head>` (decisão 5).
-- [ ] Lighthouse CI passando com 90 ou mais nas três categorias, comparado com a referência do M-001.
+- [x] Título e descrição por idioma, vindos do bloco `seo` do `site.yaml` (decisão 1) (`25faf8f`).
+- [x] Página-molde (`src/pages/og-template/[lang].astro`) e script (`scripts/generate-images.ts`, `npm run og`) das imagens Open Graph e dos ícones (decisões 2 e 3) (`25faf8f`). O script fala com o Chromium pelo protocolo de depuração, sem dependência nova; o `favicon.ico` é um PNG de 32 px dentro do contêiner ICO. Comando no `README.md`.
+- [x] Favicon no `<head>`: `icon.svg`, `favicon.ico` e `apple-touch-icon.png` (`25faf8f`).
+- [x] Sitemap (`@astrojs/sitemap` 3.7.4, `npm audit` sem vulnerabilidades) e `robots.txt` (decisão 4) (`25faf8f`). O `sitemap-0.xml` lista `/` e `/en/` com os `hreflang` e deixa a página-molde de fora.
+- [x] Canônico, Open Graph e cartão do X no `<head>` (decisão 5) (`25faf8f`). O texto alternativo da imagem junta o nome da empresa e a frase do hero, já aprovados.
+- [x] Lighthouse passando com 90 ou mais nas três categorias: 100 nas quatro, nos dois idiomas, igual ao M-014 (`logs/m007-lighthouse__2026-10-29.log`).
 - [ ] T-012 com as prévias de compartilhamento, o favicon, o sitemap e o `robots.txt`.
 
 **Commits:**
+- `25faf8f`: metadados de SEO, imagens de compartilhamento, favicon e sitemap.
 
 **Resultado:**

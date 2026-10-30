@@ -52,6 +52,11 @@ Todos os projetos de clientes foram feitos pela consultoria **ITIX**, e no site 
 - **JSL, via ITIX: robô com Selenium** (2025-11 a 2026-03);
 - **Unimed de Goiânia, via ITIX: RPA** (2025-02).
 
+**SEO** (M-007, aprovado em 2026-10-29):
+
+- **Título:** Guizani Data IT · Engenharia de dados | Davi Guizani / Guizani Data IT · Data engineering | Davi Guizani.
+- **Descrição:** Davi Guizani, engenheiro de dados: pipelines, data warehouses e automações para empresas que precisam confiar nos próprios dados. / Davi Guizani, data engineer: pipelines, data warehouses and automation for companies that need to trust their own data.
+
 **Formação e certificações** (M-012, aprovado em 2026-10-29; seção entre as skills e o laboratório, uma linha por item; a Ufes, o curso de Python básico da Fundação Bradesco e a monitoria ficam de fora):
 
 - **Título da seção:** Formação e certificações / Education and certifications.

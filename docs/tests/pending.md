@@ -17,3 +17,22 @@
 13. ~~Projetos principais no desktop, no tablet e no celular, nos dois idiomas e nos dois temas → T-009~~ (ok em 2026-10-29)
 14. ~~Botão de voltar ao topo no desktop e no celular, nos dois idiomas e nos dois temas → T-010~~ (ok em 2026-10-29)
 15. ~~Seção de formação e certificações no desktop e no celular, nos dois idiomas e nos dois temas → T-011~~ (ok em 2026-10-29)
+16. Prévias de compartilhamento, favicon, sitemap e `robots.txt`, no site publicado → T-012
+
+### T-012 · SEO e qualidade
+
+**Roadmap:** M-007.
+
+**Commits:** `25faf8f`.
+
+**O que mudou:** título e descrição por idioma; link canônico; Open Graph com uma imagem por idioma (`/og/pt.png` e `/og/en.png`) e o cartão grande do X; favicon (`/icon.svg`, `/favicon.ico`, `/apple-touch-icon.png`); `/sitemap-index.xml` e `/robots.txt`. As prévias de compartilhamento só podem ser conferidas depois do push, porque o LinkedIn e o WhatsApp leem o site no ar.
+
+**Passos:**
+- [ ] Rodada completa e Lighthouse. Esperado: tudo verde, `pass 10, fail 0`, Lighthouse 90 ou mais.
+- [ ] Aba do navegador em `/` e em `/en/`. Esperado: o ícone do "G de circuito" e o título de cada idioma.
+- [ ] Depois do push, colar `https://datait.guizani.com.br/` e `https://datait.guizani.com.br/en/` no LinkedIn Post Inspector (<https://www.linkedin.com/post-inspector/>). Esperado: a imagem do idioma certo, o título e a descrição.
+- [ ] Depois do push, mandar o link numa conversa do WhatsApp (pode ser para você mesmo). Esperado: a prévia com a imagem e o título.
+- [ ] Abrir `https://datait.guizani.com.br/sitemap-index.xml` e `https://datait.guizani.com.br/robots.txt`. Esperado: o índice apontando o `sitemap-0.xml` com as duas páginas, e o `robots.txt` liberando tudo e apontando o sitemap.
+
+**Resultado:**
+- 2026-10-29: rodada completa e Lighthouse verdes pelo agente, a partir de uma pasta limpa (100 nas quatro categorias; logs em `logs/m007-full-run__2026-10-29.log` e `logs/m007-lighthouse__2026-10-29.log`); `<head>`, sitemap e imagens conferidos no `dist/`. Falta a confirmação do usuário.
