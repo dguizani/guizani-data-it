@@ -18,6 +18,7 @@
 3. Favicon a partir do símbolo "G de circuito" do logo, sobre um quadrado escuro de cantos arredondados: `icon.svg`, `favicon.ico` (32 px) e `apple-touch-icon.png` (180 px), os PNGs gerados pelo mesmo script. Nada do logo do Python.
 4. Sitemap com o `@astrojs/sitemap` (`/` e `/en/`, com a ligação entre os idiomas) e `robots.txt` liberando tudo e apontando o sitemap.
 5. No `<head>`: canônico, Open Graph (tipo, endereço, título, descrição, imagem com medidas e texto alternativo, idioma e idioma alternativo, nome do site) e o cartão grande do X/Twitter.
+6. (2026-10-29) A prévia em português ficou borrada no LinkedIn Post Inspector, mesmo com a `pt.png` nítida no site; a suspeita é o cache de imagens do LinkedIn, guardado pelo endereço. Sem mudança no código: esperar o cache expirar (cerca de 7 dias) e inspecionar de novo. Descartadas, por ora: marca de versão automática no endereço da imagem (`?v=<hash>`) e marca manual (`?v=2`). Se o problema voltar quando o `npm run og` gerar imagens novas, a marca automática é a primeira opção.
 
 **Passos:**
 - [x] Título e descrição por idioma, vindos do bloco `seo` do `site.yaml` (decisão 1) (`25faf8f`).
@@ -26,7 +27,7 @@
 - [x] Sitemap (`@astrojs/sitemap` 3.7.4, `npm audit` sem vulnerabilidades) e `robots.txt` (decisão 4) (`25faf8f`). O `sitemap-0.xml` lista `/` e `/en/` com os `hreflang` e deixa a página-molde de fora.
 - [x] Canônico, Open Graph e cartão do X no `<head>` (decisão 5) (`25faf8f`). O texto alternativo da imagem junta o nome da empresa e a frase do hero, já aprovados.
 - [x] Lighthouse passando com 90 ou mais nas três categorias: 100 nas quatro, nos dois idiomas, igual ao M-014 (`logs/m007-lighthouse__2026-10-29.log`).
-- [ ] T-012 com as prévias de compartilhamento, o favicon, o sitemap e o `robots.txt`.
+- [ ] T-012 com as prévias de compartilhamento, o favicon, o sitemap e o `robots.txt`. Falta só a prévia em português no LinkedIn, a partir de 2026-11-05 (decisão 6).
 
 **Commits:**
 - `25faf8f`: metadados de SEO, imagens de compartilhamento, favicon e sitemap.
