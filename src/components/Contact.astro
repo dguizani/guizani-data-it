@@ -65,8 +65,9 @@ const resume = contact.resume?.[lang];
   </ul>
   {resume !== undefined && (
     <p>
-      <a class="resume" href={resume}>
-        {ui.contact.resume[lang]}
+      <a class="resume" href={resume} target="_blank" rel="noopener noreferrer">
+        {ui.contact.resume[lang]}{" "}
+        <span class="visually-hidden">{ui.a11y.externalLink[lang]}</span>
       </a>
     </p>
   )}
