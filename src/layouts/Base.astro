@@ -1,7 +1,8 @@
 ---
 /**
- * Estrutura comum a todas as páginas: o `<head>` (metadados, fontes e o script
- * do tema) e o `<body>` com o conteúdo da página.
+ * Estrutura comum a todas as páginas: o `<head>` (metadados, canônico, Open
+ * Graph, cartão do X, favicon, fontes e o script do tema) e o `<body>` com o
+ * conteúdo da página.
  *
  * O script do tema roda no `<head>`, antes da página aparecer, para ela não
  * piscar no tema errado: usa a escolha salva no navegador ou, sem ela, o tema
@@ -25,9 +26,29 @@ interface Props {
   description: string;
   /** Versões da página em cada idioma, para os links `hreflang` (ex.: `pt-BR`, `en`, `x-default`). */
   alternates: readonly { hreflang: string; href: string }[];
+  /** Endereço completo e oficial da página (link canônico e `og:url`). */
+  canonical: string;
+  /** Nome do site nas prévias de compartilhamento (`og:site_name`). */
+  siteName: string;
+  /** Idioma da página no formato do Open Graph (ex.: `pt_BR`). */
+  ogLocale: string;
+  /** Idioma da outra versão da página no formato do Open Graph (ex.: `en_US`). */
+  ogLocaleAlternate: string;
+  /** Imagem das prévias de compartilhamento: endereço completo, texto alternativo e medidas em pixels. */
+  image: { url: string; alt: string; width: number; height: number };
 }
 
-const { lang, title, description, alternates } = Astro.props;
+const {
+  lang,
+  title,
+  description,
+  alternates,
+  canonical,
+  siteName,
+  ogLocale,
+  ogLocaleAlternate,
+  image,
+} = Astro.props;
 ---
 
 <html lang={lang}>
@@ -37,6 +58,23 @@ const { lang, title, description, alternates } = Astro.props;
     <meta name="description" content={description} />
     <meta name="color-scheme" content="dark light" />
     <title>{title}</title>
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlternate} />
+    <meta property="og:image" content={image.url} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content={String(image.width)} />
+    <meta property="og:image:height" content={String(image.height)} />
+    <meta property="og:image:alt" content={image.alt} />
+    <meta name="twitter:card" content="summary_large_image" />
     {alternates.map((alternate) => (
       <link
         rel="alternate"

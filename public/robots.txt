@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://datait.guizani.com.br/sitemap-index.xml

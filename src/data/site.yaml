@@ -498,6 +498,18 @@ brand:
     primary: Guizani
     secondary: Data IT
 
+seo:
+  title:
+    pt: Guizani Data IT · Engenharia de dados | Davi Guizani
+    en: Guizani Data IT · Data engineering | Davi Guizani
+  description:
+    pt: >-
+      Davi Guizani, engenheiro de dados: pipelines, data warehouses e automações
+      para empresas que precisam confiar nos próprios dados.
+    en: >-
+      Davi Guizani, data engineer: pipelines, data warehouses and automation for
+      companies that need to trust their own data.
+
 hero:
   tagline:
     pt: >-

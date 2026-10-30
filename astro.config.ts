@@ -1,3 +1,4 @@
+import sitemap from "@astrojs/sitemap";
 import { defineConfig } from "astro/config";
 import type { AstroIntegration } from "astro";
 
@@ -21,10 +22,22 @@ const watchSiteSchema: AstroIntegration = {
  * O servidor de desenvolvimento usa polling para perceber as mudanças nos arquivos,
  * porque o contêiner não recebe os eventos de arquivo da pasta montada do Windows.
  * As pastas `logs/` e `references/` ficam fora da vigilância.
+ *
+ * O sitemap lista as duas versões da página, ligadas pelo idioma, e deixa de
+ * fora as páginas-molde das imagens Open Graph (`/og-template/`).
  */
 export default defineConfig({
   site: "https://datait.guizani.com.br",
-  integrations: [watchSiteSchema],
+  integrations: [
+    watchSiteSchema,
+    sitemap({
+      filter: (page) => !page.includes("/og-template/"),
+      i18n: {
+        defaultLocale: "pt",
+        locales: { pt: "pt-BR", en: "en" },
+      },
+    }),
+  ],
   vite: {
     server: {
       watch: {

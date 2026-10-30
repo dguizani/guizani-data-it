@@ -304,6 +304,21 @@ export const contact = z
 /** Dados de contato e da empresa. */
 export type Contact = z.infer<typeof contact>;
 
+/** Título e descrição da página para os buscadores e as prévias de compartilhamento. */
+export const seo = z
+  .strictObject({
+    title: localizedText.describe(
+      "Título da página, mostrado na aba do navegador, nos buscadores e nas prévias (até cerca de 60 caracteres).",
+    ),
+    description: localizedText.describe(
+      "Descrição da página para os buscadores e as prévias (até cerca de 160 caracteres).",
+    ),
+  })
+  .describe("Textos de SEO.");
+
+/** Textos de SEO. */
+export type Seo = z.infer<typeof seo>;
+
 /** Topo da página: a frase de posicionamento e a linha com o nome e o papel. */
 export const hero = z
   .strictObject({
@@ -489,6 +504,7 @@ export const siteSchema = z
       .array(labItem)
       .describe("Projetos pessoais e de estudo, na ordem em que aparecem."),
     brand,
+    seo,
     hero,
     about,
     contact,

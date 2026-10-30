@@ -1,0 +1,111 @@
+---
+/**
+ * Página-molde da imagem Open Graph de cada idioma (1.200 × 630), sempre no
+ * tema escuro: o logo, a frase do hero, a linha com o nome e o papel e o
+ * domínio, sobre o fundo de circuito.
+ *
+ * Não é uma página do site: o `npm run og` fotografa esta página e grava o PNG
+ * em `public/og/`. Fica fora do sitemap e marcada para os buscadores não
+ * indexarem.
+ */
+import "@fontsource-variable/inter/wght.css";
+import "@fontsource/jetbrains-mono/latin-400.css";
+import "@fontsource/jetbrains-mono/latin-700.css";
+import "../../styles/tokens.css";
+import "../../styles/reset.css";
+import CircuitBackground from "../../components/CircuitBackground.astro";
+import Logo from "../../components/Logo.astro";
+import { homePath, htmlLang, type Lang } from "../../data/format.ts";
+import { getSite } from "../../data/site.ts";
+
+/** Propriedades da página-molde. */
+interface Props {
+  /** Idioma da imagem. */
+  lang: Lang;
+}
+
+/**
+ * Gera uma página-molde por idioma.
+ *
+ * @returns Os caminhos `/og-template/pt/` e `/og-template/en/`, com o idioma.
+ */
+export function getStaticPaths(): {
+  params: { lang: Lang };
+  props: Props;
+}[] {
+  const langs: readonly Lang[] = ["pt", "en"];
+  return langs.map((lang) => ({ params: { lang }, props: { lang } }));
+}
+
+const { lang } = Astro.props;
+const site = await getSite();
+const domain = Astro.site?.host ?? "";
+---
+
+<html lang={htmlLang[lang]} data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>{site.seo.title[lang]}</title>
+  </head>
+  <body>
+    <CircuitBackground />
+    <div class="content">
+      <div class="logo">
+        <Logo
+          href={homePath[lang]}
+          label={site.ui.a11y.home[lang]}
+          primary={site.brand.wordmark.primary}
+          secondary={site.brand.wordmark.secondary}
+        />
+      </div>
+      <p class="tagline">{site.hero.tagline[lang]}</p>
+      <p class="byline">{site.hero.byline[lang]}</p>
+      <p class="domain">{domain}</p>
+    </div>
+  </body>
+</html>
+
+<style>
+  body {
+    position: relative;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+
+  .content {
+    position: relative;
+    display: grid;
+    grid-template-rows: auto 1fr auto auto;
+    gap: 1.5rem;
+    height: 100%;
+    padding: 4.5rem 5rem;
+  }
+
+  .logo {
+    zoom: 2;
+  }
+
+  .tagline {
+    align-self: end;
+    max-width: 52rem;
+    font-size: 3.25rem;
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .byline {
+    color: var(--color-primary);
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+
+  .domain {
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+    font-size: 1.375rem;
+  }
+</style>

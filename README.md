@@ -27,10 +27,12 @@ O Node não é instalado na máquina: tudo roda em contêineres Docker, definido
 | Testes                           | `docker compose run --rm dev npm test`                                      |
 | Build                            | `docker compose run --rm dev npm run build`                                 |
 | Lighthouse (build e verificação) | `docker compose run --rm lighthouse`                                        |
+| Imagens Open Graph e ícones      | `docker compose run --rm lighthouse sh -c "npm run build && npm run og"`    |
 
 - O serviço `dev` usa a imagem `node` da versão do `.nvmrc`; o serviço `lighthouse` usa a mesma imagem com o Chromium.
 - As dependências ficam no volume `guizani-data-it_node_modules`, e não na pasta do projeto, porque o `node_modules` dentro de uma pasta montada do Windows é muito lento. Para reinstalar do zero: `docker compose down -v` e rodar a instalação de novo.
 - Os relatórios do Lighthouse ficam em `logs/lighthouse/`, fora do git.
+- As imagens de compartilhamento (`public/og/`), o `apple-touch-icon.png` e o `favicon.ico` são gerados pelo `scripts/generate-images.ts` a partir das páginas-molde `/og-template/` e do `public/icon.svg`. Rodar de novo, e fazer o commit dos PNG, sempre que mudar a frase do hero, a linha com o nome, o logo ou o ícone.
 
 ## Estrutura
 

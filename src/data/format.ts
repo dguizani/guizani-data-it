@@ -21,6 +21,15 @@ export const htmlLang: Readonly<Record<Lang, string>> = {
   en: "en",
 };
 
+/** Idioma de cada página no formato do Open Graph (`og:locale`). */
+export const ogLocale: Readonly<Record<Lang, string>> = {
+  pt: "pt_BR",
+  en: "en_US",
+};
+
+/** Largura e altura, em pixels, das imagens Open Graph em `public/og/`. */
+export const ogImageSize = { width: 1200, height: 630 } as const;
+
 /**
  * Deixa a primeira letra de um texto em maiúscula.
  *

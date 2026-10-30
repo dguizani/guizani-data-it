@@ -22,7 +22,14 @@ import Services from "./Services.astro";
 import Skills from "./Skills.astro";
 import Timeline from "./Timeline.astro";
 import Base from "../layouts/Base.astro";
-import { homePath, htmlLang, type Lang } from "../data/format.ts";
+import {
+  homePath,
+  htmlLang,
+  ogImageSize,
+  ogLocale,
+  otherLang,
+  type Lang,
+} from "../data/format.ts";
 import { getSite } from "../data/site.ts";
 
 /** Propriedades da página inicial. */
@@ -42,13 +49,23 @@ const alternates = [
   { hreflang: htmlLang.en, href: new URL(homePath.en, origin).href },
   { hreflang: "x-default", href: new URL(homePath.pt, origin).href },
 ];
+const image = {
+  url: new URL(`/og/${lang}.png`, origin).href,
+  alt: `${site.brand.name}: ${site.hero.tagline[lang]}`,
+  ...ogImageSize,
+};
 ---
 
 <Base
   lang={htmlLang[lang]}
-  title={site.brand.name}
-  description={site.hero.tagline[lang]}
+  title={site.seo.title[lang]}
+  description={site.seo.description[lang]}
   alternates={alternates}
+  canonical={new URL(homePath[lang], origin).href}
+  siteName={site.brand.name}
+  ogLocale={ogLocale[lang]}
+  ogLocaleAlternate={ogLocale[otherLang(lang)]}
+  image={image}
 >
   <Header site={site} lang={lang} />
   <main id="main">
