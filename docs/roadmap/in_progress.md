@@ -28,6 +28,7 @@
 3. Uma linha por item, no estilo das participações pontuais: formação com o curso, a instituição e o período; certificação com o nome, o emissor, a data e um link "Verificar" para a página oficial. Sem logos nem imagens de diplomas. Os dados ficam no `site.yaml` (ex.: `education` e `certifications`). (2026-10-29, aprovado pelo usuário.)
 4. A Ufes (Sistemas de Informação, não concluído) fica de fora. (2026-10-29, aprovado pelo usuário.)
 5. Textos aprovados pelo usuário em 2026-10-29, registrados no `docs/approved_content.md`; o período da formação aparece só com os anos. (2026-10-29, aprovado pelo usuário.)
+6. A formação na Uninter fica sem link de verificação. A página de validação do diploma digital mostra o nome, a nacionalidade e o CPF parcialmente mascarado, e o ganho de ter o link no site é pequeno; o link não é registrado no repositório. (2026-10-29, aprovado pelo usuário.)
 
 **Passos:**
 - [x] Receber do usuário os dados do LinkedIn (2026-10-29).
