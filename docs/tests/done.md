@@ -1,5 +1,21 @@
 # Testes · concluídos
 
+### T-011 · Formação e certificações
+
+**Roadmap:** M-012.
+
+**Commits:** `0a72f74`, `1828e7e`.
+
+**O que mudou:** seção nova "Formação e certificações" ("Education and certifications" em `/en/`), entre as Skills e o Laboratório, fora do menu. Uma linha para o Tecnólogo em Ciência de Dados (UNINTER, 2024 – 2026) e outra para a PCEP (Python Institute, jan. 2025), com o link "Verificar" para a verificação oficial da OpenEDG, em outra aba.
+
+**Passos:**
+- [x] Rodada completa e Lighthouse. Esperado: tudo verde, `pass 10, fail 0`, Lighthouse 90 ou mais.
+- [x] Desktop e celular, nos dois idiomas e nos dois temas. Esperado: a seção entre as Skills e o Laboratório, com os textos aprovados, sem nada no idioma errado.
+- [x] Link "Verificar". Esperado: abre em outra aba a página da OpenEDG com a certificação válida.
+
+**Resultado:**
+- 2026-10-29: rodada e Lighthouse verdes pelo agente (100 nas quatro categorias; logs em `logs/m012-checks__2026-10-29.log` e `logs/m012-lighthouse__2026-10-29.log`); textos, link e nome acessível conferidos com o `puppeteer-core`. Publicado no push de 2026-10-29 (Deploy `40977789519`); validado pelo usuário em 2026-10-29.
+
 ### T-010 · Botão flutuante para voltar ao topo
 
 **Roadmap:** M-014.
