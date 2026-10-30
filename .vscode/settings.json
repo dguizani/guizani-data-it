@@ -1,5 +1,6 @@
 {
   "yaml.schemas": {
     "./.astro/collections/site.schema.json": "src/data/site.yaml"
-  }
+  },
+  "markdown.marp.themes": ["./cv/theme.css"]
 }

@@ -1,0 +1,95 @@
+/* @theme guizani-cv */
+
+section {
+  width: 794px;
+  height: 1123px;
+  box-sizing: border-box;
+  padding: 44px 52px 52px;
+  background: #ffffff;
+  color: #14212a;
+  font-family: "Segoe UI", Inter, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+h1 {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.1;
+  color: #14212a;
+}
+
+h1 + p {
+  margin: 4px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #306998;
+}
+
+h2 {
+  margin: 18px 0 8px;
+  padding-bottom: 3px;
+  border-bottom: 2px solid #ffd43b;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #306998;
+}
+
+h3 {
+  margin: 12px 0 0;
+  font-size: 13.5px;
+  color: #14212a;
+}
+
+h3 + p {
+  margin: 0 0 3px;
+  font-size: 12px;
+  color: #4a5a63;
+}
+
+p {
+  margin: 0 0 6px;
+}
+
+ul {
+  margin: 0 0 4px;
+  padding-left: 18px;
+}
+
+li {
+  margin: 0 0 2px;
+}
+
+li::marker {
+  color: #306998;
+}
+
+h1 + p + p {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #4a5a63;
+}
+
+strong {
+  color: #14212a;
+}
+
+a {
+  color: #306998;
+  text-decoration: none;
+}
+
+section.first > h2 + ul {
+  columns: 2;
+  column-gap: 24px;
+}
+
+footer {
+  position: absolute;
+  left: 52px;
+  right: 52px;
+  bottom: 22px;
+  font-size: 10.5px;
+  color: #4a5a63;
+}
