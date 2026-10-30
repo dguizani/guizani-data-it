@@ -32,7 +32,7 @@ Na ordem de execução. A especificação de cada entrega está em `docs/brief.m
 - ~~[ ] Trocar a origem do Pages de "branch" para "GitHub Actions" e o workflow de deploy para rodar a cada push na `main` (com autorização).~~ Adiantado para o M-010 (2026-10-29).
 - [ ] Conferir que o domínio continua verificado (C-004, feito no M-001).
 - [ ] Conferir que o CNAME `dguizani.github.io` (C-006, feito no M-001), o certificado e o "Enforce HTTPS" continuam valendo depois da troca da origem do Pages.
-- [ ] E-mail do ImprovMX funcionando (C-005): mensagem de teste chegando ao Gmail.
+- [x] E-mail do ImprovMX funcionando (C-005): mensagem de teste chegando ao Gmail. Adiantado: feito e conferido em 2026-10-29.
 - [ ] Apagar a `release/guizani-data-it` (com autorização).
 - [ ] Conferir o site no ar contra os critérios de sucesso (30 segundos no celular, todos os projetos aprovados, projeto novo em menos de 10 minutos editando só o YAML, Lighthouse 90 ou mais).
 

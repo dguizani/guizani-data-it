@@ -1,5 +1,42 @@
 # Chamados · concluídos
 
+### C-005 · Criar a conta no ImprovMX e configurar o e-mail no DNS
+
+**Roadmap:** M-005 e M-009. Endereço definido na P-001: `contato@guizani.com.br`.
+
+**Para:** o usuário, no ImprovMX e no Registro.br.
+
+**Referência:** ImprovMX, domínio `guizani.com.br` (conta criada pelo usuário em 2026-10-29).
+
+**Título:** Encaminhar o e-mail do domínio para o Gmail pelo ImprovMX.
+
+**Descrição:** o domínio `guizani.com.br` não tem registro MX (conferido em 2026-10-28), então nenhum endereço `@guizani.com.br` recebe mensagens. O ImprovMX recebe as mensagens do `contato@guizani.com.br` (P-001) e encaminha para o Gmail, de graça; as respostas saem do próprio Gmail. O Cloudflare Email Routing foi descartado porque exigiria mover o DNS para a Cloudflare.
+
+| Verificação | Encontrado (2026-10-28) | Esperado |
+|---|---|---|
+| `nslookup -type=MX guizani.com.br` | nenhum MX | `mx1.improvmx.com` (10) e `mx2.improvmx.com` (20) |
+| `nslookup -type=TXT guizani.com.br` | a conferir | SPF com `include:spf.improvmx.com` |
+
+**Sugestão de solução** (só uma sugestão; os valores certos são os que o painel do ImprovMX mostrar):
+1. Antes de criar a conta, conferir em <https://improvmx.com/pricing> os limites do plano gratuito (domínios, aliases, mensagens por dia, tamanho do anexo) e avisar no chat se algo mudou. A alternativa já avaliada é o Forward Email.
+2. Criar a conta em <https://improvmx.com>, informando o domínio `guizani.com.br` e o seu Gmail como destino.
+3. Em **Aliases**, criar o alias `contato` (para `contato@guizani.com.br`) encaminhando para o Gmail. Não criar o alias `*` (pega tudo), que atrai spam.
+4. O painel mostra os registros a criar. No Registro.br (**Entrar** → `guizani.com.br` → **DNS** → **Editar zona**), criar com **Nova entrada**:
+   - tipo **MX**, nome em branco (o próprio domínio), dados `mx1.improvmx.com`, prioridade `10`;
+   - tipo **MX**, nome em branco, dados `mx2.improvmx.com`, prioridade `20`;
+   - tipo **TXT**, nome em branco, dados `v=spf1 include:spf.improvmx.com ~all`. Se já existir um TXT começando com `v=spf1`, não criar outro: juntar os dois num só e avisar no chat.
+5. **Salvar alterações**, esperar a propagação e clicar em **Check again** no painel do ImprovMX até os registros ficarem verdes.
+6. Nunca registrar aqui a senha do ImprovMX nem o endereço do Gmail.
+
+**Casos de teste:**
+1. `nslookup -type=MX guizani.com.br 8.8.8.8` mostra os dois servidores do ImprovMX.
+2. Uma mensagem enviada de outra conta (não do próprio Gmail) para `contato@guizani.com.br` chega ao Gmail em poucos minutos.
+3. O painel do ImprovMX mostra o domínio como ativo, sem erros.
+
+**Andamento:**
+- 2026-10-29: limites do plano gratuito conferidos pelo agente em <https://improvmx.com/pricing>: 1 domínio, 25 aliases, 500 mensagens por dia, sem envio por SMTP (as respostas saem do Gmail, como previsto). Antes da mudança, o domínio tinha só o TXT do Google (C-007), sem SPF. Conta criada e alias `contato` configurado pelo usuário; registros criados no Registro.br e verdes no painel do ImprovMX (caso 3 ok, conferido pelo usuário). Os dois MX (`mx1.improvmx.com` 10 e `mx2.improvmx.com` 20) e o SPF aparecem no `b.sec.dns.br`, no 8.8.8.8 e no 1.1.1.1, junto com o TXT do Google (caso 1 ok, conferido pelo agente). Falta o caso 2 (mensagem de teste).
+- 2026-10-29: mensagem enviada de outra conta para o `contato@guizani.com.br` chegou ao Gmail (caso 2 ok, confirmado pelo usuário). Chamado concluído em 2026-10-29; o endereço do contato do site passa a receber e-mails.
+
 ### C-006 · Trocar os registros A do `datait` por um CNAME
 
 **Roadmap:** M-001 (decisão 7, de 2026-10-28) e conferido de novo no M-009.
