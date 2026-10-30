@@ -23,24 +23,3 @@
 **Casos de teste:**
 1. O site `datait.guizani.com.br` aparece na lista do Web Analytics.
 2. Depois do M-008 publicado, uma visita feita pelo celular aparece no painel em alguns minutos.
-
-### C-002 · Entregar os currículos em PDF
-
-**Roadmap:** M-005.
-
-**Para:** o usuário.
-
-**Referência:**
-
-**Título:** Currículos em PDF, em português e em inglês.
-
-**Descrição:** o contato tem um link para o currículo em PDF, que segue o idioma da página. Os PDFs são feitos pelo usuário, fora do site, e ficam públicos em `public/`.
-
-**Sugestão de solução** (só uma sugestão):
-1. Exportar os dois currículos em PDF, de preferência com menos de 500 KB cada (fotos comprimidas).
-2. Conferir que eles não têm dados que não devem ficar públicos (endereço completo, CPF, documentos) e que os contatos batem com os do site.
-3. Salvar na pasta do projeto, em `public/`, com os nomes `davi-guizani-cv-pt.pdf` e `davi-guizani-cv-en.pdf`, e avisar no chat. O agente confere o tamanho e faz o commit.
-
-**Casos de teste:**
-1. Os dois arquivos estão em `public/` e abrem no navegador.
-2. Na página em português, o link abre o PDF em português; em `/en/`, o PDF em inglês.

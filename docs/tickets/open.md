@@ -1,5 +1,29 @@
 # Chamados · abertos
 
+### C-002 · Entregar os currículos em PDF
+
+**Roadmap:** M-005 e M-015 (os currículos passaram a ser escritos pelo agente em Markdown para o Marp; os PDFs continuam gerados pelo usuário).
+
+**Para:** o usuário.
+
+**Referência:** M-015 e T-013.
+
+**Título:** Currículos em PDF, em português e em inglês.
+
+**Descrição:** o contato tem um link para o currículo em PDF, que segue o idioma da página. Os PDFs são feitos pelo usuário, fora do site, e ficam públicos em `public/`.
+
+**Sugestão de solução** (só uma sugestão):
+1. Exportar os dois currículos em PDF, de preferência com menos de 500 KB cada (fotos comprimidas).
+2. Conferir que eles não têm dados que não devem ficar públicos (endereço completo, CPF, documentos) e que os contatos batem com os do site.
+3. Salvar na pasta do projeto, em `public/`, com os nomes `davi-guizani-cv-pt.pdf` e `davi-guizani-cv-en.pdf`, e avisar no chat. O agente confere o tamanho e faz o commit.
+
+**Casos de teste:**
+1. Os dois arquivos estão em `public/` e abrem no navegador.
+2. Na página em português, o link abre o PDF em português; em `/en/`, o PDF em inglês.
+
+**Andamento:**
+- 2026-10-29: PDFs gerados pelo usuário com a extensão do Marp no VS Code e salvos em `public/` (57 KB e 59 KB, 2 páginas A4 cada); conteúdo e metadados conferidos pelo agente. Link no contato pelo bloco `contact.resume` do `site.yaml`, abrindo em outra aba (`7b83ec6`, `854af51`). Casos 1 e 2 ok no servidor de desenvolvimento, confirmados pelo usuário (T-013). Falta repetir no site no ar, depois do push.
+
 ### C-007 · Cadastrar o site no Google Search Console e enviar o sitemap
 
 **Roadmap:** M-007 (sitemap e `robots.txt` publicados no Deploy `40980975780`) e M-009 (conferências do lançamento).
