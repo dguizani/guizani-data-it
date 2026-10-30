@@ -28,7 +28,7 @@
 **O que mudou:** título e descrição por idioma; link canônico; Open Graph com uma imagem por idioma (`/og/pt.png` e `/og/en.png`) e o cartão grande do X; favicon (`/icon.svg`, `/favicon.ico`, `/apple-touch-icon.png`); `/sitemap-index.xml` e `/robots.txt`. As prévias de compartilhamento só podem ser conferidas depois do push, porque o LinkedIn e o WhatsApp leem o site no ar.
 
 **Passos:**
-- [ ] Rodada completa e Lighthouse. Esperado: tudo verde, `pass 10, fail 0`, Lighthouse 90 ou mais.
+- [x] Rodada completa e Lighthouse. Esperado: tudo verde, `pass 10, fail 0`, Lighthouse 90 ou mais.
 - [x] Aba do navegador em `/` e em `/en/`. Esperado: o ícone do "G de circuito" e o título de cada idioma.
 - [ ] Depois do push, colar `https://datait.guizani.com.br/` e `https://datait.guizani.com.br/en/` no LinkedIn Post Inspector (<https://www.linkedin.com/post-inspector/>). Esperado: a imagem do idioma certo, o título e a descrição.
 - [x] Depois do push, mandar o link numa conversa do WhatsApp (pode ser para você mesmo). Esperado: a prévia com a imagem e o título.
@@ -38,3 +38,4 @@
 - 2026-10-29: rodada completa e Lighthouse verdes pelo agente, a partir de uma pasta limpa (100 nas quatro categorias; logs em `logs/m007-full-run__2026-10-29.log` e `logs/m007-lighthouse__2026-10-29.log`); `<head>`, sitemap e imagens conferidos no `dist/`. Falta a confirmação do usuário.
 - 2026-10-29: usuário confirmou a aba do navegador (ícone e títulos) e a prévia do WhatsApp. No LinkedIn Post Inspector, a prévia em inglês saiu boa e a em português, borrada, mesmo depois de inspecionar de novo. As duas imagens publicadas têm 1.200 × 630 px e a `pt.png` está nítida no site (conferido pelo agente), então a suspeita é a imagem guardada no cache do LinkedIn. `sitemap-index.xml`, `sitemap-0.xml` e `robots.txt` conferidos pelo agente no site no ar; a linha `<script src="chrome-extension://...">` do print do usuário vem de uma extensão do navegador, não do site.
 - 2026-10-29: usuário confirmou o sitemap e o `robots.txt`. Decidiu não mudar o código por causa do LinkedIn e esperar o cache expirar (cerca de 7 dias): inspecionar `/` de novo no Post Inspector a partir de 2026-11-05.
+- 2026-10-29: usuário confirmou a rodada completa e o Lighthouse. Falta só a prévia em português no LinkedIn.
