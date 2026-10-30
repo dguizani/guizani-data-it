@@ -2,25 +2,6 @@
 
 Na ordem de execução. A especificação de cada entrega está em `docs/brief.md` (seção indicada em **Contexto**) e os textos em `docs/approved_content.md`.
 
-### M-007 · SEO e qualidade
-
-**Objetivo:** meta description, Open Graph com uma imagem por idioma, favicon, sitemap, `robots.txt` e Lighthouse 90 ou mais em performance, acessibilidade e SEO, no celular. Origem: prompt de construção, 2026-10-28.
-
-**Depende de:** M-006.
-
-**Contexto:** `docs/brief.md`, seção **Funcionalidades do MVP** (SEO e qualidade).
-
-**Passos:**
-- [ ] Meta description e título por idioma, vindos do `site.yaml`.
-- [ ] Imagens Open Graph (1.200 × 630, com o logo, o nome e o posicionamento), uma por idioma; debater como gerá-las.
-- [ ] Favicon a partir do logo.
-- [ ] Sitemap (`@astrojs/sitemap`) e `robots.txt`.
-- [ ] Lighthouse CI passando com 90 ou mais nas três categorias, comparado com a referência do M-001.
-
-**Commits:**
-
-**Resultado:**
-
 ### M-008 · Contagem de visitas
 
 **Objetivo:** contar visitas com o Cloudflare Web Analytics, sem cookies, e avisar no rodapé. Origem: prompt de construção, 2026-10-28.
