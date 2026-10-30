@@ -18,6 +18,23 @@
 14. ~~Botão de voltar ao topo no desktop e no celular, nos dois idiomas e nos dois temas → T-010~~ (ok em 2026-10-29)
 15. ~~Seção de formação e certificações no desktop e no celular, nos dois idiomas e nos dois temas → T-011~~ (ok em 2026-10-29)
 16. Prévias de compartilhamento, favicon, sitemap e `robots.txt`, no site publicado → T-012
+17. Link do currículo no contato, nos dois idiomas, no servidor de desenvolvimento e depois do push → T-013
+
+### T-013 · Currículos em PDF
+
+**Roadmap:** M-015 (e C-002).
+
+**Commits:** `d4eaa4e`, `7b83ec6`.
+
+**O que mudou:** os currículos em Markdown (`cv/`), com o tema A4 do Marp; os PDFs gerados pelo usuário em `public/davi-guizani-cv-pt.pdf` e `public/davi-guizani-cv-en.pdf`; e o bloco `contact.resume` do `site.yaml`, que faz aparecer o link "Currículo em PDF" / "Résumé (PDF)" no fim da seção de contato.
+
+**Passos:**
+- [ ] Rodada completa e Lighthouse. Esperado: tudo verde, `pass 10, fail 0`, Lighthouse 90 ou mais.
+- [ ] Em <http://localhost:4321/> e <http://localhost:4321/en/>, clicar no link do currículo, no fim do contato. Esperado: abre o PDF do idioma da página, em 2 páginas A4, com os links clicáveis.
+- [ ] Depois do push, repetir no site no ar. Esperado: o mesmo.
+
+**Resultado:**
+- 2026-10-29: rodada completa e Lighthouse verdes pelo agente, a partir de uma pasta limpa (100 nas quatro categorias; log em `logs/m015-full-run__2026-10-29.log`); o link aparece no `dist/` com o PDF de cada idioma. Texto e metadados dos PDFs conferidos com o `pdftotext` e o `pdfinfo`: 2 páginas A4, nada cortado, só o que o site mostra. Falta a confirmação do usuário.
 
 ### T-012 · SEO e qualidade
 

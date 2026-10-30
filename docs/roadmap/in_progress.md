@@ -15,10 +15,12 @@
 - [x] Tema A4 (`cv/theme.css`, 794 × 1123 px, fundo claro, cores do site), registrado para a extensão no `.vscode/settings.json`.
 - [x] Rascunho dos dois currículos, em duas páginas cada. Conferido pelo agente que nada é cortado, com o `@marp-team/marp-cli` rodando por `npx` no serviço `lighthouse`, sem dependência nova (capturas em `logs/cv/`).
 - [x] Revisão do usuário (2026-10-29).
-- [ ] PDFs gerados pelo usuário em `public/` (C-002).
+- [x] PDFs gerados pelo usuário em `public/` (C-002), com o link no contato pelo bloco `contact.resume` do `site.yaml` (`7b83ec6`).
+- [ ] T-013.
 
 **Commits:**
 - `d4eaa4e`: currículos em Markdown, tema A4 e registro do tema no VS Code.
+- `7b83ec6`: PDFs em `public/` e link do currículo no contato.
 
 **Resultado:**
 
