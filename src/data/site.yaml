@@ -560,6 +560,9 @@ contact:
         about a data project.
   linkedin: https://www.linkedin.com/in/davi-guizani/
   github: https://github.com/dguizani
+  resume:
+    pt: /davi-guizani-cv-pt.pdf
+    en: /davi-guizani-cv-en.pdf
 
 ui:
   sections:
