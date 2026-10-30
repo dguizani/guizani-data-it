@@ -1,5 +1,27 @@
 # Roadmap · em andamento
 
+### M-015 · Currículos em Markdown para o Marp
+
+**Objetivo:** escrever os currículos em português e em inglês, em Markdown no formato do Marp, a partir das informações do projeto; o usuário gera os PDFs pela extensão do Marp no VS Code. Origem: pedido do usuário, 2026-10-29. Substitui o "feito à parte pelo usuário" do C-002, que continua valendo para a entrega dos PDFs em `public/`.
+
+**Depende de:** nada.
+
+**Decisões** (2026-10-29, aprovadas pelo usuário):
+1. O agente entrega só os dois Markdown (`cv/cv-pt.md` e `cv/cv-en.md`); os PDFs são gerados pelo usuário, com a extensão do Marp no VS Code, e salvos em `public/` com os nomes do C-002.
+2. Conteúdo só do que o site já mostra (`src/data/site.yaml`), revisado pelo usuário antes do commit.
+3. Sem foto, sem cidade e sem CNPJ. Título "Engenheiro de dados · fundador da Guizani Data IT" / "Data engineer · founder of Guizani Data IT"; inglês "técnico" / "technical".
+
+**Passos:**
+- [x] Tema A4 (`cv/theme.css`, 794 × 1123 px, fundo claro, cores do site), registrado para a extensão no `.vscode/settings.json`.
+- [x] Rascunho dos dois currículos, em duas páginas cada. Conferido pelo agente que nada é cortado, com o `@marp-team/marp-cli` rodando por `npx` no serviço `lighthouse`, sem dependência nova (capturas em `logs/cv/`).
+- [x] Revisão do usuário (2026-10-29).
+- [ ] PDFs gerados pelo usuário em `public/` (C-002).
+
+**Commits:**
+- `d4eaa4e`: currículos em Markdown, tema A4 e registro do tema no VS Code.
+
+**Resultado:**
+
 ### M-007 · SEO e qualidade
 
 **Objetivo:** meta description, Open Graph com uma imagem por idioma, favicon, sitemap, `robots.txt` e Lighthouse 90 ou mais em performance, acessibilidade e SEO, no celular. Origem: prompt de construção, 2026-10-28.
