@@ -29,13 +29,14 @@
 **O que mudou:** os currículos em Markdown (`cv/`), com o tema A4 do Marp; os PDFs gerados pelo usuário em `public/davi-guizani-cv-pt.pdf` e `public/davi-guizani-cv-en.pdf`; e o bloco `contact.resume` do `site.yaml`, que faz aparecer o link "Currículo em PDF" / "Résumé (PDF)" no fim da seção de contato, abrindo em outra aba.
 
 **Passos:**
-- [ ] Rodada completa e Lighthouse. Esperado: tudo verde, `pass 10, fail 0`, Lighthouse 90 ou mais.
-- [ ] Em <http://localhost:4321/> e <http://localhost:4321/en/>, clicar no link do currículo, no fim do contato. Esperado: abre, em outra aba, o PDF do idioma da página, em 2 páginas A4, com os links clicáveis.
+- [x] Rodada completa e Lighthouse. Esperado: tudo verde, `pass 10, fail 0`, Lighthouse 90 ou mais.
+- [x] Em <http://localhost:4321/> e <http://localhost:4321/en/>, clicar no link do currículo, no fim do contato. Esperado: abre, em outra aba, o PDF do idioma da página, em 2 páginas A4, com os links clicáveis.
 - [ ] Depois do push, repetir no site no ar. Esperado: o mesmo.
 
 **Resultado:**
 - 2026-10-29: rodada completa e Lighthouse verdes pelo agente, a partir de uma pasta limpa (100 nas quatro categorias; log em `logs/m015-full-run__2026-10-29.log`); o link aparece no `dist/` com o PDF de cada idioma. Texto e metadados dos PDFs conferidos com o `pdftotext` e o `pdfinfo`: 2 páginas A4, nada cortado, só o que o site mostra. Falta a confirmação do usuário.
 - 2026-10-29: pedido do usuário, o link passou a abrir em outra aba (`854af51`). Rodada completa e Lighthouse verdes de novo, a partir de uma pasta limpa (100 nas quatro categorias; log em `logs/m015-full-run-2__2026-10-29.log`); no `dist/`, o link tem `target="_blank"` e o aviso "(abre em outra aba)" / "(opens in a new tab)" separado do rótulo por um espaço. Falta a confirmação do usuário.
+- 2026-10-29: usuário validou a rodada completa e o link no servidor de desenvolvimento, nos dois idiomas. Falta conferir no site no ar, depois do push.
 
 ### T-012 · SEO e qualidade
 
